@@ -1,0 +1,118 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+* {
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+}
+
+body {
+    -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+    -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+    -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
+    font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+    font-size:12px;
+    height:100%;
+    margin:0px;
+    padding:0px;
+    text-transform:uppercase;
+    width:100%;
+}
+
+@font-face {
+    font-family: AnmolUni;
+    src: url('../anmoluni.otf');
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-size: 20px;
+    padding: 8px;
+}
+.setting {
+    background-color: rgba(255,255,255,0.98);
+    background-size: 44px 44px;
+    border-radius: 10px;
+    display: block;
+    height: 44px;
+    position: fixed;
+    top: 2px;
+    width: 44px;
+}
+#larreevaar_padchhed {
+    background-image: url(../img/larreevaar.png);
+    right: 2px;
+}
+#larreevaar_padchhed.larreevaar {
+    background-image: url(../img/padchhed.png);
+}
+#larreevaar_assistance {
+    background-image: url(../img/larreevaar_assistance.png);
+    left: 2px;
+}
+#larreevaar_assistance.larreevaar_assistance {
+    background-image: url(../img/larreevaar_assistance_none.png);
+}
+#settings {
+    background: #fff;
+    box-shadow: 0 0 3px #ccc;
+    display: none;
+    max-height: 80%;
+    max-width: 90%;
+    position: fixed;
+    right: 2px;
+    top: 48px;
+    z-index: 4;
+}
+.navigation {
+    clear: both;
+    text-align: center;
+}
+.navigation * {
+    vertical-align: middle;
+}
+.navigation form {
+    display: inline-block;
+}
+.navigation input {
+    border: 1px solid rgb(238, 238, 238);
+    text-align: center;
+    width: 50px;
+}
+#paatth {
+    font-family: AnmolUni;
+    line-height: 1.4em;
+    padding: 10px 0;
+}
+#paatth:after {
+    clear: both;
+    content: " ";
+    display: block;
+}
+#paatth.larreevaar span,
+#paatth.larreevaar i {
+    float: left;
+    vertical-align: bottom;
+    white-space: nowrap;
+}
+#paatth.larreevaar.larreevaar_assistance span:nth-of-type(2n) {
+    color: #F37B20;
+}
+#paatth i {
+    font-style: normal;
+}
