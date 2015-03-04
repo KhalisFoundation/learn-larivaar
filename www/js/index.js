@@ -7,8 +7,8 @@ var setAng = function(ang, store) {
   var minus1                = ((ang - 1) >= 1 ? (ang - 1) : 1);
   var plus1                 = ((ang + 1) <= 1430 ? (ang + 1) : 1430);
   $(".ang").val(ang);
-  $(".minus1").text(minus1);
-  $(".plus1").text(plus1);
+  $(".minus1").data("ang", minus1);
+  $(".plus1").data("ang", plus1);
   var newPaatth = '';
   $.get("paatth/" + ang + ".html", function(data) {
     shabads = data.split(' ');
@@ -21,7 +21,7 @@ var setAng = function(ang, store) {
       newPaatth += "<" + tag + ">" + val + (tag == "i" ? " " : "") + "</" + tag + "> ";
     });
     $("#paatth").html(newPaatth);
-//              $newPaatth .= '<' . $tag . '>' . $shabad . ($tag == 'i' ? ' ' : '') . '</' . $tag . '> ';
+    window.scrollTo(0,0);
   });
   if (store === true) {
     window.localStorage["ang"] = ang;
@@ -33,6 +33,7 @@ $(function() {
   var larreevaar            = window.localStorage["larreevaar"] || 0;
   var larreevaar_assistance = window.localStorage["larreevaar_assistance"] || 0;
   setAng(ang, false);
+  font_size = parseInt(font_size);
   $("#paatth").css("font-size", font_size + "px");
   $("#larreevaar_padchhed").data("on", larreevaar);
   $("#larreevaar_assistance").data("on", larreevaar_assistance);
@@ -47,14 +48,15 @@ $(function() {
   $("body").on("click", ".smaller", function () {
     font_size -= 1;
     $("#paatth").css("font-size", font_size + "px");
-    window.localStorage["font-size"] = font_size;
+    window.localStorage["font_size"] = font_size;
   });
   $("body").on("submit", ".submit_ang", function(event) {
     setAng($(this).find("input").val());
+    $('.ang').blur();
     event.preventDefault();
   });
-  $("body").on("click", ".navigation button", function () {
-    setAng($(this).text());
+  $("body").on("click", ".navigation a.minus1, .navigation a.plus1", function () {
+    setAng($(this).data("ang"));
   });
   $("body").on("focus", ".ang", function(){
     $(this).select();
@@ -70,5 +72,4 @@ $(function() {
       $(this).data("on", "0");
     }
   });
-  $(".navigation").clone().appendTo("body");
 });
