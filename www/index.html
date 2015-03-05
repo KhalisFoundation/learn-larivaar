@@ -30,22 +30,53 @@
     </head>
     <body>
         <header>
-            <a href="javascript:void(0)" id="larreevaar_padchhed" data-setting="larreevaar" class="setting"></a>
-            <a href="javascript:void(0)" id="larreevaar_assistance" data-setting="larreevaar_assistance" class="setting"></a>
-            <div class="navigation">
-                <a href="javascript:void(0)" class="smaller"><i class="fa fa-search-minus"></i></a>
-                &nbsp;
+            <!--<a href="javascript:void(0)" id="larreevaar_padchhed" data-setting="larreevaar" class="setting"></a>-->
+            <a href="javascript:void(0)" id="settings_button" class="setting corner_nav"><i class="fa fa-cog"></i></a>
+            <a href="javascript:void(0)" id="larreevaar_assistance" data-setting="larreevaar_assistance" class="setting corner_nav"></a>
+            <div id="navigation">
                 <a href="javascript:void(0)" class="minus1"><i class="fa fa-arrow-left"></i></a>
                 &nbsp;
                 <form action="./" method="get" class="submit_ang"><input type="text" name="ang" class="ang" value="" /></form>
                 &nbsp;
                 <a href="javascript:void(0)" class="plus1"><i class="fa fa-arrow-right"></i></a>
-                &nbsp;
-                <a href="javascript:void(0)" class="bigger"><i class="fa fa-search-plus"></i></a>
+            </div>
+            <div id="settings" class="arrow_box">
+                <div class="setting_row">
+                    <div class="setting_2col">
+                        <a href="javascript:void(0)" class="smaller"><i class="fa fa-search-minus"></i></a>
+                    </div>
+                    <div class="setting_2col">
+                        <a href="javascript:void(0)" class="bigger"><i class="fa fa-search-plus"></i></a>
+                    </div>
+                </div>
+                <div class="setting_row">
+                    <div class="checkbox_setting_text">
+                        Dark Mode
+                    </div>
+                    <div class="checkbox_setting_checkbox">
+                        <a href="javascript:void(0)" class="setting checkbox" data-setting="dark"><i class="fa fa-square-o"></i></a>
+                    </div>
+                </div>
+                <div class="setting_row">
+                    <div class="checkbox_setting_text">
+                        Swipe Navigation
+                    </div>
+                    <div class="checkbox_setting_checkbox">
+                        <a href="javascript:void(0)" class="setting checkbox" data-setting="swipe_nav"><i class="fa fa-square-o"></i></a>
+                    </div>
+                </div>
+                <div class="setting_row">
+                    <div class="checkbox_setting_text">
+                        Larivaar
+                    </div>
+                    <div class="checkbox_setting_checkbox">
+                        <a href="javascript:void(0)" class="setting checkbox" data-setting="larreevaar"><i class="fa fa-square-o"></i></a>
+                    </div>
+                </div>
             </div>
         </header>
         <div class="app">
-            <div id="paatth"></div>
+            <div id="paatth" ontouchstart="touchStart(event,'swipeBox');"  ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);"></div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>

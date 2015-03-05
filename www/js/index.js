@@ -1,3 +1,16 @@
+var dark                  = window.localStorage["dark"] || 0;
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+  StatusBar.show();
+  if (dark) {
+    StatusBar.backgroundColorByHexString('333333');
+  } else {
+    StatusBar.styleDefault();
+  }
+}
+
+var swipe_nav = window.localStorage["swipe_nav"] || 1;
+
 var setAng = function(ang, store) {
   store = typeof store !== 'undefined' ? store : true;
   //Make sure it's an Ang within the proper range or set to 1
@@ -29,17 +42,30 @@ var setAng = function(ang, store) {
 }
 $(function() {
   var ang                   = window.localStorage["ang"] || 1;
+  //Settings
   var font_size             = window.localStorage["font_size"] || 20;
-  var larreevaar            = window.localStorage["larreevaar"] || 0;
+  var larreevaar            = window.localStorage["larreevaar"] || 1;
   var larreevaar_assistance = window.localStorage["larreevaar_assistance"] || 0;
   setAng(ang, false);
   font_size = parseInt(font_size);
   $("#paatth").css("font-size", font_size + "px");
-  $("#larreevaar_padchhed").data("on", larreevaar);
+  $(".setting[data-setting='larreevaar']").data("on", larreevaar);
   $("#larreevaar_assistance").data("on", larreevaar_assistance);
-  if (larreevaar == 1)            $("#paatth, #larreevaar_padchhed").addClass("larreevaar");
+  if (larreevaar == 1)            $("#paatth").addClass("larreevaar");
   if (larreevaar_assistance == 1) $("#paatth, #larreevaar_assistance").addClass("larreevaar_assistance");
+  $(".setting[data-setting='swipe_nav']").data("on", swipe_nav);
+  $(".setting[data-setting='dark']").data("on", dark);
+  if (dark == 1)                  $("body").addClass("dark");
+  //Change checkboxes to checked for settings that are on
+  $(".setting.checkbox").each(function(){
+    if ($(this).data("on") == "1") {
+      $(this).find("i").removeClass("fa-square-o").addClass("fa-check-square-o");
+    }
+  });
 
+  $("#settings_button").click(function() {
+    $("#settings").toggle();
+  })
   $("body").on("click", ".bigger", function () {
     font_size += 1;
     $("#paatth").css("font-size", font_size + "px");
@@ -55,21 +81,52 @@ $(function() {
     $('.ang').blur();
     event.preventDefault();
   });
-  $("body").on("click", ".navigation a.minus1, .navigation a.plus1", function () {
+  $("body").on("click", "#navigation a.minus1, #navigation a.plus1", function () {
     setAng($(this).data("ang"));
   });
   $("body").on("focus", ".ang", function(){
     $(this).select();
   })
   $(".setting").click(function () {
+    setting = $(this).data("setting");
     if ($(this).data("on") == "0") {
-      window.localStorage[$(this).data("setting")] = 1;
-      $(this).add("#paatth").addClass($(this).attr("data-setting"));
+      window.localStorage[setting] = 1;
       $(this).data("on", "1");
+      switch(setting) {
+        case "larreevaar_assistance":
+          $(this).addClass(setting);
+        case "larreevaar":
+          $("#paatth").addClass(setting);
+          break;
+        case "swipe_nav":
+          swipe_nav = 1;
+          break;
+        case "dark":
+          $("body").addClass(setting);
+          break;
+      }
+      if ($(this).hasClass("checkbox")) {
+        $(this).find("i.fa-square-o").removeClass("fa-square-o").addClass("fa-check-square-o");
+      }
     } else {
       window.localStorage[$(this).data("setting")] = 0;
-      $(this).add("#paatth").removeClass($(this).attr("data-setting"));
       $(this).data("on", "0");
+      switch(setting) {
+        case "larreevaar_assistance":
+          $(this).removeClass(setting);
+        case "larreevaar":
+          $("#paatth").removeClass(setting);
+          break;
+        case "swipe_nav":
+          swipe_nav = 0;
+          break;
+        case "dark":
+          $("body").removeClass(setting);
+          break;
+      }
+      if ($(this).hasClass("checkbox")) {
+        $(this).find("i.fa-check-square-o").removeClass("fa-check-square-o").addClass("fa-square-o");
+      }
     }
   });
 });
@@ -100,51 +157,57 @@ var swipeDirection = null;
 // <div id="picture-frame" ontouchstart="touchStart(event,'picture-frame');"  ontouchend="touchEnd(event);" ontouchmove="touchMove(event);" ontouchcancel="touchCancel(event);">
 
 function touchStart(event,passedName) {
-  // disable the standard ability to select the touched object
-  //event.preventDefault();
-  // get the total number of fingers touching the screen
-  fingerCount = event.touches.length;
-  // since we're looking for a swipe (single finger) and not a gesture (multiple fingers),
-  // check that only one finger was used
-  if ( fingerCount == 1 ) {
-    // get the coordinates of the touch
-    startX = event.touches[0].pageX;
-    startY = event.touches[0].pageY;
-    // store the triggering element ID
-    triggerElementID = passedName;
-  } else {
-    // more than one finger touched so cancel
-    touchCancel(event);
+  if (swipe_nav) {
+    // disable the standard ability to select the touched object
+    //event.preventDefault();
+    // get the total number of fingers touching the screen
+    fingerCount = event.touches.length;
+    // since we're looking for a swipe (single finger) and not a gesture (multiple fingers),
+    // check that only one finger was used
+    if ( fingerCount == 1 ) {
+      // get the coordinates of the touch
+      startX = event.touches[0].pageX;
+      startY = event.touches[0].pageY;
+      // store the triggering element ID
+      triggerElementID = passedName;
+    } else {
+      // more than one finger touched so cancel
+      touchCancel(event);
+    }
   }
 }
 
 function touchMove(event) {
-  //event.preventDefault();
-  if ( event.touches.length == 1 ) {
-    curX = event.touches[0].pageX;
-    curY = event.touches[0].pageY;
-  } else {
-    touchCancel(event);
+  if (swipe_nav) {
+    //event.preventDefault();
+    if ( event.touches.length == 1 ) {
+      curX = event.touches[0].pageX;
+      curY = event.touches[0].pageY;
+    } else {
+      touchCancel(event);
+    }
   }
 }
 
 function touchEnd(event) {
-  //event.preventDefault();
-  // check to see if more than one finger was used and that there is an ending coordinate
-  if ( fingerCount == 1 && curX != 0 ) {
-    // use the Distance Formula to determine the length of the swipe
-    swipeLength = Math.round(Math.sqrt(Math.pow(curX - startX,2) + Math.pow(curY - startY,2)));
-    // if the user swiped more than the minimum length, perform the appropriate action
-    if ( swipeLength >= minLength ) {
-      caluculateAngle();
-      determineSwipeDirection();
-      processingRoutine();
-      touchCancel(event); // reset the variables
+  if (swipe_nav) {
+    //event.preventDefault();
+    // check to see if more than one finger was used and that there is an ending coordinate
+    if ( fingerCount == 1 && curX != 0 ) {
+      // use the Distance Formula to determine the length of the swipe
+      swipeLength = Math.round(Math.sqrt(Math.pow(curX - startX,2) + Math.pow(curY - startY,2)));
+      // if the user swiped more than the minimum length, perform the appropriate action
+      if ( swipeLength >= minLength ) {
+        caluculateAngle();
+        determineSwipeDirection();
+        processingRoutine();
+        touchCancel(event); // reset the variables
+      } else {
+        touchCancel(event);
+      } 
     } else {
       touchCancel(event);
-    } 
-  } else {
-    touchCancel(event);
+    }
   }
 }
 

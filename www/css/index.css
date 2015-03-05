@@ -29,7 +29,6 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
     width:100%;
 }
 
@@ -43,6 +42,12 @@ body {
 body {
     font-size: 20px;
 }
+a {
+    color: #000;
+}
+.fa {
+    font-size: 20px !important;
+}
 header {
     background-color: rgba(255,255,255,0.95);
     height: 48px;
@@ -52,18 +57,24 @@ header {
     top: 0;
     width: 100%;
 }
-.setting {
-    background-color: rgba(255,255,255,0.98);
+.corner_nav {
     background-size: 44px 44px;
-    border-radius: 10px;
     display: block;
     height: 44px;
+    line-height: 44px;
     position: fixed;
+    text-align: center;
     top: 2px;
     width: 44px;
 }
+a.corner_nav {
+    color: #000;
+}
 #larreevaar_padchhed {
     background-image: url(../img/larreevaar.png);
+    right: 2px;
+}
+#settings_button {
     right: 2px;
 }
 #larreevaar_padchhed.larreevaar {
@@ -78,32 +89,84 @@ header {
 }
 #settings {
     background: #fff;
-    box-shadow: 0 0 3px #ccc;
+    border: 1px solid #cccccc;
     display: none;
-    max-height: 80%;
-    max-width: 90%;
+    font-size: 16px;
     position: fixed;
     right: 2px;
     top: 48px;
+    width: 200px;
     z-index: 4;
 }
-.navigation {
+#settings:after, #settings:before {
+    bottom: 100%;
+    left: 176px;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+#settings:after {
+    border-color: rgba(255, 255, 255, 0);
+    border-bottom-color: #ffffff;
+    border-width: 10px;
+    margin-left: -10px;
+}
+#settings:before {
+    border-color: rgba(204, 204, 204, 0);
+    border-bottom-color: #cccccc;
+    border-width: 11px;
+    margin-left: -11px;
+}
+.setting_row {
+    border-bottom: 1px solid rgba(221,221,221,0.7);
+    margin: 5px;
+    padding: 5px;
+}
+.setting_row::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+.setting_row:last-child {
+    border-bottom: none;
+}
+.setting_2col {
+    border-right: 1px solid rgba(221, 221, 221, 0.7);
+    float: left;
+    text-align: center;
+    width: 50%;
+}
+.setting_2col:last-of-type {
+    border-right: none;
+}
+.checkbox_setting_text {
+    float: left;
+    width: calc(100% - 25px);
+}
+.checkbox_setting_checkbox {
+    float: left;
+    text-align: center;
+    width: 25px;
+}
+
+#navigation {
     clear: both;
     text-align: center;
 }
-.navigation * {
+#navigation * {
     vertical-align: middle;
 }
-.navigation form {
+#navigation form {
     display: inline-block;
 }
-.navigation input {
+#navigation input {
     border: 1px solid rgb(238, 238, 238);
     text-align: center;
     width: 50px;
-}
-.navigation a {
-    color: #000;
 }
 .app {
     padding: 50px 8px 8px;
@@ -129,4 +192,17 @@ header {
 }
 #paatth i {
     font-style: normal;
+}
+
+/* ***** DARK ***** */
+body.dark,
+.dark #settings {
+    background: #222;
+    color: #ddd;
+}
+.dark a {
+    color: #ddd;
+}
+.dark header {
+    background-color: rgba(34,34,34,0.95);
 }
