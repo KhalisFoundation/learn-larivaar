@@ -40,10 +40,12 @@ body {
     box-sizing: border-box;
 }
 body {
+    color: #333;
     font-size: 20px;
 }
 a {
-    color: #000;
+    color: #333;
+    text-decoration: none;
 }
 .fa {
     font-size: 20px !important;
@@ -68,24 +70,33 @@ header {
     width: 44px;
 }
 a.corner_nav {
-    color: #000;
-}
-#larreevaar_padchhed {
-    background-image: url(../img/larreevaar.png);
-    right: 2px;
+    color: #333;
 }
 #settings_button {
     right: 2px;
 }
-#larreevaar_padchhed.larreevaar {
-    background-image: url(../img/padchhed.png);
-}
 #larreevaar_assistance {
-    background-image: url(../img/larreevaar_assistance.png);
+    font-family: AnmolUni;
+    font-size: 15px;
     left: 2px;
 }
-#larreevaar_assistance.larreevaar_assistance {
-    background-image: url(../img/larreevaar_assistance_none.png);
+#larreevaar_assistance::after {
+    border-color: #333;
+    border-radius: 6px;
+    border-style: solid;
+    border-width: 1px;
+    content: "";
+    height: 36px;
+    left: 3px;
+    position: absolute;
+    top: 3px;
+    width: 36px;
+}
+#larreevaar_assistance span:nth-of-type(2n) {
+    color: #F37B20;
+}
+#larreevaar_assistance.larreevaar_assistance span:nth-of-type(2n) {
+    color: inherit;
 }
 #settings {
     background: #fff;
@@ -205,4 +216,7 @@ body.dark,
 }
 .dark header {
     background-color: rgba(34,34,34,0.95);
+}
+.dark #larreevaar_assistance::after {
+    border-color: #ddd;
 }
