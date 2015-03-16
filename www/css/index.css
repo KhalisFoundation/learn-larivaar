@@ -58,6 +58,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 9999;
 }
 .corner_nav {
     background-size: 44px 44px;
@@ -147,6 +148,7 @@ a.corner_nav {
 }
 .setting_2col {
     border-right: 1px solid rgba(221, 221, 221, 0.7);
+    display: block;
     float: left;
     text-align: center;
     width: 50%;
@@ -219,4 +221,9 @@ body.dark,
 }
 .dark #larreevaar_assistance::after {
     border-color: #ddd;
+}
+
+/* ***** SMART BANNER ***** */
+body.smartbanner .app {
+    padding-top: 128px;
 }
