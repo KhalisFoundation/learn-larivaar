@@ -12,6 +12,7 @@ var swipe_nav             = window.localStorage["swipe_nav"]              || 1;
 var larreevaar            = window.localStorage["larreevaar"]             || 1;
 var larreevaar_assistance = window.localStorage["larreevaar_assistance"]  || 0;
 var lang                  = "en";//window.localStorage["lang"]                   || "en";
+var backButtonClose       = false;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
@@ -25,6 +26,8 @@ function onDeviceReady() {
   $("#smartbanner").remove();
   $("body").removeClass("smartbanner");
   $("script[src='js/jquery.smartbanner.js']").remove();
+  //Override back button
+  document.addEventListener("backbutton", onBackButton, false);
 }
 
 function calculateDailyAngs(samaaptee, ang) {
@@ -113,6 +116,23 @@ function setAng(set_ang, store) {
   });
   if (store === true) {
     window.localStorage["ang"] = ang;
+  }
+}
+
+function onBackButton() {
+  if ($(".datepicker:visible").length > 0) {
+    $("#samaaptee_date_input").blur().datepicker("hide");
+  } else if ($(".modal:visible").length > 0) {
+    $(".modal").closeModal();
+  } else if (parseInt($(".side-nav.right-aligned").css("right")) == 0 || parseInt($(".side-nav.left-aligned").css("left")) == 0) {
+    $(".button-collapse").sideNav("hide");
+  } else {
+      if (backButtonClose == true) {
+        navigator.app.exitApp();
+      } else {
+        backButtonClose = true;
+        Materialize.toast("Press again to exit", 4000, "", function(){ backButtonClose = false; });
+      }
   }
 }
 $(function() {

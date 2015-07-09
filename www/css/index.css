@@ -89,6 +89,7 @@ a.corner_nav {
     color: #333;
 }
 #settings_button {
+    font-size: 40px;
     right: 2px;
 }
 #larreevaar_assistance {
@@ -136,13 +137,16 @@ a.corner_nav {
 .setting_progress {
     float: right;
 }
+.setting_progress_link {
+    z-index: 2;
+}
 .setting_progress_link.hide-arrow i {
     display: none;
 }
 #sehaj_paatth_setting_progress_bar {
     background-color: rgba(0,150,0,0.5);
     content: "";
-    height: 100%;
+    height: 44px;
     left: 0;
     position: absolute;
     top: 0;
@@ -222,7 +226,6 @@ div.ui-datepicker {
 
 /* ***** DARK ***** */
 body.dark,
-.dark #settings,
 .dark .side-nav,
 .dark .side-nav .collapsible-body,
 .dark .side-nav li,
@@ -230,8 +233,14 @@ body.dark,
 .dark .secondary-content,
 .dark .modal,
 .dark .modal .modal-footer {
-    background: #222;
     color: #ddd;
+}
+body.dark,
+.dark .side-nav,
+.dark .side-nav .collapsible-body,
+.dark .modal,
+.dark .modal .modal-footer {
+    background: #222;
 }
 .dark a {
     color: #ddd;
@@ -260,6 +269,7 @@ body.smartbanner .app {
     z-index: 1000;
 }
 .datepicker {
+    position: fixed;
     z-index: 1001;
 }
 
@@ -308,4 +318,18 @@ nav a.button-collapse {
 }
 .secondary-content {
     color: #444;
+}
+.modal-close {
+    float: right;
+}
+@media screen and (max-width: 480px) {
+    h4 {
+        font-size: 1.8rem;
+        line-height: 1.98rem;
+    }
+}
+@media screen and (max-width: 320px) {
+    .modal .modal-content {
+        padding: 12px;
+    }
 }
