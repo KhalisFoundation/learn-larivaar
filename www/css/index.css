@@ -39,13 +39,28 @@ body {
 * {
     box-sizing: border-box;
 }
+html {
+    height: 100%;
+}
 body {
+    background-color: #fff;
     color: #333;
     font-size: 20px;
+    line-height: 1;
 }
 a {
     color: #333;
     text-decoration: none;
+}
+body .lang_pa {
+    display: none;
+    font-family: AnmolUni, 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
+}
+body.lang_pa .lang_pa {
+    display: inline;
+}
+body.lang_pa .lang_en {
+    display: none;
 }
 .fa {
     font-size: 20px !important;
@@ -58,7 +73,7 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 9999;
+    z-index: 4;
 }
 .corner_nav {
     background-size: 44px 44px;
@@ -78,8 +93,10 @@ a.corner_nav {
 }
 #larreevaar_assistance {
     font-family: AnmolUni;
-    font-size: 15px;
+    font-size: 13px;
     left: 2px;
+    line-height: 15px;
+    padding-top: 7px;
 }
 #larreevaar_assistance::after {
     border-color: #333;
@@ -93,62 +110,15 @@ a.corner_nav {
     top: 3px;
     width: 36px;
 }
-#larreevaar_assistance span:nth-of-type(2n) {
+#larreevaar_assistance .on span:nth-of-type(2n) {
     color: #F37B20;
 }
-#larreevaar_assistance.larreevaar_assistance span:nth-of-type(2n) {
-    color: inherit;
-}
-#settings {
-    background: #fff;
-    border: 1px solid #cccccc;
-    display: none;
-    font-size: 16px;
-    position: fixed;
-    right: 2px;
-    top: 48px;
-    width: 200px;
-    z-index: 4;
-}
-#settings:after, #settings:before {
-    bottom: 100%;
-    left: 176px;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-}
-
-#settings:after {
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #ffffff;
-    border-width: 10px;
-    margin-left: -10px;
-}
-#settings:before {
-    border-color: rgba(204, 204, 204, 0);
-    border-bottom-color: #cccccc;
-    border-width: 11px;
-    margin-left: -11px;
-}
-.setting_row {
-    border-bottom: 1px solid rgba(221,221,221,0.7);
-    margin: 5px;
-    padding: 5px;
-}
-.setting_row::after {
-    clear: both;
-    content: "";
-    display: block;
-}
-.setting_row:last-child {
-    border-bottom: none;
+.setting_row_2col {
+    border-bottom: 1px solid rgba(221, 221, 221, 0.7);
 }
 .setting_2col {
     border-right: 1px solid rgba(221, 221, 221, 0.7);
-    display: block;
+    display: block !important;
     float: left;
     text-align: center;
     width: 50%;
@@ -156,14 +126,48 @@ a.corner_nav {
 .setting_2col:last-of-type {
     border-right: none;
 }
-.checkbox_setting_text {
-    float: left;
-    width: calc(100% - 25px);
+.setting_2col.cur {
+    color: #F37B20;
 }
-.checkbox_setting_checkbox {
-    float: left;
+.setting_more_info {
+    font-size: 13px;
+    margin-top: 3px;
+}
+.setting_progress {
+    float: right;
+}
+.setting_progress_link.hide-arrow i {
+    display: none;
+}
+#sehaj_paatth_setting_progress_bar {
+    background-color: rgba(0,150,0,0.5);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 0;
+    z-index: 1;
+}
+div.ui-datepicker {
+    font-size: 11px;
+}
+#samaaptee_daily_angs_cont,
+#daily_angs_projected_samaaptee_cont {
+    display: none;
+}
+#daily_angs_input_cont {
+    margin: 0 auto;
+    width: 100px;
+}
+#daily_angs_input,
+#samaaptee_date_input {
+    font-size: 2rem;
     text-align: center;
-    width: 25px;
+}
+#samaaptee_date_input_cont {
+    margin: 0 auto;
+    width: 200px;
 }
 
 #navigation {
@@ -177,15 +181,24 @@ a.corner_nav {
     display: inline-block;
 }
 #navigation input {
+    background-color: transparent;
     border: 1px solid rgb(238, 238, 238);
+    box-shadow: none;
+    font-size: inherit;
+    height: initial;
+    margin: 0;
+    outline: none;
+    padding: 1px 0;
     text-align: center;
     width: 50px;
 }
 .app {
+    height: 100%;
     padding: 50px 8px 8px;
 }
 #paatth {
     font-family: AnmolUni;
+    height: 100%;
     line-height: 1.4em;
     padding: 10px 0;
 }
@@ -200,7 +213,7 @@ a.corner_nav {
     vertical-align: bottom;
     white-space: nowrap;
 }
-#paatth.larreevaar.larreevaar_assistance span:nth-of-type(2n) {
+#paatth.larreevaar_assistance span:nth-of-type(2n) {
     color: #F37B20;
 }
 #paatth i {
@@ -209,7 +222,14 @@ a.corner_nav {
 
 /* ***** DARK ***** */
 body.dark,
-.dark #settings {
+.dark #settings,
+.dark .side-nav,
+.dark .side-nav .collapsible-body,
+.dark .side-nav li,
+.dark .side-nav a,
+.dark .secondary-content,
+.dark .modal,
+.dark .modal .modal-footer {
     background: #222;
     color: #ddd;
 }
@@ -226,4 +246,66 @@ body.dark,
 /* ***** SMART BANNER ***** */
 body.smartbanner .app {
     padding-top: 128px;
+}
+
+/* ***** DATE PICKER ***** */
+#datepicker_back {
+    background-color: rgba(0,0,0,0.3);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+.datepicker {
+    z-index: 1001;
+}
+
+/* ***** MATERIALIZE ***** */
+#slide-out-button {
+    display: none;
+}
+nav,
+nav a.button-collapse {
+    color: #444;
+    height: 0 !important;
+}
+.side-nav li::after {
+    clear: both;
+    content: "";
+    display: block;
+}
+.side-nav li {
+    position: relative;
+}
+.side-nav li,
+.side-nav a {
+    color: #444;
+    font-size: inherit;
+    height: auto;
+    line-height: 44px;
+}
+.side-nav li:hover,
+.side-nav li.active {
+    background-color: transparent;
+}
+.side-nav > li {
+    border-bottom: 1px solid rgba(221,221,221,0.7);
+}
+.side-nav .collapsible-header {
+    margin: 0;
+    position: relative;
+}
+.collapsible-header i {
+    position: absolute;
+    right: 10px;
+    top: 0;
+}
+.side-nav .collapsible-body li a {
+    font-size: 1.2rem;
+}
+.secondary-content {
+    color: #444;
 }
