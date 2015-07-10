@@ -52,12 +52,12 @@
     </head>
     <body>
         <header>
-            <a href="javascript:$('.button-collapse').sideNav('show');/*$('#settings_button').toggleClass('selected');*/" id="settings_button" class="burger setting corner_nav"><span></span></a>
+            <a href="javascript:void(0)" id="settings_button" class="burger setting corner_nav"><span></span></a>
             <a href="javascript:void(0)" id="larreevaar_assistance" data-setting="larreevaar_assistance" class="setting corner_nav"><div class="on"><span>ਜੁ</span><span>ਨ</span><span>ਚ</span></div><div class="off"<span>ਜੁ</span><span>ਨ</span><span>ਚ</span></div></a>
             <div id="navigation">
                 <a href="javascript:void(0)" class="minus1"><i class="fa fa-arrow-left"></i></a>
                 &nbsp;
-                <form action="./" method="get" class="submit_ang"><input type="text" name="ang" class="ang" value="" /></form>
+                <input type="number" name="ang" class="ang" value="" />
                 &nbsp;
                 <a href="javascript:void(0)" class="plus1"><i class="fa fa-arrow-right"></i></a>
             </div>
@@ -65,12 +65,12 @@
         <nav>
             <ul id="slide-out" class="side-nav">
                 <li class="setting_row_2col">
-                    <a href="javascript:void(0)" class="setting_2col smaller"><i class="fa fa-search-minus"></i></a>
-                    <a href="javascript:void(0)" class="setting_2col bigger"><i class="fa fa-search-plus"></i></a>
+                    <a href="javascript:void(0)" class="setting_2col smaller" id="zoom_out_button"><i class="fa fa-search-minus"></i></a>
+                    <a href="javascript:void(0)" class="setting_2col bigger" id="zoom_in_button"><i class="fa fa-search-plus"></i></a>
                 </li>
-                <li><div><span class="lang_en">Night Mode</span><span class="lang_pa">ਹਨੇਰਾ ਅੰਦਾਜ਼/Kaalaa Mode</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="dark"><i class="fa fa-square-o"></i></a></div></li>
+                <li><div><span class="lang_en">Night Mode</span><span class="lang_pa">ਹਨੇਰਾ ਅੰਦਾਜ਼/Kaalaa Mode</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="dark" id="night_mode_button"><i class="fa fa-square-o"></i></a></div></li>
                 <li><div><span class="lang_en">Swipe Navigation</span><span class="lang_pa">Swipe Navigation</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="swipe_nav"><i class="fa fa-square-o"></i></a></div></li>
-                <li><div><span class="lang_en">Larivaar</span><span class="lang_pa">ਲੜੀਵਾਰ</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="larreevaar"><i class="fa fa-square-o"></i></a></div></li>
+                <li><div><span class="lang_en">Larivaar</span><span class="lang_pa">ਲੜੀਵਾਰ</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="larreevaar" id="larreevaar_setting"><i class="fa fa-square-o"></i></a></div></li>
                 <li class="no-padding">
                     <ul class="collapsible collapsible-accordion">
                         <li>
@@ -84,10 +84,10 @@
                             <div class="collapsible-body">
                                 <ul>
                                     <li>
-                                        <a class="modal-trigger" href="#dailySetting">Set Desired Daily Ang</a>
+                                        <a id="daily_modal_trigger" class="modal-trigger set" href="#dailySetting"><span class="set">Set</span><span class="edit">Edit</span> Desired Daily Ang</a>
                                     </li>
                                     <li>
-                                        <a class="modal-trigger" href="#samaapteeSetting">Set Samaaptee Date</a>
+                                        <a id="samaaptee_modal_trigger" class="modal-trigger set" href="#samaapteeSetting"><span class="set">Set</span><span class="edit">Edit</span> Samaaptee Date</a>
                                     </li>
                                 </ul>
                             </div>

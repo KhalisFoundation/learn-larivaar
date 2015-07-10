@@ -133,6 +133,12 @@ a.corner_nav {
   transform: translate(9px, 1px) rotate(-225deg);
 }
 #larreevaar_assistance {
+    display: none;
+}
+.larreevaar #larreevaar_assistance {
+    display: block;
+}
+#larreevaar_assistance {
     font-family: AnmolUni;
     font-size: 13px;
     left: 2px;
@@ -193,6 +199,15 @@ a.corner_nav {
     width: 0;
     z-index: 1;
 }
+.modal-trigger .set,
+.modal-trigger .edit {
+    display: none;
+}
+.modal-trigger.set .set,
+.modal-trigger.edit .edit {
+    display: inline;
+}
+/* ***** MODALS ***** */
 div.ui-datepicker {
     font-size: 11px;
 }
@@ -220,9 +235,6 @@ div.ui-datepicker {
 }
 #navigation * {
     vertical-align: middle;
-}
-#navigation form {
-    display: inline-block;
 }
 #navigation input {
     background-color: transparent;
@@ -257,7 +269,7 @@ div.ui-datepicker {
     vertical-align: bottom;
     white-space: nowrap;
 }
-#paatth.larreevaar_assistance span:nth-of-type(2n) {
+#paatth.larreevaar.larreevaar_assistance span:nth-of-type(2n) {
     color: #F37B20;
 }
 #paatth i {
@@ -274,6 +286,11 @@ body.dark,
 .dark .modal,
 .dark .modal .modal-footer {
     color: #ddd;
+}
+.dark .burger span,
+.dark .burger span:before,
+.dark .burger span:after {
+    background: #ddd;
 }
 body.dark,
 .dark .side-nav,

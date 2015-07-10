@@ -34,6 +34,8 @@ function calculateDailyAngs(samaaptee, ang) {
   var samaaptee_date = processDate(samaaptee);
   var daily_angs = Math.ceil((1430-ang+1)/samaaptee_date['diff']);
   $("#samaaptee_daily_angs").text(daily_angs).parent("#samaaptee_daily_angs_cont").show();
+  $("#samaaptee_modal_trigger").removeClass("set").addClass("edit");
+  $("#daily_modal_trigger").addClass("set").removeClass("edit");
   daily_total = daily_angs;
 }
 function calculateSamaapteeDate(angs, ang) {
@@ -42,6 +44,8 @@ function calculateSamaapteeDate(angs, ang) {
   var date = new Date();
   var samaaptee_date = new Date(Date.UTC(date.getFullYear(), date.getMonth(), (date.getDate() + days_left)));
   $("#daily_angs_projected_samaaptee").text(formatDate(samaaptee_date)).parent("#daily_angs_projected_samaaptee_cont").show();
+  $("#daily_modal_trigger").removeClass("set").addClass("edit");
+  $("#samaaptee_modal_trigger").addClass("set").removeClass("edit");
 }
 
 function updateProgress(){
@@ -119,14 +123,14 @@ function setAng(set_ang, store) {
   }
 }
 
-function onBackButton() {
+function onBackButton(esc) {
   if ($(".datepicker:visible").length > 0) {
     $("#samaaptee_date_input").blur().datepicker("hide");
   } else if ($(".modal:visible").length > 0) {
     $(".modal").closeModal();
   } else if (parseInt($(".side-nav.right-aligned").css("right")) == 0 || parseInt($(".side-nav.left-aligned").css("left")) == 0) {
     $(".button-collapse").sideNav("hide");
-  } else {
+  } else if (!esc) {
       if (backButtonClose == true) {
         navigator.app.exitApp();
       } else {
@@ -159,7 +163,7 @@ $(function() {
   $("#paatth").css("font-size", font_size + "px");
   $(".setting[data-setting='larreevaar']").data("on", larreevaar);
   $("#larreevaar_assistance").data("on", larreevaar_assistance);
-  if (larreevaar == 1)            $("#paatth").addClass("larreevaar");
+  if (larreevaar == 1)            $("body, #paatth").addClass("larreevaar");
   if (larreevaar_assistance == 1) $("#paatth, #larreevaar_assistance").addClass("larreevaar_assistance");
   $(".setting[data-setting='swipe_nav']").data("on", swipe_nav);
   $(".setting[data-setting='dark']").data("on", dark);
@@ -207,6 +211,8 @@ $(function() {
   });
 
   $("#settings_button").click(function() {
+    $('.button-collapse').sideNav('show');
+    /*$('#settings_button').toggleClass('selected');*/
     ga('send','event','button','click','settings'); 
   });
   //FONT SIZE
@@ -223,17 +229,27 @@ $(function() {
     ga('send','event','setting','change','zoom','out');
   });
   //CHANGE ANG
-  $(".submit_ang").submit(function(event) {
-    ang = $(this).find("input").val();
-    setAng(ang);
-    window.localStorage["today_start"] = today_start = ang;
-    if (samaaptee) {
-      calculateDailyAngs(samaaptee, ang);
+  $(".ang").blur(function() {
+    $(".submit_ang").submit();
+  }).keypress(function(event) {
+    if (event.keyCode == 13) {
+      $(this).blur();
+      event.preventDefault();
     }
-    updateProgress();
-    ga('send','event','submit','ang',ang);
-    $('.ang').blur();
-    event.preventDefault();
+  });
+  $(".ang").blur(function(event) {
+    var newAng = parseInt($(this).val());
+    if (newAng != ang) {
+      ang = newAng;
+      setAng(ang);
+      window.localStorage["today_start"] = today_start = ang;
+      if (samaaptee) {
+        calculateDailyAngs(samaaptee, ang);
+      }
+      updateProgress();
+      ga('send','event','submit','ang',ang);
+      event.preventDefault();
+    }
   });
   $("#navigation a.minus1, #navigation a.plus1").click(function () {
     setAng($(this).data("ang"));
@@ -260,7 +276,7 @@ $(function() {
           ga('send','event','button','click','assist','on');
           break;
         case "larreevaar":
-          $("#paatth").addClass(setting);
+          $("body, #paatth").addClass(setting);
           ga('send','event','setting','change','larreevaar','on');
           break;
         case "swipe_nav":
@@ -285,7 +301,7 @@ $(function() {
           ga('send','event','button','click','assist','off');
           break;
         case "larreevaar":
-          $("#paatth").removeClass(setting);
+          $("body, #paatth").removeClass(setting);
           ga('send','event','setting','change','larreevaar','off');
           break;
         case "swipe_nav":
@@ -367,4 +383,58 @@ $(function() {
       }
     });
   }
+  //KEYBOARD NAVIGATION
+  $(document).keydown(function(event) {
+    if (!$(document.activeElement).is("input")) {
+      switch (event.keyCode) {
+        //Esc
+        case 27:
+          onBackButton(true);
+          break;
+        //Left Arrow
+        case 37:
+          $(".minus1").click();
+          ga("send","event","keyboard","left");
+          break;
+        //Right Arrow
+        case 39:
+          $(".plus1").click();
+          ga("send","event","keyboard","right");
+          break;
+      }
+    }
+  });
+  $(document).keypress(function(event) {
+    if (!$(document.activeElement).is("input")) {
+      console.log(event.keyCode)
+      switch (event.keyCode) {
+        //+
+        case 43:
+          $("#zoom_in_button").click();
+          break;
+        //-
+        case 95:
+          $("#zoom_out_button").click();
+          break;
+        //a
+        case 97:
+          if ($("#paatth").hasClass("larreevaar")) {
+            $("#larreevaar_assistance").click();
+          }
+          break;
+        //l
+        case 108:
+          $("#larreevaar_setting").click();
+          break;
+        //m
+        case 109:
+          $("#settings_button").click();
+          break;
+        //n
+        case 110:
+          $("#night_mode_button").click();
+          break;
+      }
+    }
+  });
 });
