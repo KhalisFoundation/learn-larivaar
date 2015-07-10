@@ -92,6 +92,46 @@ a.corner_nav {
     font-size: 40px;
     right: 2px;
 }
+.burger {
+  margin: 5px 5px 0 0;
+  display: inline-block;
+  width: 35px;
+  height: 44px;
+}
+.burger span,
+.burger span:before,
+.burger span:after {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background: #333;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+}
+.burger span {
+  position: relative;
+  margin: 10px 0 0;
+}
+.burger span:before,
+.burger span:after {
+  position: absolute;
+  content: "";
+}
+.burger span:before {
+  top: -10px;
+}
+.burger span:after {
+  top: 10px;
+}
+.burger.selected span {
+  transform: scale(0.5);
+}
+.burger.selected span:before {
+  transform: translate(9px, -1px) rotate(225deg);
+}
+.burger.selected span:after {
+  transform: translate(9px, 1px) rotate(-225deg);
+}
 #larreevaar_assistance {
     font-family: AnmolUni;
     font-size: 13px;
@@ -281,6 +321,10 @@ nav,
 nav a.button-collapse {
     color: #444;
     height: 0 !important;
+}
+.side-nav,
+#sidenav-overlay {
+    top: 48px;
 }
 .side-nav li::after {
     clear: both;
