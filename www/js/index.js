@@ -406,7 +406,6 @@ $(function() {
   });
   $(document).keypress(function(event) {
     if (!$(document.activeElement).is("input")) {
-      console.log(event.keyCode)
       switch (event.keyCode) {
         //+
         case 43:
