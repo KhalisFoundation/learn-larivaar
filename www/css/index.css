@@ -235,6 +235,10 @@ div.ui-datepicker {
 }
 #paatth i {
     font-style: normal;
+    line-height: inherit;
+}
+#paatth i.fa.fa-bookmark {
+    margin: 0 5px 0 3px;
 }
 
 /* ***** DARK ***** */

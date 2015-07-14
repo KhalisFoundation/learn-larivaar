@@ -12,6 +12,8 @@ var swipe_nav             = window.localStorage["swipe_nav"]              || 1;
 var larreevaar            = window.localStorage["larreevaar"]             || 1;
 var larreevaar_assistance = window.localStorage["larreevaar_assistance"]  || 0;
 var lang                  = "en";//window.localStorage["lang"]                   || "en";
+var bookmark_index        = window.localStorage["bookmark_index"]         || null;
+var bookmark_ang          = window.localStorage["bookmark_ang"]           || null;
 var backButtonClose       = false;
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -116,10 +118,29 @@ function setAng(set_ang, store) {
       newPaatth += "<" + tag + ">" + val + (tag == "i" ? " " : "") + "</" + tag + "> ";
     });
     $("#paatth").html(newPaatth);
-    window.scrollTo(0,0);
+    //Check for bookmark, insert it and scroll to
+    if (bookmark_ang == ang && bookmark_index > -1) {
+      $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
+      window.scrollTo(0,$("i.fa.fa-bookmark").offset().top-58);
+    } else {
+      window.scrollTo(0,0);
+    }
+
   });
   if (store === true) {
     window.localStorage["ang"] = ang;
+    //Check for bookmark and remove
+    if (bookmark_ang) {
+      window.localStorage.removeItem('bookmark_ang');
+      window.localStorage.removeItem('bookmark_index');
+      bookmark_ang = null;
+      bookmark_index = null;
+      Materialize.toast("Bookmark removed", 4000);
+    }
+  } else {
+    //Loading for the first time
+    //Check for bookmark, insert it and scroll to
+    if (bookmark_ang == ang && bookmark_index > -1) $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
   }
 }
 
@@ -170,6 +191,10 @@ $(function() {
   if (dark == 1)                  $("body").addClass("dark");
   $("body").addClass("lang_" + lang);
   $(".setting[data-setting='lang'][data-value='" + lang + "']").addClass("cur");
+  if (bookmark_ang != null && bookmark_index != null) {
+    bookmark_ang = parseInt(bookmark_ang);
+    bookmark_index = parseInt(bookmark_index);
+  }
   //if (Modernizr.inputtypes.date) {
     var tomorrow    = new Date(Date.UTC(year,month,(day+1)));
     tomorrow_string =  formatDate(tomorrow);
@@ -182,7 +207,7 @@ $(function() {
       .val(samaaptee)
       .on("changeDate", function(ev) {
         if (ev.date.valueOf() < tomorrow.valueOf()) {
-          alert("Please choose a date in the future.");
+          Materialize.toast("Please choose a date in the future.", 4000);
           $("#samaaptee_date_input").datepicker("setValue", tomorrow_string);
         } else {
           var new_samaaptee = $(this).val();
@@ -363,9 +388,39 @@ $(function() {
       speedIn: 400
     });
   }
+  //Hammer gesture recognition
+  var myElement = document.getElementById('paatth');
+  var mc = new Hammer(myElement);
+  //Bookmarking
+  mc.add(new Hammer.Tap({ event: "doubletap", taps: 2 }));
+  mc.add(new Hammer.Tap());
+  mc.get("doubletap").recognizeWith("tap");
+  mc.on("doubletap", function(ev) {
+    var prev_i_index,
+        next_i_index;
+
+    $("#paatth i.fa.fa-bookmark").remove();
+    var doubletap_index = $(ev.target).index();
+    if (ev.target.tagName == "I") {
+      bookmark_index = doubletap_index;
+    } else {
+      //Find closest <i> and put bookmark after
+      prev_i_index = $(ev.target).prevAll("i").eq(0).index();
+      next_i_index = $(ev.target).nextAll("i").eq(0).index();
+      if ((doubletap_index - prev_i_index) < (next_i_index - doubletap_index)) {
+        //Prev <i> is closer
+        bookmark_index = prev_i_index;
+      } else {
+        //Next <i> is closer
+        bookmark_index = next_i_index;
+      }
+    }
+    //Set localStorage variable and add icon
+    window.localStorage["bookmark_index"] = bookmark_index;
+    window.localStorage["bookmark_ang"]   = ang;
+    $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
+  })  
   if (swipe_nav) {
-    var myElement = document.getElementById('paatth');
-    var mc = new Hammer(myElement);
     mc.get("swipe").set({
       direction: Hammer.DIRECTION_HORIZONTAL,
       velocity: 0.2
@@ -412,7 +467,7 @@ $(function() {
           $("#zoom_in_button").click();
           break;
         //-
-        case 95:
+        case 45:
           $("#zoom_out_button").click();
           break;
         //a
