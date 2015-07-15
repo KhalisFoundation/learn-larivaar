@@ -241,6 +241,19 @@ div.ui-datepicker {
     margin: 0 5px 0 3px;
 }
 
+/* ***** ABOUT ***** */
+#about {
+    background: #fff !important;
+    color: #333 !important;
+    font-size: 1rem;
+}
+#about .modal-close {
+    color: #333 !important;
+}
+#about p a {
+    color: #F37B20;
+}
+
 /* ***** DARK ***** */
 body.dark,
 .dark .side-nav,
