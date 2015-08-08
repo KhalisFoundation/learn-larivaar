@@ -29,7 +29,7 @@ function onDeviceReady() {
   $("body").removeClass("smartbanner");
   $("script[src='js/jquery.smartbanner.js']").remove();
   //Override back button
-  document.addEventListener("backbutton", onBackButton, false);
+  document.addEventListener("backbutton", function(){onBackButton(false);}, false);
 }
 
 function calculateDailyAngs(samaaptee, ang) {
@@ -144,14 +144,15 @@ function setAng(set_ang, store) {
   }
 }
 
-function onBackButton(esc) {
+function onBackButton(esc_button) {
+  esc_button = typeof esc_button !== 'undefined' ? esc_button : false;
   if ($(".datepicker:visible").length > 0) {
     $("#samaaptee_date_input").blur().datepicker("hide");
   } else if ($(".modal:visible").length > 0) {
     $(".modal").closeModal();
   } else if (parseInt($(".side-nav.right-aligned").css("right")) == 0 || parseInt($(".side-nav.left-aligned").css("left")) == 0) {
     $(".button-collapse").sideNav("hide");
-  } else if (!esc) {
+  } else if (!esc_button) {
       if (backButtonClose == true) {
         navigator.app.exitApp();
       } else {
@@ -418,6 +419,7 @@ $(function() {
     //Set localStorage variable and add icon
     window.localStorage["bookmark_index"] = bookmark_index;
     window.localStorage["bookmark_ang"]   = ang;
+    bookmark_ang                          = ang;
     $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
   })  
   if (swipe_nav) {

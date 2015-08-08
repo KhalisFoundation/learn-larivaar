@@ -250,8 +250,12 @@ div.ui-datepicker {
 #about .modal-close {
     color: #333 !important;
 }
-#about p a {
+#about p a,
+#about h5 a {
     color: #F37B20;
+}
+#about h5 {
+    font-size: 1.4rem;
 }
 
 /* ***** DARK ***** */
