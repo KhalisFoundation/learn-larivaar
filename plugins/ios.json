@@ -19,6 +19,10 @@
                         {
                             "xml": "<preference name=\"StatusBarStyle\" value=\"lightcontent\" />",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Insomnia\"><param name=\"ios-package\" value=\"Insomnia\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -27,6 +31,9 @@
     },
     "installed_plugins": {
         "org.apache.cordova.statusbar": {
+            "PACKAGE_NAME": "com.cyfersystems.learnlarivaar"
+        },
+        "nl.x-services.plugins.insomnia": {
             "PACKAGE_NAME": "com.cyfersystems.learnlarivaar"
         }
     },

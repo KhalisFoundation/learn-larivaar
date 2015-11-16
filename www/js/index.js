@@ -15,6 +15,7 @@ var lang                  = "en";//window.localStorage["lang"]                  
 var bookmark_index        = window.localStorage["bookmark_index"]         || null;
 var bookmark_ang          = window.localStorage["bookmark_ang"]           || null;
 var backButtonClose       = false;
+var keep_awake            = window.localStorage["keep_awake"]             || 0;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
@@ -29,7 +30,86 @@ function onDeviceReady() {
   $("body").removeClass("smartbanner");
   $("script[src='js/jquery.smartbanner.js']").remove();
   //Override back button
+  init();
   document.addEventListener("backbutton", function(){onBackButton(false);}, false);
+}
+
+function init() {
+  setAng(ang, false);
+  if (samaaptee) {
+    calculateDailyAngs(samaaptee, ang);
+  } else if (daily) {
+    daily_total = daily;
+    calculateSamaapteeDate(daily, ang);
+  }
+  //Check if today var is actually today or reset
+  var today         = new Date();
+  var year          = today.getFullYear();
+  var month         = today.getMonth();
+  var day           = today.getDate();
+  var today_string  = new Date(Date.UTC(year,month,day));
+  today_string      = formatDate(today);
+  if (today_string != today_date) {
+    window.localStorage["today_date"] = today_date = today_string;
+    window.localStorage["today_start"] = today_start = ang;
+  }
+  updateProgress();
+  font_size = parseInt(font_size);
+  $("#paatth").css("font-size", font_size + "px");
+  $(".setting[data-setting='larreevaar']").data("on", larreevaar);
+  $("#larreevaar_assistance").data("on", larreevaar_assistance);
+  if (larreevaar == 1)            $("body, #paatth").addClass("larreevaar");
+  if (larreevaar_assistance == 1) $("#paatth, #larreevaar_assistance").addClass("larreevaar_assistance");
+  $(".setting[data-setting='swipe_nav']").data("on", swipe_nav);
+  $(".setting[data-setting='dark']").data("on", dark);
+  if (dark == 1)                  $("body").addClass("dark");
+  $(".setting[data-setting='keep_awake']").data("on", keep_awake);
+  if (keep_awake == 1)            window.plugins.insomnia.keepAwake();
+  $("body").addClass("lang_" + lang);
+  $(".setting[data-setting='lang'][data-value='" + lang + "']").addClass("cur");
+  if (bookmark_ang != null && bookmark_index != null) {
+    bookmark_ang = parseInt(bookmark_ang);
+    bookmark_index = parseInt(bookmark_index);
+  }
+  //if (Modernizr.inputtypes.date) {
+    var tomorrow    = new Date(Date.UTC(year,month,(day+1)));
+    tomorrow_string =  formatDate(tomorrow);
+    //$("#samaaptee_date_input").attr("min",tomorrow_string);
+  //} else {
+    $("#samaaptee_date_input").datepicker({
+      //altField: "#samaaptee_date_input",
+      format: "yyyy-mm-dd",
+    })
+      .val(samaaptee)
+      .on("changeDate", function(ev) {
+        if (ev.date.valueOf() < tomorrow.valueOf()) {
+          Materialize.toast("Please choose a date in the future.", 4000);
+          $("#samaaptee_date_input").datepicker("setValue", tomorrow_string);
+        } else {
+          var new_samaaptee = $(this).val();
+          $("#samaaptee_date_input").datepicker("hide");
+          window.localStorage['samaaptee'] = samaaptee = new_samaaptee;
+          window.localStorage.removeItem('daily');
+          daily = null;
+          $("#daily_angs_input").val("");
+          $("#daily_angs_projected_samaaptee").text("").parent("#daily_angs_projected_samaaptee_cont").hide();
+          calculateDailyAngs(samaaptee, ang);
+          updateProgress();
+
+        }
+      })
+    ;
+    if (samaaptee) {
+      $("#samaaptee_date_input").datepicker("setValue", samaaptee);
+    }
+  //}
+  $("#daily_angs_input").val(daily);
+  //Change checkboxes to checked for settings that are on
+  $(".setting.checkbox").each(function(){
+    if ($(this).data("on") == "1") {
+      $(this).find("i").removeClass("fa-square-o").addClass("fa-check-square-o");
+    }
+  });  
 }
 
 function calculateDailyAngs(samaaptee, ang) {
@@ -162,79 +242,6 @@ function onBackButton(esc_button) {
   }
 }
 $(function() {
-  setAng(ang, false);
-  if (samaaptee) {
-    calculateDailyAngs(samaaptee, ang);
-  } else if (daily) {
-    daily_total = daily;
-    calculateSamaapteeDate(daily, ang);
-  }
-  //Check if today var is actually today or reset
-  var today         = new Date();
-  var year          = today.getFullYear();
-  var month         = today.getMonth();
-  var day           = today.getDate();
-  var today_string  = new Date(Date.UTC(year,month,day));
-  today_string      = formatDate(today);
-  if (today_string != today_date) {
-    window.localStorage["today_date"] = today_date = today_string;
-    window.localStorage["today_start"] = today_start = ang;
-  }
-  updateProgress();
-  font_size = parseInt(font_size);
-  $("#paatth").css("font-size", font_size + "px");
-  $(".setting[data-setting='larreevaar']").data("on", larreevaar);
-  $("#larreevaar_assistance").data("on", larreevaar_assistance);
-  if (larreevaar == 1)            $("body, #paatth").addClass("larreevaar");
-  if (larreevaar_assistance == 1) $("#paatth, #larreevaar_assistance").addClass("larreevaar_assistance");
-  $(".setting[data-setting='swipe_nav']").data("on", swipe_nav);
-  $(".setting[data-setting='dark']").data("on", dark);
-  if (dark == 1)                  $("body").addClass("dark");
-  $("body").addClass("lang_" + lang);
-  $(".setting[data-setting='lang'][data-value='" + lang + "']").addClass("cur");
-  if (bookmark_ang != null && bookmark_index != null) {
-    bookmark_ang = parseInt(bookmark_ang);
-    bookmark_index = parseInt(bookmark_index);
-  }
-  //if (Modernizr.inputtypes.date) {
-    var tomorrow    = new Date(Date.UTC(year,month,(day+1)));
-    tomorrow_string =  formatDate(tomorrow);
-    //$("#samaaptee_date_input").attr("min",tomorrow_string);
-  //} else {
-    $("#samaaptee_date_input").datepicker({
-      //altField: "#samaaptee_date_input",
-      format: "yyyy-mm-dd",
-    })
-      .val(samaaptee)
-      .on("changeDate", function(ev) {
-        if (ev.date.valueOf() < tomorrow.valueOf()) {
-          Materialize.toast("Please choose a date in the future.", 4000);
-          $("#samaaptee_date_input").datepicker("setValue", tomorrow_string);
-        } else {
-          var new_samaaptee = $(this).val();
-          $("#samaaptee_date_input").datepicker("hide");
-          window.localStorage['samaaptee'] = samaaptee = new_samaaptee;
-          window.localStorage.removeItem('daily');
-          daily = null;
-          $("#daily_angs_input").val("");
-          $("#daily_angs_projected_samaaptee").text("").parent("#daily_angs_projected_samaaptee_cont").hide();
-          calculateDailyAngs(samaaptee, ang);
-          updateProgress();
-
-        }
-      })
-    ;
-    if (samaaptee) {
-      $("#samaaptee_date_input").datepicker("setValue", samaaptee);
-    }
-  //}
-  $("#daily_angs_input").val(daily);
-  //Change checkboxes to checked for settings that are on
-  $(".setting.checkbox").each(function(){
-    if ($(this).data("on") == "1") {
-      $(this).find("i").removeClass("fa-square-o").addClass("fa-check-square-o");
-    }
-  });
 
   $("#settings_button").click(function() {
     $('.button-collapse').sideNav('show');
@@ -313,6 +320,10 @@ $(function() {
           $("body").addClass(setting);
           ga('send','event','setting','change','dark','on');
           break;
+        case "keep_awake":
+          window.plugins.insomnia.keepAwake();
+          ga('send','event','setting','change','keep_awake','on');
+          break;
       }
       if ($(this).hasClass("checkbox")) {
         $(this).find("i.fa-square-o").removeClass("fa-square-o").addClass("fa-check-square-o");
@@ -337,6 +348,10 @@ $(function() {
         case "dark":
           $("body").removeClass(setting);
           ga('send','event','setting','change','dark','off');
+          break;
+        case "keep_awake":
+          window.plugins.insomnia.allowSleepAgain();
+          ga('send','event','setting','change','keep_awake','off');
           break;
       }
       if ($(this).hasClass("checkbox")) {
