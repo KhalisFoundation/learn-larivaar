@@ -8,7 +8,7 @@ var today_date            = window.localStorage["today_date"]             || nul
 var today_start           = window.localStorage["today_start"]            || null;
 var today_read            = ang - today_start;
 var daily_total           = 0;
-var swipe_nav             = window.localStorage["swipe_nav"]              || 1;
+var swipe_nav             = parseInt(window.localStorage["swipe_nav"])    || 1;
 var larreevaar            = window.localStorage["larreevaar"]             || 1;
 var larreevaar_assistance = window.localStorage["larreevaar_assistance"]  || 0;
 var lang                  = "en";//window.localStorage["lang"]                   || "en";
@@ -437,24 +437,24 @@ $(function() {
     bookmark_ang                          = ang;
     $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
   })  
-  if (swipe_nav) {
     mc.get("swipe").set({
       direction: Hammer.DIRECTION_HORIZONTAL,
       velocity: 0.2
     })
     mc.on("swipeleft swiperight", function(ev) {
-      switch(ev.type) {
-        case 'swiperight':
-          $(".minus1").click();
-          ga('send','event','swipe','right');
-          break;
-        case "swipeleft":
-          $(".plus1").click();
-          ga('send','event','swipe','left');
-          break;
+      if (swipe_nav == 1) {
+        switch(ev.type) {
+          case 'swiperight':
+            $(".minus1").click();
+            ga('send','event','swipe','right');
+            break;
+          case "swipeleft":
+            $(".plus1").click();
+            ga('send','event','swipe','left');
+            break;
+        }
       }
     });
-  }
   //KEYBOARD NAVIGATION
   $(document).keydown(function(event) {
     if (!$(document.activeElement).is("input")) {
