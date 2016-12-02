@@ -75,6 +75,29 @@ header {
     width: 100%;
     z-index: 4;
 }
+/* ***** SIDEBAR ***** */
+.side-nav {
+    left: 0 !important;
+    transition: transform 0.15s ease-out;
+    transform: translateX(-100%);
+}
+body.nav-open .side-nav {
+    transform: translateX(0%);
+}
+.side-nav-back {
+    background-color: rgba(0,0,0,0.4);
+    height: 0;
+    position: fixed;
+    opacity: 0;
+    top: 48px;
+    transition: opacity 0.15s ease-out;
+    width: 100%;
+    z-index: 998;
+}
+body.nav-open .side-nav-back {
+    opacity: 1;
+    height: 100%;
+}
 .corner_nav {
     display: block;
     height: 44px;
@@ -100,7 +123,7 @@ a.corner_nav {
     width: 36px;
 }
 #settings_button {
-    right: 0;
+    left: 2px;
 }
 #settings_button .fa {
     font-size: 23px !important;
@@ -114,7 +137,7 @@ a.corner_nav {
 #larreevaar_assistance {
     font-family: AnmolUni;
     font-size: 13px;
-    left: 2px;
+    right: 0px;
     line-height: 15px;
     padding-top: 7px;
 }
@@ -258,6 +281,24 @@ div.ui-datepicker {
     font-size: 1.4rem;
 }
 
+/* ***** LEFTHAND ***** */
+body.lefthand #settings_button {
+    left: initial;
+    right: 0;
+}
+body.lefthand #larreevaar_assistance {
+    left: 2px;
+    right: initial;
+}
+body.lefthand .side-nav {
+    left: initial !important;
+    right: 0;
+    transform: translateX(100%);
+}
+body.lefthand.nav-open .side-nav {
+    transform: translateX(0%);
+}
+
 /* ***** DARK ***** */
 body.dark,
 .dark .side-nav,
@@ -320,6 +361,9 @@ nav,
 nav a.button-collapse {
     color: #444;
     height: 0 !important;
+}
+.side-nav {
+    width: 300px;
 }
 .side-nav,
 #sidenav-overlay {

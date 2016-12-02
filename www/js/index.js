@@ -16,15 +16,16 @@ var bookmark_index        = window.localStorage["bookmark_index"]         || nul
 var bookmark_ang          = window.localStorage["bookmark_ang"]           || null;
 var backButtonClose       = false;
 var keep_awake            = window.localStorage["keep_awake"]             || 0;
+var lefthand              = window.localStorage["lefthand"]               || 0;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-  StatusBar.show();
+  /*StatusBar.show();
   if (dark) {
     StatusBar.backgroundColorByHexString('333333');
   } else {
     StatusBar.styleDefault();
-  }
+  }*/
   window.localStorage["no_smartbanner"] = 1;
   $("#smartbanner").remove();
   $("body").removeClass("smartbanner");
@@ -65,6 +66,8 @@ function init() {
   if (dark == 1)                  $("body").addClass("dark");
   $(".setting[data-setting='keep_awake']").data("on", keep_awake);
   if (keep_awake == 1)            window.plugins.insomnia.keepAwake();
+  $(".setting[data-setting='lefthand']").data("on", lefthand);
+  if (lefthand == 1)              $("body").addClass("lefthand");
   $("body").addClass("lang_" + lang);
   $(".setting[data-setting='lang'][data-value='" + lang + "']").addClass("cur");
   if (bookmark_ang != null && bookmark_index != null) {
@@ -109,7 +112,7 @@ function init() {
     if ($(this).data("on") == "1") {
       $(this).find("i").removeClass("fa-square-o").addClass("fa-check-square-o");
     }
-  });  
+  });
 }
 
 function calculateDailyAngs(samaaptee, ang) {
@@ -246,7 +249,7 @@ $(function() {
   $("#settings_button").click(function() {
     $('.button-collapse').sideNav('show');
     /*$('#settings_button').toggleClass('selected');*/
-    ga('send','event','button','click','settings'); 
+    ga('send','event','button','click','settings');
   });
   //FONT SIZE
   $(".bigger").click(function () {
@@ -324,6 +327,10 @@ $(function() {
           window.plugins.insomnia.keepAwake();
           ga('send','event','setting','change','keep_awake','on');
           break;
+        case "lefthand":
+          $("body").addClass(setting);
+          ga('send','event','setting','change','lefthand','on');
+          break;
       }
       if ($(this).hasClass("checkbox")) {
         $(this).find("i.fa-square-o").removeClass("fa-square-o").addClass("fa-check-square-o");
@@ -352,6 +359,10 @@ $(function() {
         case "keep_awake":
           window.plugins.insomnia.allowSleepAgain();
           ga('send','event','setting','change','keep_awake','off');
+          break;
+        case "lefthand":
+          $("body").removeClass(setting);
+          ga('send','event','setting','change','lefthand','off');
           break;
       }
       if ($(this).hasClass("checkbox")) {

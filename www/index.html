@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <!--
     Licensed to the Apache Software Foundation (ASF) under one
     or more contributor license agreements.  See the NOTICE file
@@ -95,11 +95,12 @@
                         </li>
                     </ul>
                 </li>
+                <li><div><span class="lang_en">Left-Handed Mode</span><span class="lang_pa">Left-Handed Mode</span><a href="javascript:void(0)" class="setting checkbox secondary-content" data-setting="lefthand"><i class="fa fa-square-o"></i></a></div></li>
                 <li class="no-padding">
                     <a class="modal-trigger" href="#about">About</a>
                 </li>
             </ul>
-            <a href="#" id="slide-out-button" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            <a href="#" id="slide-out-button" data-activates="slide-out" class="button-collapse nav-toggle"><i class="mdi-navigation-menu"></i></a>
         </nav>
         <div id="dailySetting" class="modal">
             <div class="modal-content">
@@ -130,13 +131,15 @@
                 <p>Seva of Gurbani was done by <a href="http://sourceforge.net/projects/sikher/files/Database/" target="_blank">Sikher</a>.</p>
                 <p>Bhul Chuk Maaf!</p>
                 <h5><a href="http://khalisfoundation.org/projects/apps" href="_blank">More Apps by Khalis</a></h5>
-                <p><small>&copy; 2015 Khalis Foundation</small></p>
+                <p><small>&copy; 2016 Khalis Foundation</small></p>
             </div>
         </div>
         <div class="app">
             <div id="paatth"></div>
         </div>
         <div id="datepicker_back"></div>
+        <div class="side-nav-back"></div>
+        <div id="nav_back"></div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
@@ -145,8 +148,11 @@
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
         <script>
+            $(".nav-toggle, .side-nav-back").click(function () {
+                $("body").toggleClass("nav-open");
+            });
             //Materialize
-            $(".button-collapse").sideNav({edge:'right'});
+            //$(".button-collapse").sideNav({edge:'right'});
             $(".modal-trigger").leanModal();
             
             //Analytics
