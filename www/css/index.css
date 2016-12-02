@@ -225,7 +225,7 @@ div.ui-datepicker {
     border: 1px solid rgb(238, 238, 238);
     box-shadow: none;
     font-size: inherit;
-    height: initial;
+    height: auto;
     margin: 0;
     outline: none;
     padding: 1px 0;
@@ -283,15 +283,15 @@ div.ui-datepicker {
 
 /* ***** LEFTHAND ***** */
 body.lefthand #settings_button {
-    left: initial;
+    left: auto;
     right: 0;
 }
 body.lefthand #larreevaar_assistance {
     left: 2px;
-    right: initial;
+    right: auto;
 }
 body.lefthand .side-nav {
-    left: initial !important;
+    left: auto !important;
     right: 0;
     transform: translateX(100%);
 }
