@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.cyfersystems.learnlarivaar" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.cyfersystems.learnlarivaar" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Learn Larivaar</name>
   <description>
         An application to help learn Larivaar through Sehaj Paatth.
@@ -7,6 +7,8 @@
   <author email="techsupport@khalisfoundation.org" href="http://www.khalisfoundation.org">
         Khalis Foundation
     </author>
+  <preference name="WindowsStoreIdentityName" value="KhalisFoundation.LearnLarivaar"/>
+  <preference name="windows-target-version" value="10.0"/>
   <content src="index.html"/>
   <plugin name="cordova-plugin-whitelist" spec="1"/>
   <plugin name="cordova-plugin-statusbar"/>

@@ -1,0 +1,7 @@
+{
+  "windows": {
+    "release": {
+      "packageCertificateKeyFile": "learnlarivaar.pfx"
+    }
+  }
+}
