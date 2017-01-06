@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.cyfersystems.learnlarivaar" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.cyfersystems.learnlarivaar" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Learn Larivaar</name>
   <description>
         An application to help learn Larivaar through Sehaj Paatth.
@@ -53,6 +53,8 @@
     <!-- iPad Spotlight and Settings Icon -->
     <icon src="res/ios/Icon-Small-50.png" width="50" height="50" />
     <icon src="res/ios/Icon-Small-50@2x.png" width="100" height="100" />
+    <!-- iPad Pro -->
+    <icon src="res/ios/Icon-83.5@2x.png" width="167" height="167" />
   </platform>
 
   <platform name="ios">
