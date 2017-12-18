@@ -1,0 +1,19 @@
+{
+  "name": "com.cyfersystems.learnlarivaar",
+  "version": "1.0.6",
+  "displayName": "Learn Larivaar",
+  "cordova": {
+    "platforms": [
+      "ios"
+    ],
+    "plugins": {
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {},
+      "cordova-plugin-insomnia": {}
+    }
+  },
+  "dependencies": {
+    "cordova-ios": "~4.5.4",
+    "cordova-plugin-whitelist": "1"
+  }
+}
