@@ -160,7 +160,7 @@ function processDate(future_date) {
   var month     = today.getMonth();
   var day       = today.getDate();
   today         = new Date(Date.UTC(year,month,day));
-  
+
   return {
     "diff" : Math.round((new_date.getTime() - today.getTime())/(oneDay)),
     "new_date" : formatDate(new_date)
@@ -245,6 +245,17 @@ function onBackButton(esc_button) {
   }
 }
 $(function() {
+
+  $(".external-link").click(function() {
+    var externalLink = $(this).attr("href");
+    cordova.plugins.browsertab.isAvailable(function(result) {
+      if (!result) {
+        cordova.InAppBrowser.open(externalLink, '_system');
+      } else {
+        cordova.plugins.browsertab.openUrl(externalLink);
+      }
+    })
+  })
 
   $("#settings_button").click(function() {
     $('.button-collapse').sideNav('show');
@@ -447,7 +458,7 @@ $(function() {
     window.localStorage["bookmark_ang"]   = ang;
     bookmark_ang                          = ang;
     $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
-  })  
+  })
     mc.get("swipe").set({
       direction: Hammer.DIRECTION_HORIZONTAL,
       velocity: 0.2

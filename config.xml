@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cyfersystems.learnlarivaar" version="1.0.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.cyfersystems.learnlarivaar" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Learn Larivaar</name>
     <description>
         An application to help learn Larivaar through Sehaj Paatth.
@@ -9,11 +9,11 @@
     </author>
     <preference name="WindowsStoreIdentityName" value="KhalisFoundation.LearnLarivaar" />
     <preference name="windows-target-version" value="10.0" />
-    <content src="index.html" />
-    <access origin="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="StatusBarOverlaysWebView" value="false" />
+    <content src="index.html" />
+    <access origin="*" />
     <platform name="android">
         <icon density="ldpi" src="res/android/ldpi.png" />
         <icon density="mdpi" src="res/android/mdpi.png" />
@@ -66,4 +66,6 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-statusbar" />
     <plugin name="cordova-plugin-insomnia" />
+    <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
 </widget>
