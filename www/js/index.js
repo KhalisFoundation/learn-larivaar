@@ -28,15 +28,6 @@ function onDeviceReady() {
     document.body.classList.remove('landscape-secondary');
     document.body.classList.add(screen.orientation.type);
   });
-  if (window.screen.height !== 812 || device.platform.toLowerCase() !== 'ios') {
-    document.body.classList.add('statusbar');
-  }
-  /*StatusBar.show();
-  if (dark) {
-    StatusBar.backgroundColorByHexString('333333');
-  } else {
-    StatusBar.styleDefault();
-  }*/
   window.localStorage["no_smartbanner"] = 1;
   $("#smartbanner").remove();
   $("body").removeClass("smartbanner");
@@ -74,7 +65,13 @@ function init() {
   if (larreevaar_assistance == 1) $("#paatth, #larreevaar_assistance").addClass("larreevaar_assistance");
   $(".setting[data-setting='swipe_nav']").data("on", swipe_nav);
   $(".setting[data-setting='dark']").data("on", dark);
-  if (dark == 1)                  $("body").addClass("dark");
+  if (dark == 1) {
+    $("body").addClass("dark");
+    StatusBar.backgroundColorByHexString('#222');
+    StatusBar.styleLightContent();
+  } else {
+    StatusBar.styleDefault();
+  }
   $(".setting[data-setting='keep_awake']").data("on", keep_awake);
   if (keep_awake == 1)            window.plugins.insomnia.keepAwake();
   $(".setting[data-setting='lefthand']").data("on", lefthand);
@@ -343,6 +340,8 @@ $(function() {
           break;
         case "dark":
           $("body").addClass(setting);
+          StatusBar.backgroundColorByHexString('#222');
+          StatusBar.styleLightContent();
           ga('send','event','setting','change','dark','on');
           break;
         case "keep_awake":
@@ -376,6 +375,8 @@ $(function() {
           break;
         case "dark":
           $("body").removeClass(setting);
+          StatusBar.backgroundColorByHexString('#fff');
+          StatusBar.styleDefault();
           ga('send','event','setting','change','dark','off');
           break;
         case "keep_awake":

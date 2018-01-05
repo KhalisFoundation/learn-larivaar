@@ -1,61 +1,76 @@
-.platform-ios.h812.portrait-primary {
-  padding-top: 44px;
-
-  header {
-    top: 44px;
-  }
-
-  .corner_nav {
-    top: calc(2px + 44px);
-  }
-}
+$iphonex-padding: 44px;
+$iphonex-rounded-padding: 20px;
 
 .platform-ios.h812.landscape-primary {
-  padding-left: 44px;
-  padding-right: 20px;
-
   #settings_button {
-    left: 44px;
+    left: $iphonex-padding;
   }
 
   #larreevaar_assistance {
-    right: 20px;
+    right: $iphonex-rounded-padding;
+  }
+
+  .app {
+    padding-left: calc(8px + #{$iphonex-padding});
+    padding-right: calc(8px + #{$iphonex-rounded-padding});
+  }
+
+  .side-nav {
+    padding-left: $iphonex-padding;
+    width: calc(300px + #{$iphonex-padding});
   }
 
   &.lefthand {
     #settings_button {
       left: auto;
-      right: 20px;
+      right: $iphonex-rounded-padding;
     }
 
     #larreevaar_assistance {
-      left: 44px;
+      left: $iphonex-padding;
       right: auto;
+    }
+
+    .side-nav {
+      padding-left: 0;
+      width: 300px;
     }
   }
 }
 
 .platform-ios.h812.landscape-secondary {
-  padding-left: 20px;
-  padding-right: 44px;
-
   #settings_button {
-    left: 20px;
+    left: $iphonex-rounded-padding;
   }
 
   #larreevaar_assistance {
-    right: 44px;
+    right: $iphonex-padding;
+  }
+
+  .side-nav {
+    padding-right: 0;
+    width: 300px;
+  }
+
+  .app {
+    padding-left: calc(8px + #{$iphonex-rounded-padding});
+    padding-right: calc(8px + #{$iphonex-padding});
   }
 
   &.lefthand {
     #settings_button {
       left: auto;
-      right: 44px;
+      right: $iphonex-padding;
     }
 
     #larreevaar_assistance {
-      left: 20px;
+      left: $iphonex-rounded-padding;
       right: auto;
+    }
+
+    .side-nav {
+      padding-right: $iphonex-padding;
+      width: calc(300px + #{$iphonex-padding});
     }
   }
 }

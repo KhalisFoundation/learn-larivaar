@@ -11,7 +11,7 @@
     <preference name="windows-target-version" value="10.0" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <content src="index.html" />
     <access origin="*" />
     <platform name="android">
