@@ -1,0 +1,61 @@
+.platform-ios.h812.portrait-primary {
+  padding-top: 44px;
+
+  header {
+    top: 44px;
+  }
+
+  .corner_nav {
+    top: calc(2px + 44px);
+  }
+}
+
+.platform-ios.h812.landscape-primary {
+  padding-left: 44px;
+  padding-right: 20px;
+
+  #settings_button {
+    left: 44px;
+  }
+
+  #larreevaar_assistance {
+    right: 20px;
+  }
+
+  &.lefthand {
+    #settings_button {
+      left: auto;
+      right: 20px;
+    }
+
+    #larreevaar_assistance {
+      left: 44px;
+      right: auto;
+    }
+  }
+}
+
+.platform-ios.h812.landscape-secondary {
+  padding-left: 20px;
+  padding-right: 44px;
+
+  #settings_button {
+    left: 20px;
+  }
+
+  #larreevaar_assistance {
+    right: 44px;
+  }
+
+  &.lefthand {
+    #settings_button {
+      left: auto;
+      right: 44px;
+    }
+
+    #larreevaar_assistance {
+      left: 20px;
+      right: auto;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cyfersystems.learnlarivaar" version="1.0.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.cyfersystems.learnlarivaar" version="1.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Learn Larivaar</name>
     <description>
         An application to help learn Larivaar through Sehaj Paatth.
@@ -11,7 +11,7 @@
     <preference name="windows-target-version" value="10.0" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
     <content src="index.html" />
     <access origin="*" />
     <platform name="android">
@@ -39,6 +39,7 @@
         <icon height="50" src="res/ios/Icon-Small-50.png" width="50" />
         <icon height="100" src="res/ios/Icon-Small-50@2x.png" width="100" />
         <icon height="167" src="res/ios/Icon-83.5@2x.png" width="167" />
+        <icon height="1024" src="res/ios/Icon-1024.png" width="1024" />
     </platform>
     <platform name="ios">
         <splash src="res/screen/ios/Default@2x~iphone~anyany.png" />
@@ -62,10 +63,13 @@
         <icon src="res/windows/splashscreen.png" target="SplashScreen" />
         <icon src="res/windows/splashscreenphone.png" target="SplashScreenPhone" />
     </platform>
-    <engine name="ios" spec="~4.5.4" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-statusbar" />
     <plugin name="cordova-plugin-insomnia" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
+    <plugin name="cordova-plugin-device" spec="^1.1.7" />
+    <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

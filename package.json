@@ -2,6 +2,9 @@
   "name": "com.cyfersystems.learnlarivaar",
   "version": "1.0.6",
   "displayName": "Learn Larivaar",
+  "scripts": {
+    "watch-css": "nodemon --watch www -e scss -x \"node-sass --output-style nested --source-map true --include-path www/src/scss www/src/scss/index.scss www/css/index.css\""
+  },
   "cordova": {
     "platforms": [
       "ios"
@@ -11,14 +14,24 @@
       "cordova-plugin-statusbar": {},
       "cordova-plugin-insomnia": {},
       "cordova-plugin-browsertab": {},
-      "cordova-plugin-inappbrowser": {}
+      "cordova-plugin-inappbrowser": {},
+      "cordova-plugin-splashscreen": {},
+      "cordova-plugin-device": {},
+      "cordova-plugin-screen-orientation": {}
     }
   },
   "dependencies": {
-    "cordova-ios": "~4.5.4",
+    "cordova-ios": "^4.5.4",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
+    "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-inappbrowser": "^1.7.2",
+    "cordova-plugin-screen-orientation": "^2.0.2",
+    "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "1"
+  },
+  "devDependencies": {
+    "node-sass": "^4.7.2",
+    "nodemon": "^1.14.3"
   }
 }

@@ -20,6 +20,17 @@ var lefthand              = window.localStorage["lefthand"]               || 0;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
+  document.body.classList.add('h' + window.screen.height);
+  document.body.classList.add(screen.orientation.type);
+  screen.orientation.addEventListener('change', function() {
+    document.body.classList.remove('portrait-primary');
+    document.body.classList.remove('landscape-primary');
+    document.body.classList.remove('landscape-secondary');
+    document.body.classList.add(screen.orientation.type);
+  });
+  if (window.screen.height !== 812 || device.platform.toLowerCase() !== 'ios') {
+    document.body.classList.add('statusbar');
+  }
   /*StatusBar.show();
   if (dark) {
     StatusBar.backgroundColorByHexString('333333');
