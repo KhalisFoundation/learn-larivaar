@@ -1,0 +1,19 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "jquery": true
+  },
+  "rules": {
+    "no-mixed-operators": "off",
+    "no-restricted-globals": "off",
+    "no-use-before-define": "off"
+  },
+  "globals": {
+    "cordova": true,
+    "ga": true,
+    "Hammer": true,
+    "Materialize": true,
+    "StatusBar": true
+  }
+}

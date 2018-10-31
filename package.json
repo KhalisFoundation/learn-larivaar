@@ -2,6 +2,7 @@
   "name": "com.cyfersystems.learnlarivaar",
   "version": "1.0.10",
   "displayName": "Learn Larivaar",
+  "description": "An application to help learn Larivaar through Sehaj Paatth.",
   "scripts": {
     "watch-css": "nodemon --watch www -e scss -x \"node-sass --output-style nested --source-map true --include-path www/src/scss www/src/scss/index.scss www/css/index.css\""
   },
@@ -23,9 +24,9 @@
     }
   },
   "dependencies": {
-    "cordova-android": "^7.0.0",
+    "cordova-android": "^7.1.1",
     "cordova-browser": "^5.0.4",
-    "cordova-ios": "^4.5.4",
+    "cordova-ios": "^4.5.5",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
@@ -33,10 +34,20 @@
     "cordova-plugin-screen-orientation": "^2.0.2",
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "1",
-    "es6-promise-plugin": "^4.2.2"
+    "es6-promise-plugin": "^4.2.2",
+    "react": "^16.6.0",
+    "react-redux": "^5.1.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
-    "node-sass": "^4.7.2",
-    "nodemon": "^1.14.3"
+    "eslint": "^5.7.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "htmlhint": "^0.10.1",
+    "node-sass": "^4.9.4",
+    "nodemon": "^1.18.4",
+    "stylelint": "^9.6.0",
+    "stylelint-config-standard": "^18.2.0",
+    "stylelint-order": "^1.0.0"
   }
 }
