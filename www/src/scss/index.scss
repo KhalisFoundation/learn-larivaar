@@ -16,19 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
- * {
-  -webkit-tap-highlight-color: rgba(0,0,0,0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* make transparent link selection, adjust last value opacity 0 to 1.0 */
 }
 
 body {
-  -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
-  -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
-  -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
   font-family: 'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
   font-size: 12px;
   height: 100%;
   margin: 0;
   padding: 0 0 44px;
+  -webkit-text-size-adjust: none;             /* prevent webkit from resizing text to fit */
+  -webkit-touch-callout: none;                /* prevent callout to copy image, etc when tap to hold */
+  -webkit-user-select: none;                  /* prevent copy paste, to allow, change 'none' to 'text' */
   width: 100%;
 }
 
@@ -62,7 +62,7 @@ a {
 }
 
 header {
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255, 255, 255, 0.95);
   height: 48px;
   left: 0;
   padding-top: 8px;
@@ -86,7 +86,7 @@ a.corner_nav {
   color: #333;
 }
 
-.corner_nav:after {
+.corner_nav::after {
   border-color: #333;
   border-radius: 6px;
   border-style: solid;
@@ -118,13 +118,13 @@ a.corner_nav {
 #larreevaar_assistance {
   font-family: AnmolUni;
   font-size: 13px;
-  right: 0px;
   line-height: 15px;
   padding-top: 7px;
+  right: 0;
 }
 
 #larreevaar_assistance .on span:nth-of-type(2n) {
-  color: #F37B20;
+  color: #f37b20;
 }
 
 .setting_row_2col {
@@ -144,7 +144,7 @@ a.corner_nav {
 }
 
 .setting_2col.cur {
-  color: #F37B20;
+  color: #f37b20;
 }
 
 .setting_more_info {
@@ -165,7 +165,7 @@ a.corner_nav {
 }
 
 #sehaj_paatth_setting_progress_bar {
-  background-color: rgba(0,150,0,0.5);
+  background-color: rgba(0, 150, 0, 0.5);
   content: "";
   height: 44px;
   left: 0;
@@ -184,6 +184,7 @@ a.corner_nav {
 .modal-trigger.edit .edit {
   display: inline;
 }
+
 /* ***** MODALS ***** */
 div.ui-datepicker {
   font-size: 11px;
@@ -244,7 +245,7 @@ div.ui-datepicker {
   padding: 10px 0;
 }
 
-#paatth:after {
+#paatth::after {
   clear: both;
   content: " ";
   display: block;
@@ -258,7 +259,7 @@ div.ui-datepicker {
 }
 
 #paatth.larreevaar.larreevaar_assistance span:nth-of-type(2n) {
-  color: #F37B20;
+  color: #f37b20;
 }
 
 #paatth i {
@@ -283,7 +284,7 @@ div.ui-datepicker {
 
 #about p a,
 #about h5 a {
-  color: #F37B20;
+  color: #f37b20;
 }
 
 #about h5 {
@@ -318,7 +319,7 @@ body.smartbanner .app {
 
 /* ***** DATE PICKER ***** */
 #datepicker_back {
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   display: none;
   height: 100%;
   left: 0;
@@ -377,7 +378,7 @@ nav a.button-collapse {
 }
 
 .side-nav > li {
-  border-bottom: 1px solid rgba(221,221,221,0.7);
+  border-bottom: 1px solid rgba(221, 221, 221, 0.7);
 }
 
 .side-nav .collapsible-header {
@@ -402,12 +403,14 @@ nav a.button-collapse {
 .modal-close {
   float: right;
 }
+
 @media screen and (max-width: 480px) {
   h4 {
     font-size: 1.8rem;
     line-height: 1.98rem;
   }
 }
+
 @media screen and (max-width: 320px) {
   .modal .modal-content {
     padding: 12px;

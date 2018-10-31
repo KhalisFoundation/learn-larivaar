@@ -1,7 +1,7 @@
 .side-nav {
   left: 0 !important;
-  transition: transform 0.15s ease-out;
   transform: translateX(-100%);
+  transition: transform 0.15s ease-out;
 }
 
 body.nav-open .side-nav {
@@ -9,10 +9,10 @@ body.nav-open .side-nav {
 }
 
 .side-nav-back {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   height: 0;
-  position: fixed;
   opacity: 0;
+  position: fixed;
   top: 48px;
   transition: opacity 0.15s ease-out;
   width: 100%;
@@ -20,6 +20,6 @@ body.nav-open .side-nav {
 }
 
 body.nav-open .side-nav-back {
-  opacity: 1;
   height: 100%;
+  opacity: 1;
 }
