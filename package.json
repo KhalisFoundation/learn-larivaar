@@ -1,6 +1,6 @@
 {
   "name": "com.cyfersystems.learnlarivaar",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "displayName": "Learn Larivaar",
   "scripts": {
     "watch-css": "nodemon --watch www -e scss -x \"node-sass --output-style nested --source-map true --include-path www/src/scss www/src/scss/index.scss www/css/index.css\""
