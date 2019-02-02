@@ -261,6 +261,12 @@ $(() => {
     });
   });
 
+  $('.browser-link').click(() => {
+    const browserLink = $(this).attr('href');
+    window.open(browserLink, '_system');
+    return false;
+  });
+
   $('#settings_button').click(() => {
     $('.button-collapse').sideNav('show');
     /* $('#settings_button').toggleClass('selected'); */

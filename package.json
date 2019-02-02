@@ -1,6 +1,6 @@
 {
   "name": "com.cyfersystems.learnlarivaar",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "displayName": "Learn Larivaar",
   "description": "An application to help learn Larivaar through Sehaj Paatth.",
   "scripts": {
@@ -24,7 +24,7 @@
     }
   },
   "dependencies": {
-    "cordova-android": "^7.1.1",
+    "cordova-android": "^7.1.4",
     "cordova-browser": "^5.0.4",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-browsertab": "^0.2.0",

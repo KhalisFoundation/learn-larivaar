@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.cyfersystems.learnlarivaar" version="1.0.9" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.cyfersystems.learnlarivaar" version="1.0.11" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Learn Larivaar</name>
     <description>
         An application to help learn Larivaar through Sehaj Paatth.
@@ -15,6 +15,7 @@
     <content src="index.html" />
     <access origin="*" />
     <platform name="android">
+        <preference name="android-minSdkVersion" value="19" />
         <icon density="ldpi" src="res/android/ldpi.png" />
         <icon density="mdpi" src="res/android/mdpi.png" />
         <icon density="hdpi" src="res/android/hdpi.png" />
@@ -72,6 +73,6 @@
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
     <engine name="ios" spec="^4.5.5" />
-    <engine name="android" spec="^7.1.1" />
+    <engine name="android" spec="^7.1.4" />
     <engine name="browser" spec="^5.0.4" />
 </widget>
