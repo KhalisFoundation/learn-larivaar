@@ -1,4 +1,13 @@
 {
+  "android": {
+    "release": {
+      "keystore": "learnLarivaar.keystore",
+      "storePassword": "",
+      "alias": "learnLarivaar",
+      "password": "",
+      "keystoreType": "jks"
+    }
+  },
   "windows": {
     "release": {
       "packageCertificateKeyFile": "learnlarivaar.pfx"
