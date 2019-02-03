@@ -1,8 +1,9 @@
 platforms
 plugins
 *.pfx
-www/css/index.css
 .vscode
 jsconfig.json
 build.json
+www/index.html
+www/css/index.css
 www/main.*.js*
