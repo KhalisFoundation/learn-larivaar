@@ -28,10 +28,6 @@ function onDeviceReady() {
     document.body.classList.remove('landscape-secondary');
     document.body.classList.add(screen.orientation.type);
   });
-  window.localStorage.no_smartbanner = 1;
-  $('#smartbanner').remove();
-  $('body').removeClass('smartbanner');
-  $("script[src='js/jquery.smartbanner.js']").remove();
   // Override back button
   init();
   document.addEventListener('backbutton', () => { onBackButton(false); }, false);
@@ -432,12 +428,6 @@ $(() => {
       alert('Invalid number');
     }
   });
-  if (!window.localStorage.no_smartbanner) {
-    $.smartbanner({
-      layer: true,
-      speedIn: 400,
-    });
-  }
   // Hammer gesture recognition
   const myElement = document.getElementById('paatth');
   const mc = new Hammer(myElement);
