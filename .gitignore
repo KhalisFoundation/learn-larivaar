@@ -5,3 +5,4 @@ www/css/index.css
 .vscode
 jsconfig.json
 build.json
+www/main.*.js*

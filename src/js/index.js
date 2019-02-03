@@ -63,9 +63,11 @@ function init() {
   $(".setting[data-setting='dark']").data('on', dark);
   if (dark == 1) {
     $('body').addClass('dark');
-    StatusBar.backgroundColorByHexString('#222');
-    StatusBar.styleLightContent();
-  } else {
+    if (typeof StatusBar !== 'undefined') {
+      StatusBar.backgroundColorByHexString('#222');
+      StatusBar.styleLightContent();
+    }
+  } else if (dark !== 1 && typeof StatusBar !== 'undefined') {
     StatusBar.styleDefault();
   }
   $(".setting[data-setting='keep_awake']").data('on', keep_awake);
@@ -338,8 +340,10 @@ $(() => {
           break;
         case 'dark':
           $('body').addClass(setting);
-          StatusBar.backgroundColorByHexString('#222');
-          StatusBar.styleLightContent();
+          if (typeof StatusBar !== 'undefined') {
+            StatusBar.backgroundColorByHexString('#222');
+            StatusBar.styleLightContent();
+          }
           ga('send', 'event', 'setting', 'change', 'dark', 'on');
           break;
         case 'keep_awake':
@@ -373,8 +377,10 @@ $(() => {
           break;
         case 'dark':
           $('body').removeClass(setting);
-          StatusBar.backgroundColorByHexString('#fff');
-          StatusBar.styleDefault();
+          if (typeof StatusBar !== 'undefined') {
+            StatusBar.backgroundColorByHexString('#fff');
+            StatusBar.styleDefault();
+          }
           ga('send', 'event', 'setting', 'change', 'dark', 'off');
           break;
         case 'keep_awake':
