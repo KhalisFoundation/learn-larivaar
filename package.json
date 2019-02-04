@@ -48,6 +48,7 @@
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.5",
+    "cordova": "^8.1.2",
     "cssnano": "^4.1.8",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
