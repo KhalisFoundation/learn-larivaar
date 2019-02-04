@@ -7,7 +7,8 @@
   "rules": {
     "no-mixed-operators": "off",
     "no-restricted-globals": "off",
-    "no-use-before-define": "off"
+    "no-use-before-define": "off",
+    "react/jsx-filename-extension": 0
   },
   "globals": {
     "cordova": true,

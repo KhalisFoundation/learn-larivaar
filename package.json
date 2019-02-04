@@ -37,6 +37,7 @@
     "cordova-plugin-whitelist": "1",
     "es6-promise-plugin": "^4.2.2",
     "react": "^16.6.0",
+    "react-dom": "^16.7.0",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1"
   },

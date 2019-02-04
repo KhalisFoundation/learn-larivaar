@@ -1,3 +1,13 @@
+import React from 'react';
+import { render } from 'react-dom';
+
+// Components
+import Root from './app/Root';
+
+const App = () => (
+  <Root />
+);
+
 // Settings
 let ang = window.localStorage.ang || 1;
 let font_size = window.localStorage.font_size || 20;
@@ -28,6 +38,7 @@ function onDeviceReady() {
     document.body.classList.remove('landscape-secondary');
     document.body.classList.add(screen.orientation.type);
   });
+  render(<App />, document.getElementById('app'));
   // Override back button
   init();
   document.addEventListener('backbutton', () => { onBackButton(false); }, false);
@@ -82,7 +93,7 @@ function init() {
   }
   // if (Modernizr.inputtypes.date) {
   const tomorrow = new Date(Date.UTC(year, month, (day + 1)));
-  tomorrow_string = formatDate(tomorrow);
+  const tomorrow_string = formatDate(tomorrow);
   // $("#samaaptee_date_input").attr("min",tomorrow_string);
   // } else {
   $('#samaaptee_date_input').datepicker({
@@ -195,7 +206,8 @@ function setAng(set_ang, store) {
   $('.plus1').data('ang', plus1);
   let newPaatth = '';
   $.get(`paatth/${ang}.html`, (data) => {
-    shabads = data.split(' ');
+    const shabads = data.split(' ');
+    let tag;
     $.each(shabads, (index, val) => {
       if (val.indexOf('॥') !== -1) {
         tag = 'i';
