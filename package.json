@@ -6,7 +6,7 @@
   "scripts": {
     "build": "run-s build:*",
     "build:scss": "node-sass --output-style nested --source-map true --include-path src/scss src/scss/index.scss www/css/index.css",
-    "build:scripts": "webpack",
+    "build:scripts": "NODE_ENV=development webpack",
     "dev": "NODE_ENV=development webpack",
     "serve": "cordova run browser",
     "watch-css": "nodemon --watch src -e scss -x \"npm run build:scss\"",
@@ -43,8 +43,8 @@
     "es6-promise-plugin": "^4.2.2",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.2",
-    "react": "^16.6.0",
-    "react-dom": "^16.7.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0"
