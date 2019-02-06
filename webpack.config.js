@@ -16,7 +16,7 @@ module.exports = {
     path: BUILD_DIR,
     filename: '[name].[hash].js',
   },
-  devtool: 'source-map',
+  devtool: isDev ? 'source-map' : false,
   module: {
     rules: [
       {
