@@ -1,11 +1,20 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+
+import configureStore from './app/configureStore';
 
 // Components
 import Root from './app/Root';
 
+import site from './reducers';
+
+const store = configureStore(site);
+
 const App = () => (
-  <Root />
+  <Provider store={store}>
+    <Root />
+  </Provider>
 );
 
 // Settings
@@ -205,7 +214,7 @@ function setAng(set_ang, store) {
   $('.minus1').data('ang', minus1);
   $('.plus1').data('ang', plus1);
   let newPaatth = '';
-  $.get(`paatth/${ang}.html`, (data) => {
+  /* $.get(`https://api.banidb.com/v2/angs/${ang}/G`, (data) => {
     const shabads = data.split(' ');
     let tag;
     $.each(shabads, (index, val) => {
@@ -224,7 +233,7 @@ function setAng(set_ang, store) {
     } else {
       window.scrollTo(0, 0);
     }
-  });
+  }); */
   if (store === true) {
     window.localStorage.ang = ang;
     // Check for bookmark and remove
@@ -331,8 +340,8 @@ $(() => {
     $(this).select();
   });
   $('.setting').click(function () {
-    setting = $(this).data('setting');
-    data_on = $(this).data('on');
+    const setting = $(this).data('setting');
+    const data_on = $(this).data('on');
     if (data_on == '0') {
       window.localStorage[setting] = 1;
       $(this).data('on', '1');

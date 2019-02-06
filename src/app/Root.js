@@ -1,7 +1,9 @@
 import React from 'react';
+// Components
+import Paatth from '../components/Paatth';
 
 const Root = () => (
-  <div id="paatth" />
+  <Paatth />
 );
 
 export default Root;

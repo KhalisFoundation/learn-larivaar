@@ -4,8 +4,13 @@
   "displayName": "Learn Larivaar",
   "description": "An application to help learn Larivaar through Sehaj Paatth.",
   "scripts": {
-    "build": "webpack",
-    "watch-css": "nodemon --watch www -e scss -x \"node-sass --output-style nested --source-map true --include-path www/src/scss www/src/scss/index.scss www/css/index.css\""
+    "build": "run-s build:*",
+    "build:scss": "node-sass --output-style nested --source-map true --include-path src/scss src/scss/index.scss www/css/index.css",
+    "build:scripts": "webpack",
+    "dev": "NODE_ENV=development webpack",
+    "serve": "cordova run browser",
+    "watch-css": "nodemon --watch src -e scss -x \"npm run build:scss\"",
+    "watch": "nodemon --watch src -e js -x \"cordova build browser\""
   },
   "cordova": {
     "platforms": [
@@ -36,10 +41,13 @@
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "1",
     "es6-promise-plugin": "^4.2.2",
+    "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.7.0",
     "react-redux": "^5.1.0",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -60,6 +68,7 @@
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.9.4",
     "nodemon": "^1.18.4",
+    "npm-run-all": "^4.1.5",
     "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^1.0.0",

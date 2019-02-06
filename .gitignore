@@ -1,3 +1,4 @@
+node_modules
 platforms
 plugins
 *.pfx
@@ -5,5 +6,5 @@ plugins
 jsconfig.json
 build.json
 www/index.html
-www/css/index.css
+www/css/index.css*
 www/main.*.js*
