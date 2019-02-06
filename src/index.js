@@ -18,7 +18,8 @@ const App = () => (
 );
 
 // Settings
-let ang = window.localStorage.ang || 1;
+const state = JSON.parse(window.localStorage.state);
+const { ang } = state.currentAng;
 let font_size = window.localStorage.font_size || 20;
 const dark = window.localStorage.dark || 0;
 let samaaptee = window.localStorage.samaaptee || null;
@@ -235,7 +236,6 @@ function setAng(set_ang, store) {
     }
   }); */
   if (store === true) {
-    window.localStorage.ang = ang;
     // Check for bookmark and remove
     if (bookmark_ang) {
       window.localStorage.removeItem('bookmark_ang');

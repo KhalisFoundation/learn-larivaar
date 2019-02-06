@@ -30,7 +30,13 @@ const Paatth = ({
   </div>
 );
 Paatth.propTypes = {
-  verses: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  verses: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.shape({})),
+    PropTypes.bool,
+  ]),
+};
+Paatth.defaultProps = {
+  verses: false,
 };
 
 class PaatthContainer extends React.Component {

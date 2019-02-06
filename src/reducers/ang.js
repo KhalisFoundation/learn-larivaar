@@ -4,16 +4,9 @@ import {
 } from '../actions/ang';
 // Config
 import sources from '../app/sources';
+import defaults from '../app/defaults';
 
-const defaultCurrentAngState = {
-  ang: 1,
-  source: 'G',
-};
-Object.keys(sources).forEach((source) => {
-  defaultCurrentAngState[source] = 1;
-});
-
-export const currentAng = (state = defaultCurrentAngState, action) => {
+export const currentAng = (state = defaults.defaultCurrentAng, action) => {
   switch (action.type) {
     case UPDATE_CURRENT_ANG:
       return {
