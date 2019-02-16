@@ -2,9 +2,11 @@ export const UPDATE_CURRENT_ANG = 'UPDATE_CURRENT_ANG';
 export const ADD_ANG_TO_CACHE = 'ADD_ANG_TO_CACHE';
 const receiveAng = (ang, source, verses) => ({
   type: ADD_ANG_TO_CACHE,
-  ang,
-  source,
-  verses,
+  payload: {
+    ang,
+    source,
+    verses,
+  },
 });
 
 export const fetchAngAction = (ang, source) => async (dispatch) => {

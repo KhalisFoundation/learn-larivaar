@@ -6,14 +6,14 @@ import {
 import sources from '../app/sources';
 import defaults from '../app/defaults';
 
-export const currentAng = (state = defaults.defaultCurrentAng, action) => {
-  switch (action.type) {
+export const currentAng = (state = defaults.defaultCurrentAng, { type, payload }) => {
+  switch (type) {
     case UPDATE_CURRENT_ANG:
       return {
         ...state,
-        ang: action.ang,
-        source: action.source,
-        [action.source]: action.ang,
+        ang: payload.ang,
+        source: payload.source,
+        [payload.source]: payload.ang,
       };
     default:
       return state;
@@ -24,14 +24,14 @@ const defaultAngCacheState = {};
 Object.keys(sources).forEach((source) => {
   defaultAngCacheState[source] = {};
 });
-export const angCache = (state = defaultAngCacheState, action) => {
-  switch (action.type) {
+export const angCache = (state = defaultAngCacheState, { type, payload }) => {
+  switch (type) {
     case ADD_ANG_TO_CACHE:
       return {
         ...state,
-        [action.source]: {
-          ...state[action.source],
-          [action.ang]: action.verses,
+        [payload.source]: {
+          ...state[payload.source],
+          [payload.ang]: payload.verses,
         },
       };
     default:
