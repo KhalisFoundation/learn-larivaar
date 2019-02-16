@@ -18,8 +18,8 @@ const App = () => (
 );
 
 // Settings
-const state = JSON.parse(window.localStorage.state);
-const { ang } = state.currentAng;
+const state = JSON.parse(window.localStorage.learnlarivaar_state);
+let { ang } = state.currentAng;
 let font_size = window.localStorage.font_size || 20;
 const dark = window.localStorage.dark || 0;
 let samaaptee = window.localStorage.samaaptee || null;
