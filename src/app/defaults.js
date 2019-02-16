@@ -1,9 +1,14 @@
+import lodashSet from 'lodash.set';
 import sources from './sources';
 
 const defaults = {
   defaultCurrentAng: {
     ang: 1,
     source: 'G',
+  },
+  larivaarDefaults: {
+    larivaar: true,
+    larivaarAssist: false,
   },
 };
 
@@ -17,16 +22,20 @@ Object.keys(sources).forEach((source) => {
   Migrate from pre-redux preference management
 */
 const migration = {
-  ang: window.localStorage.ang,
+  'defaultCurrentAng.ang': 'ang',
+  'larivaarDefaults.larivaar': 'larreevaar',
+  'larivaarDefaults.larivaarAssist': 'larreevaar_assistance',
 };
 
 // Overwrite defaults with previous preferences
-if (migration.ang) {
-  defaults.defaultCurrentAng.ang = migration.ang;
-  defaults.defaultCurrentAng.G = migration.ang;
-}
-
-// Delete old preferences
-window.localStorage.removeItem('ang');
+Object.keys(migration).forEach((newKey) => {
+  const oldKey = migration[newKey];
+  const oldVal = window.localStorage[oldKey];
+  if (oldVal !== undefined) {
+    lodashSet(defaults, newKey, oldVal);
+  }
+  // Delete old preferences
+  window.localStorage.removeItem(oldKey);
+});
 
 export default defaults;
