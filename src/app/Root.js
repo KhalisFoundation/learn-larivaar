@@ -1,6 +1,6 @@
 import React from 'react';
 // Components
-import Paatth from '../components/Paatth';
+import Paatth from '../components/Paatth/Paatth';
 
 const Root = () => (
   <Paatth />
