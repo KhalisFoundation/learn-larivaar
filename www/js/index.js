@@ -198,8 +198,13 @@ function setAng(set_ang, store) {
   $(".minus1").data("ang", minus1);
   $(".plus1").data("ang", plus1);
   var newPaatth = '';
-  $.get("paatth/" + ang + ".html", function(data) {
-    shabads = data.split(' ');
+  $.get("https://api.banidb.com/v2/angs/" + ang + "/G", function(data) {
+    var lines = [];
+    $.each(data.page, function(index, line){
+      lines.push(line.verse.unicode);
+    });
+    var allLines = lines.join(' ');
+    var shabads = allLines.split(' ');
     $.each(shabads, function(index,val){
       if(val.indexOf('॥') !== -1) {
         tag = "i";

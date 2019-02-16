@@ -4,3 +4,4 @@ plugins
 www/css/index.css
 .vscode
 jsconfig.json
+node_modules
