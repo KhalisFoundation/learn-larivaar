@@ -2,7 +2,6 @@ node_modules
 platforms
 plugins
 *.pfx
-.vscode
 jsconfig.json
 build.json
 www/index.html

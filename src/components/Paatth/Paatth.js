@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // Actions
-import { fetchAngAction } from '../actions/ang';
+import { fetchAngAction } from '../../actions/ang';
+
+// Styles
+import styles from './Paatth.css';
 
 const Paatth = ({
   verses,
 }) => (
-  <div id="paatth">
+  <div id="paatth" className={styles.paatth}>
     {verses && verses.map(verse => (
       verse.verse.split(' ').map((val, index) => {
         if (val.indexOf('॥') !== -1) {

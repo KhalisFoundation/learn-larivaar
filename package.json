@@ -10,7 +10,7 @@
     "dev": "NODE_ENV=development webpack",
     "serve": "cordova run browser",
     "watch-css": "nodemon --watch src -e scss -x \"npm run build:scss\"",
-    "watch": "nodemon --watch src -e js -x \"cordova build browser\""
+    "watch": "nodemon --watch src -e js,css -x \"cordova build browser\""
   },
   "cordova": {
     "platforms": [
@@ -41,6 +41,7 @@
     "cordova-plugin-splashscreen": "^4.1.0",
     "cordova-plugin-whitelist": "1",
     "es6-promise-plugin": "^4.2.2",
+    "lodash.set": "^4.3.2",
     "lodash.throttle": "^4.1.1",
     "prop-types": "^15.6.2",
     "react": "^16.8.1",
@@ -57,6 +58,7 @@
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.5",
     "cordova": "^8.1.2",
+    "css-loader": "^2.1.0",
     "cssnano": "^4.1.8",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -69,6 +71,9 @@
     "node-sass": "^4.9.4",
     "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.5",
+    "postcss-loader": "^3.0.0",
+    "postcss-preset-env": "^6.5.0",
+    "style-loader": "^0.23.1",
     "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.2.0",
     "stylelint-order": "^1.0.0",
