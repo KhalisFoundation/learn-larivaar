@@ -18,7 +18,7 @@ const App = () => (
 );
 
 // Settings
-const state = JSON.parse(window.localStorage.learnlarivaar_state);
+/* const state = JSON.parse(window.localStorage.learnlarivaar_state);
 let { ang } = state.currentAng;
 let font_size = window.localStorage.font_size || 20;
 const dark = window.localStorage.dark || 0;
@@ -36,25 +36,25 @@ let bookmark_index = window.localStorage.bookmark_index || null;
 let bookmark_ang = window.localStorage.bookmark_ang || null;
 let backButtonClose = false;
 const keep_awake = window.localStorage.keep_awake || 0;
-const lefthand = window.localStorage.lefthand || 0;
+const lefthand = window.localStorage.lefthand || 0; */
 
 document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
-  document.body.classList.add(`h${window.screen.height}`);
+  /* document.body.classList.add(`h${window.screen.height}`);
   document.body.classList.add(screen.orientation.type);
   screen.orientation.addEventListener('change', () => {
     document.body.classList.remove('portrait-primary');
     document.body.classList.remove('landscape-primary');
     document.body.classList.remove('landscape-secondary');
     document.body.classList.add(screen.orientation.type);
-  });
+  }); */
   render(<App />, document.getElementById('app'));
   // Override back button
-  init();
-  document.addEventListener('backbutton', () => { onBackButton(false); }, false);
+  /* init();
+  document.addEventListener('backbutton', () => { onBackButton(false); }, false); */
 }
 
-function init() {
+/* function init() {
   setAng(ang, false);
   if (samaaptee) {
     calculateDailyAngs(samaaptee, ang);
@@ -215,7 +215,7 @@ function setAng(set_ang, store) {
   $('.minus1').data('ang', minus1);
   $('.plus1').data('ang', plus1);
   let newPaatth = '';
-  /* $.get(`https://api.banidb.com/v2/angs/${ang}/G`, (data) => {
+  $.get(`https://api.banidb.com/v2/angs/${ang}/G`, (data) => {
     const shabads = data.split(' ');
     let tag;
     $.each(shabads, (index, val) => {
@@ -234,7 +234,7 @@ function setAng(set_ang, store) {
     } else {
       window.scrollTo(0, 0);
     }
-  }); */
+  });
   if (store === true) {
     // Check for bookmark and remove
     if (bookmark_ang) {
@@ -288,7 +288,7 @@ $(() => {
 
   $('#settings_button').click(() => {
     $('.button-collapse').sideNav('show');
-    /* $('#settings_button').toggleClass('selected'); */
+    // $('#settings_button').toggleClass('selected');
     ga('send', 'event', 'button', 'click', 'settings');
   });
   // FONT SIZE
@@ -561,4 +561,4 @@ $(() => {
       }
     }
   });
-});
+}); */
