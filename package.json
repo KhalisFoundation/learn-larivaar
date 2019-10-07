@@ -9,8 +9,9 @@
     "build:scripts": "NODE_ENV=development webpack",
     "dev": "NODE_ENV=development webpack",
     "serve": "cordova run browser",
+    "test": "eslint src",
     "watch-css": "nodemon --watch src -e scss -x \"npm run build:scss\"",
-    "watch": "nodemon --watch src -e js,css -x \"cordova build browser\""
+    "watch": "nodemon --watch src -e js,css,html -x \"cordova build browser\""
   },
   "cordova": {
     "platforms": [
@@ -33,7 +34,7 @@
     "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "cordova-android": "^7.1.4",
-    "cordova-browser": "^5.0.4",
+    "cordova-browser": "^6.0.0",
     "cordova-ios": "^4.5.5",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
@@ -59,9 +60,9 @@
     "@babel/preset-react": "^7.0.0",
     "autoprefixer": "^9.4.7",
     "babel-loader": "^8.0.5",
-    "cordova": "^8.1.2",
+    "cordova": "^9.0.0",
     "css-loader": "^2.1.0",
-    "cssnano": "^4.1.8",
+    "cssnano": "^4.1.10",
     "eslint": "^5.8.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
@@ -70,7 +71,7 @@
     "html-webpack-plugin": "^3.2.0",
     "htmlhint": "^0.10.1",
     "mini-css-extract-plugin": "^0.5.0",
-    "node-sass": "^4.9.4",
+    "node-sass": "^4.12.0",
     "nodemon": "^1.18.4",
     "npm-run-all": "^4.1.5",
     "postcss-loader": "^3.0.0",
