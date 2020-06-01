@@ -8,13 +8,14 @@ var today_date            = window.localStorage["today_date"]             || nul
 var today_start           = window.localStorage["today_start"]            || null;
 var today_read            = ang - today_start;
 var daily_total           = 0;
-var swipe_nav             = parseInt(window.localStorage["swipe_nav"])    || 1;
+var swipe_nav             = window.localStorage["swipe_nav"]              || 1;
 var larreevaar            = window.localStorage["larreevaar"]             || 1;
 var larreevaar_assistance = window.localStorage["larreevaar_assistance"]  || 0;
 var lang                  = "en";//window.localStorage["lang"]                   || "en";
 var bookmark_index        = window.localStorage["bookmark_index"]         || null;
 var bookmark_ang          = window.localStorage["bookmark_ang"]           || null;
 var backButtonClose       = false;
+var isOnline              = false;
 var keep_awake            = window.localStorage["keep_awake"]             || 0;
 var lefthand              = window.localStorage["lefthand"]               || 0;
 
@@ -35,9 +36,13 @@ function onDeviceReady() {
   //Override back button
   init();
   document.addEventListener("backbutton", function(){onBackButton(false);}, false);
+  document.addEventListener("offline", onOffline, false);
+  document.addEventListener("online", onOnline, false);
 }
 
 function init() {
+  var network = navigator.connection.type;
+  isOnline = (network !== Connection.UNKNOWN || network !== Connection.NONE);
   setAng(ang, false);
   if (samaaptee) {
     calculateDailyAngs(samaaptee, ang);
@@ -198,13 +203,30 @@ function setAng(set_ang, store) {
   $(".minus1").data("ang", minus1);
   $(".plus1").data("ang", plus1);
   var newPaatth = '';
-  $.get("https://api.banidb.com/v2/angs/" + ang + "/G", function(data) {
-    var lines = [];
-    $.each(data.page, function(index, line){
-      lines.push(line.verse.unicode);
-    });
-    var allLines = lines.join(' ');
-    var shabads = allLines.split(' ');
+  var endpoint;
+  var api = "https://api.banidb.com/v2/angs/" + ang + "/G";
+  var local = "paatth/" + ang + ".html"
+  if (isOnline) {
+    endpoint = api;
+  } else {
+    endpoint = local;
+  }
+  $.get(endpoint, function(data) {
+    var shabads;
+    if (isOnline) {
+      var lines = [];
+      $.each(data.page, function(index, line){
+        lines.push(line.verse.unicode);
+      });
+      var allLines = lines.join(' ');
+      shabads = allLines.split(' ');
+    } else {
+      shabads = data
+      .replace(/\./g, '')
+      .replace(/,/g, '')
+      .replace(/;/g, '')
+      .split(' ');
+    }
     $.each(shabads, function(index,val){
       if(val.indexOf('॥') !== -1) {
         tag = "i";
@@ -238,6 +260,14 @@ function setAng(set_ang, store) {
     //Check for bookmark, insert it and scroll to
     if (bookmark_ang == ang && bookmark_index > -1) $("#paatth *").eq(bookmark_index).after($("<i></i>").addClass("fa fa-bookmark"));
   }
+}
+
+function onOnline() {
+  isOnline = true;
+}
+
+function onOffline() {
+  isOnline = false;
 }
 
 function onBackButton(esc_button) {

@@ -64,15 +64,14 @@
         <icon src="res/windows/splashscreen.png" target="SplashScreen" />
         <icon src="res/windows/splashscreenphone.png" target="SplashScreenPhone" />
     </platform>
+    <engine name="browser" spec="^5.0.4" />
     <plugin name="cordova-plugin-whitelist" spec="1" />
-    <plugin name="cordova-plugin-statusbar" />
-    <plugin name="cordova-plugin-insomnia" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.3" />
+    <plugin name="cordova-plugin-insomnia" spec="~4.3.0" />
     <plugin name="cordova-plugin-browsertab" spec="^0.2.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^1.7.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.1.0" />
     <plugin name="cordova-plugin-device" spec="^1.1.7" />
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.2" />
-    <engine name="ios" spec="^4.5.5" />
-    <engine name="android" spec="^7.1.4" />
-    <engine name="browser" spec="^5.0.4" />
+    <plugin name="cordova-plugin-network-information" spec="~2.0.2" />
 </widget>

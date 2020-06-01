@@ -7,9 +7,9 @@
   },
   "cordova": {
     "platforms": [
+      "browser",
       "ios",
-      "android",
-      "browser"
+      "android"
     ],
     "plugins": {
       "cordova-plugin-whitelist": {},
@@ -19,24 +19,29 @@
       "cordova-plugin-inappbrowser": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-device": {},
-      "cordova-plugin-screen-orientation": {}
+      "cordova-plugin-screen-orientation": {},
+      "cordova-plugin-network-information": {}
     }
   },
   "dependencies": {
-    "cordova-android": "^7.1.4",
+    "cordova-android": "^8.1.0",
     "cordova-browser": "^5.0.4",
-    "cordova-ios": "^4.5.5",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
     "cordova-plugin-inappbrowser": "^1.7.2",
+    "cordova-plugin-insomnia": "^4.3.0",
+    "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-screen-orientation": "^2.0.2",
     "cordova-plugin-splashscreen": "^4.1.0",
+    "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-whitelist": "1",
-    "es6-promise-plugin": "^4.2.2"
+    "es6-promise-plugin": "^4.2.2",
+    "fsevents": "^2.1.2"
   },
   "devDependencies": {
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.14.1",
     "nodemon": "^1.14.3"
   }
 }
