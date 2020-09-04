@@ -30,7 +30,7 @@
     "cordova-plugin-browsertab": "^0.2.0",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-device": "^1.1.7",
-    "cordova-plugin-inappbrowser": "^1.7.2",
+    "cordova-plugin-inappbrowser": "^3.1.0",
     "cordova-plugin-insomnia": "^4.3.0",
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-plugin-screen-orientation": "^2.0.2",
