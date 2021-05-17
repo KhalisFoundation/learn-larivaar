@@ -90,11 +90,14 @@ const App: () => Node = () => {
   const [dateSelected, setdateSelected] = useState(new Date(1598051730000));
   const [AngPop, setAngPop] = useState(false);
   const [AngModal, setAngModal] = useState(false);
+  const [dang, setdang] = useState(0);
+  const [dailyTotal, setdailyTotal] = useState(0);
+  const [dailyProgress, setdailyProgress] = useState(0);
 
   const [today_date, settoday_date ] = useState(getsData("today_date"));
   const [today_start, settoday_start ] = useState(getsData("today_start"));
   const [today_read, settoday_read ] = useState(ang - today_start);
-  const [daily_total, setdaily_total] = useState(0);
+  
 
 
   var now = moment().format('MM-DD-YYYY');
@@ -198,7 +201,7 @@ const App: () => Node = () => {
           <Text
             style={{color: nMode ? 'white' : 'black', fontSize: 21}}
             onPress={() => sahajPaath ? setsahajPaath(false) : setsahajPaath(true)}>
-            Sehaj Paath
+            Sehaj Paath <View><Text style={{width: 110, paddingLeft:30, paddingRight:10, textAlign:'right', height: 20, alignSelf: 'flex-end', fontSize:21}}>{dailyProgress}/{dailyTotal}</Text></View>
           </Text>
         </View>
           { sahajPaath && <View>
@@ -243,15 +246,18 @@ const App: () => Node = () => {
   
 
   const getstoreData = async () => {
+   
     try {
       const value = await AsyncStorage.getItem('ang');
       if (value !== null) {
         setAng(value);
         getData(value);
+        
       } else {
         storeData('ang', '1');
         setAng('1');
         getData(ang);
+        
       }
     } catch (e) {
       // error reading value
@@ -265,7 +271,11 @@ const App: () => Node = () => {
   }, []);
 
   function setDaily(angnew){
-    console.log("set daily called", angnew);
+    console.log(angnew, ang);
+    console.log("set daily called", angnew - ang);
+    var dtotal = (1430 - ang) / (angnew);
+    setdailyTotal(dtotal);
+    
     setAngPop(false)
   }
 
@@ -295,6 +305,7 @@ const App: () => Node = () => {
   }
 
   function getData(arg) {
+    setdailyProgress(+dailyProgress + 1);
     setAng(arg);
     shabads_new = [];
     var shabads;
@@ -326,6 +337,8 @@ const App: () => Node = () => {
   function fun(){
     console.log("fun loaded");
   }
+
+  //const dang = 0;
 
   return (
     <SideMenu
@@ -444,8 +457,6 @@ const App: () => Node = () => {
        </View>
         </Modal>
 
-    
-      
             <Modal animationType="slide"
             transparent={true}
             visible={AngPop}
@@ -456,8 +467,8 @@ const App: () => Node = () => {
               
               <View style={styles.modalView}>
               <TextInput
-              //onChangeText={setAng}
-              value={ang}
+              onChangeText={setdang}
+              value={dang}
               style={{
                 width: 80,
                 marginHorizontal: 10,
@@ -469,7 +480,7 @@ const App: () => Node = () => {
                 borderWidth: 1,
               }}></TextInput>
                   <TouchableOpacity style={{alignItems: 'center', backgroundColor: '#ccc', marginTop: 10, paddingVertical:5, paddingHorizontal:30}} 
-                  onPress={() => setDaily(ang)}>
+                  onPress={() => setDaily(dang)}>
                 <Text style={{fontSize:18}}>OK</Text>
               </TouchableOpacity>
               </View>
