@@ -10,6 +10,7 @@ import {
   Image,
   Linking,
 } from 'react-native';
+import {exturl, dburl} from '../constants/Constants'
 
 const CustModal = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -20,7 +21,6 @@ const CustModal = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
           setModalVisible(!modalVisible);
         }}>
         <View style={styles.centeredView}>
@@ -41,7 +41,7 @@ const CustModal = () => {
             <Text>For information, suggestions, or help visit us at </Text>
             <Text
               style={{color: 'blue'}}
-              onPress={() => Linking.openURL('https://khalisfoundation.org')}>
+              onPress={() => Linking.openURL(exturl)}>
               KhalisFoundation.org!
             </Text>
             <Text>
@@ -52,7 +52,7 @@ const CustModal = () => {
               Learn Larivaar utilizes KhalisFoundation.org!
               <Text
                 style={{color: 'blue'}}
-                onPress={() => Linking.openURL('http://www.banidb.com/')}>
+                onPress={() => Linking.openURL(dburl)}>
                 BaniDB {"\n"}
               </Text>
               <Text>
@@ -69,7 +69,7 @@ const CustModal = () => {
               <Text
                 style={{color: 'blue'}}
                 onPress={() =>
-                  Linking.openURL('https://khalisfoundation.org/projects/apps')
+                  Linking.openURL(exturl + '/projects/apps')
                 }>
                 More Apps by Khalis
               </Text>
@@ -78,12 +78,12 @@ const CustModal = () => {
               <Text
                 style={{color: 'blue'}}
                 onPress={() =>
-                  Linking.openURL('https://khalisfoundation.org/donate')
+                  Linking.openURL(exturl + '/donate')
                 }>
                 DONATE
               </Text>
             </Text>
-            <Text>&copy; 2021 Khalis Foundation</Text>
+            <Text>&copy; 2020 Khalis Foundation</Text>
           </View>
         </View>
       </Modal>
