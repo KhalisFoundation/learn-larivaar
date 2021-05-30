@@ -5,7 +5,6 @@ import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  StyleSheet,
   Text,
   useColorScheme,
   View,
@@ -31,6 +30,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import KeepAwake from 'react-native-keep-awake';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import {styles} from './styles/Styles';
 
 const Section = ({children, title}): Node => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -94,15 +94,9 @@ const App: () => Node = () => {
   const [dailyTotal, setdailyTotal] = useState(0);
   const [dailyProgress, setdailyProgress] = useState(0);
 
-  const [today_date, settoday_date ] = useState(getsData("today_date"));
-  const [today_start, settoday_start ] = useState(getsData("today_start"));
-  const [today_read, settoday_read ] = useState(ang - today_start);
-  
-
-
-  var now = moment().format('MM-DD-YYYY');
-  console.log(now);
-  //{list.map(item => <li key={item.item}>{item.item}</li>)}
+  const [todayDate, settodayDate ] = useState(getsData("today_date"));
+  const [todayStart, settodayStart ] = useState(getsData("today_start"));
+  const [todayRead, settodayRead ] = useState(ang - todayStart);
 
   const menu = (
     <View
@@ -252,6 +246,9 @@ const App: () => Node = () => {
       if (value !== null) {
         setAng(value);
         getData(value);
+        var gdt = await getsData('setdaily');
+        console.log("gdt from service is", gdt)
+        gdt && calculateTotal(gdt);
         
       } else {
         storeData('ang', '1');
@@ -270,12 +267,17 @@ const App: () => Node = () => {
     getstoreData();
   }, []);
 
+  function calculateTotal(angnew){
+    var dtotal = (1430 - ang) / (angnew);
+    setdailyTotal(dtotal);
+  }
+
   function setDaily(angnew){
     console.log(angnew, ang);
     console.log("set daily called", angnew - ang);
     var dtotal = (1430 - ang) / (angnew);
     setdailyTotal(dtotal);
-    
+    storeData('setdaily', angnew)
     setAngPop(false)
   }
 
@@ -285,20 +287,16 @@ const App: () => Node = () => {
 
   function updateProgress(){
     if (daily_total > 0) {
-      today_read = ang - today_start;
+      today_read = ang - todayStart;
       var percent = Math.round((today_read/daily_total*100),1);
       if (percent > 100) {
         percent = 100;
       } else if (percent < 0) {
         percent = 0;
       }
-      //$("#sehaj_paatth_progress").show().parent("a").addClass("hide-arrow");
-      //$("#sehaj_paatth_today_read").text(today_read);
-      //$("#sehaj_paatth_daily_total").text(daily_total);
-      //$("#sehaj_paatth_setting_progress_bar").css("width", percent+"%");
+
     } else {
-      //$("#sehaj_paatth_progress").hide().parent("a").removeClass("hide-arow");
-      //$("#sehaj_paatth_setting_progress_bar").css("width", 0);
+   
     }
     console.log("function called", moment(dateSelected).format("MM-DD-YYYY"));
     setdatePicker(false)
@@ -323,9 +321,7 @@ const App: () => Node = () => {
         for (let i = 0; i < shabads.length; i++) {
           shabads_new.push(
             shabads[i],
-            /*<View key={i}>
-              <Text>{shabads[i]}</Text>
-            </View>*/
+          
           );
         }
         setresData(shabads_new);
@@ -338,7 +334,6 @@ const App: () => Node = () => {
     console.log("fun loaded");
   }
 
-  //const dang = 0;
 
   return (
     <SideMenu
@@ -350,7 +345,7 @@ const App: () => Node = () => {
       <SafeAreaView
         style={(backgroundStyle, {backgroundColor: nMode ? 'black' : 'white'})}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-{kAwake && <KeepAwake />}
+        {kAwake && <KeepAwake />}
         <View style={styles.hdr}>
           <View style={{width: '33%'}}>
             <TouchableOpacity
@@ -372,19 +367,7 @@ const App: () => Node = () => {
             <TouchableOpacity onPress={() => setAngModal(true)}>
               <Text style={{padding:5, paddingHorizontal:10, borderColor:'#ccc', borderWidth:1, marginHorizontal:5}}>{ang}</Text>
             </TouchableOpacity>
-            {/*<TextInput
-              onChangeText={setAng}
-              value={ang}
-              style={{
-                width: 40,
-                marginHorizontal: 10,
-                paddingHorizontal: 5,
-                textAlign: 'center',
-                height: 30,
-                backgroundColor: 'white',
-                borderColor: '#cccccc',
-                borderWidth: 1,
-              }}></TextInput>*/}
+            
             <TouchableOpacity onPress={() => getData(+ang + 1)}>
               <Image
                 source={require('./icons/right_arw.png')}
@@ -404,13 +387,10 @@ const App: () => Node = () => {
           contentInsetAdjustmentBehavior="automatic"
           style={backgroundStyle}>
           <GestureRecognizer
-            //onSwipe={(direction, state) => doSomething(direction, state)}
             onSwipeLeft={() => canSwipe && getData(+ang + 1)}
             onSwipeRight={() => canSwipe && ang > 0 && getData(+ang - 1)}
-            //config={config}
             style={{
               flex: 1,
-              //backgroundColor: 'black'
             }}>
             <View
               style={{
@@ -522,66 +502,5 @@ const App: () => Node = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    //marginTop: 32,
-    paddingHorizontal: 24,
-    //backgroundColor: 'black'
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  menuitem: {
-    paddingVertical: 10,
-    fontSize: 21,
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    
-  },
-  menuitemtxt: {
-    fontSize: 21,
-  },
-  stext: {
-    fontSize: 20,
-    textAlign: 'left',
-  },
-  hdr: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    paddingBottom: 5,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'flex-end'
-  },
-  modalView: {
-    marginTop: '50%',
-    marginHorizontal: 20,
-    backgroundColor: 'white',
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-});
 
 export default App;

@@ -83,7 +83,7 @@ const CustModal = () => {
                 DONATE
               </Text>
             </Text>
-            <Text>&copy; 2020 Khalis Foundation</Text>
+            <Text>&copy; 2021 Khalis Foundation</Text>
           </View>
         </View>
       </Modal>
