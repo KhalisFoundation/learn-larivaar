@@ -6,7 +6,6 @@ import {
   ScrollView,
   StatusBar,
   Text,
-  useColorScheme,
   View,
   Modal,
   Image,
@@ -26,7 +25,6 @@ import moment from 'moment';
 import {styles} from './styles/Styles';
 
 const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
 
   const getsData = async(key) => {
     try {
@@ -184,7 +182,7 @@ const App: () => Node = () => {
     </View>
   );
 
-  const doSomething = () => {
+  const toggelMenu = () => {
     isOpen ? setisOpen(false) : setisOpen(true);
   };
 
@@ -198,14 +196,14 @@ const App: () => Node = () => {
 
   
 
-  const getstoreData = async () => {
+  const getStoreData = async () => {
    
     try {
       const value = await AsyncStorage.getItem('ang');
       if (value !== null) {
         setAng(value);
         getData(value);
-        var gdt = await getsData('setdaily');
+        let gdt = await getsData('setdaily');
         gdt && calculateTotal(gdt);
         
       } else {
@@ -219,19 +217,19 @@ const App: () => Node = () => {
     }
   };
 
-  var shabads_new = [];
+  let shabads_new = [];
 
   useEffect(ang => {
-    getstoreData();
+    getStoreData();
   }, []);
 
   function calculateTotal(angnew){
-    var dtotal = (1430 - ang) / (angnew);
+    let dtotal = (1430 - ang) / (angnew);
     setdailyTotal(dtotal);
   }
 
   function setDaily(angnew){
-    var dtotal = (1430 - ang) / (angnew);
+    let dtotal = (1430 - ang) / (angnew);
     setdailyTotal(dtotal);
     storeData('setdaily', angnew)
     setAngPop(false)
@@ -244,7 +242,7 @@ const App: () => Node = () => {
   function updateProgress(){
     if (daily_total > 0) {
       today_read = ang - todayStart;
-      var percent = Math.round((today_read/daily_total*100),1);
+      let percent = Math.round((today_read/daily_total*100),1);
       if (percent > 100) {
         percent = 100;
       } else if (percent < 0) {
@@ -261,13 +259,13 @@ const App: () => Node = () => {
     setdailyProgress(+dailyProgress + 1);
     setAng(arg);
     shabads_new = [];
-    var shabads;
-    var lines = [];
-    var allLines = '';
+    let shabads;
+    let lines = [];
+    let allLines = '';
     fetch('https://api.banidb.com/v2/angs/' + arg + '/G')
       .then(response => response.json())
       .then(json => {
-        for (var i = 0; i < json.page.length; i++) {
+        for (let i = 0; i < json.page.length; i++) {
           lines.push(json.page[i].verse.unicode);
         }
         allLines = lines.join(' ');
@@ -289,18 +287,18 @@ const App: () => Node = () => {
     <SideMenu
       menu={menu}
       isOpen={isOpen}
-      onChange={() => doSomething(isOpen)}
+      onChange={() => toggelMenu(isOpen)}
       menuPosition={'left'}
       scrollsToTop={false}>
       <SafeAreaView
         style={{backgroundColor: nMode ? 'black' : 'white'}}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <StatusBar/>
         {kAwake && <KeepAwake />}
         <View style={styles.hdr}>
           <View style={{width: '33%'}}>
             <TouchableOpacity
               style={{marginLeft: 10}}
-              onPress={() => doSomething()}>
+              onPress={() => toggelMenu()}>
               <Image
                 source={require('./icons/menuicon.png')}
                 style={{width: 40, height: 40}}
