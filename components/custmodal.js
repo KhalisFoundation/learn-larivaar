@@ -28,7 +28,9 @@ const CustModal = () => {
             <Pressable
               style={null}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>X</Text>
+              <Image
+                source={require('../icons/close.png')}
+              />
             </Pressable>
 
             <Text>
