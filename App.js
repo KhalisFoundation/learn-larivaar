@@ -17,13 +17,6 @@ import {
 
 import CustModal from './components/custmodal'
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import SideMenu from 'react-native-side-menu';
 import GestureRecognizer from 'react-native-swipe-gestures';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -32,42 +25,8 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {styles} from './styles/Styles';
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
-
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const nmodestyle = {
-    backgroundColor: nMode ? 'black' : 'white',
-  };
 
   const getsData = async(key) => {
     try {
@@ -247,7 +206,6 @@ const App: () => Node = () => {
         setAng(value);
         getData(value);
         var gdt = await getsData('setdaily');
-        console.log("gdt from service is", gdt)
         gdt && calculateTotal(gdt);
         
       } else {
@@ -273,8 +231,6 @@ const App: () => Node = () => {
   }
 
   function setDaily(angnew){
-    console.log(angnew, ang);
-    console.log("set daily called", angnew - ang);
     var dtotal = (1430 - ang) / (angnew);
     setdailyTotal(dtotal);
     storeData('setdaily', angnew)
@@ -298,7 +254,6 @@ const App: () => Node = () => {
     } else {
    
     }
-    console.log("function called", moment(dateSelected).format("MM-DD-YYYY"));
     setdatePicker(false)
   }
 
@@ -330,11 +285,6 @@ const App: () => Node = () => {
       .catch(error => console.error(error));
   }
 
-  function fun(){
-    console.log("fun loaded");
-  }
-
-
   return (
     <SideMenu
       menu={menu}
@@ -343,7 +293,7 @@ const App: () => Node = () => {
       menuPosition={'left'}
       scrollsToTop={false}>
       <SafeAreaView
-        style={(backgroundStyle, {backgroundColor: nMode ? 'black' : 'white'})}>
+        style={{backgroundColor: nMode ? 'black' : 'white'}}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
         {kAwake && <KeepAwake />}
         <View style={styles.hdr}>
@@ -384,8 +334,7 @@ const App: () => Node = () => {
         </View>
 
         <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
+          contentInsetAdjustmentBehavior="automatic">
           <GestureRecognizer
             onSwipeLeft={() => canSwipe && getData(+ang + 1)}
             onSwipeRight={() => canSwipe && ang > 0 && getData(+ang - 1)}
@@ -397,7 +346,7 @@ const App: () => Node = () => {
                 backgroundColor: nMode ? 'black' : 'white',
               }}>
                
-              <Section>
+              <View style={{flex:1, paddingHorizontal:15}}>
                 <View
                   style={{
                     flexDirection: 'row',
@@ -409,7 +358,7 @@ const App: () => Node = () => {
                     {resData}
                   </Text>
                 </View>
-              </Section>
+              </View>
             </View>
           </GestureRecognizer>
           
