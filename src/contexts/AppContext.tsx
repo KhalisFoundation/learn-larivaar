@@ -1,7 +1,7 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import {ResData, appService} from '../services/Service';
-import {FONT_SIZE} from '../constants/constants';
+import {ResData, appService} from '../services';
+import {FONT_SIZE} from '../constants';
 
 type ResContextData = {
   resData?: ResData;

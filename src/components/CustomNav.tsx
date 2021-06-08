@@ -20,7 +20,7 @@ export const CustomNav = () => {
   }
     return (
       <View style={styles.txtBox}>
-        <CustomInputModal dta="customAgg" />
+        <CustomInputModal />
           <TouchableOpacity onPress={() => getDataWithNum('prev')}>
             <Image
               source={require('../img/left_arw.png')}

@@ -9,7 +9,7 @@ import {
   Image,
   Linking,
 } from 'react-native';
-import {EXT_URL, DB_URL} from '../constants/constants';
+import {EXT_URL, DB_URL, MAIN_LOGO, DB_LOGO, BTN_CLOSE } from '../constants';
 
 const About = () => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -29,13 +29,13 @@ const About = () => {
               onPress={() => setModalVisible(!modalVisible)}>
               <Image
                 style={styles.imgStyle}
-                source={require('../img/close.png')}
+                source={require(BTN_CLOSE)}
               />
             </Pressable>
 
             <Text>
               Created By: {'\n'}
-              <Image source={require('../img/khalislogo150.png')} />
+              <Image source={require(MAIN_LOGO)} />
             </Text>
             <Text>We welcome your comments, suggestions and corrections!</Text>
             <Text>For information, suggestions, or help visit us at </Text>
@@ -61,7 +61,7 @@ const About = () => {
               </Text>
               <Image
                 style={{width: 150, height: 35}}
-                source={require('../img/banidblogo150.png')}
+                source={require(DB_LOGO)}
               />
             </Text>
             <Text>Bhul Chuk Maaf!</Text>

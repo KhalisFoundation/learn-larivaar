@@ -1,4 +1,4 @@
-import { URL } from '../constants/constants'
+import { URL } from '../constants'
 
 const getData = (ang) => {
   let lines: Array<string> = [],
