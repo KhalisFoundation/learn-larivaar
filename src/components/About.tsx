@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Alert,
   Modal,
   StyleSheet,
   Text,
@@ -10,9 +9,9 @@ import {
   Image,
   Linking,
 } from 'react-native';
-import {exturl, dburl} from '../constants/Constants'
+import {EXT_URL, DB_URL} from '../constants/constants';
 
-const CustModal = () => {
+const About = () => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -29,21 +28,20 @@ const CustModal = () => {
               style={null}
               onPress={() => setModalVisible(!modalVisible)}>
               <Image
-                source={require('../icons/close.png')}
+                style={styles.imgStyle}
+                source={require('../img/close.png')}
               />
             </Pressable>
 
             <Text>
-              Created By: {"\n"}
-              <Image
-                source={require('../icons/khalislogo150.png')}
-              />
+              Created By: {'\n'}
+              <Image source={require('../img/khalislogo150.png')} />
             </Text>
             <Text>We welcome your comments, suggestions and corrections!</Text>
             <Text>For information, suggestions, or help visit us at </Text>
             <Text
               style={{color: 'blue'}}
-              onPress={() => Linking.openURL(exturl)}>
+              onPress={() => Linking.openURL(EXT_URL)}>
               KhalisFoundation.org!
             </Text>
             <Text>
@@ -54,34 +52,30 @@ const CustModal = () => {
               Learn Larivaar utilizes KhalisFoundation.org!
               <Text
                 style={{color: 'blue'}}
-                onPress={() => Linking.openURL(dburl)}>
-                BaniDB {"\n"}
+                onPress={() => Linking.openURL(DB_URL)}>
+                BaniDB {'\n'}
               </Text>
               <Text>
-              {"\n"}
-                - the open source Gurbani database and API used in many Gurbani
-                applications, such as SikhiToTheMax.{"\n"}
+                {'\n'}- the open source Gurbani database and API used in many
+                Gurbani applications, such as SikhiToTheMax.{'\n'}
               </Text>
-              <Image style={{width: 100, height: 30}}
-                source={require('../icons/banidblogo150.png')}
+              <Image
+                style={{width: 150, height: 35}}
+                source={require('../img/banidblogo150.png')}
               />
             </Text>
             <Text>Bhul Chuk Maaf!</Text>
             <Text>
               <Text
                 style={{color: 'blue'}}
-                onPress={() =>
-                  Linking.openURL(exturl + '/projects/apps')
-                }>
+                onPress={() => Linking.openURL(EXT_URL + '/projects/apps')}>
                 More Apps by Khalis
               </Text>
             </Text>
             <Text>
               <Text
                 style={{color: 'blue'}}
-                onPress={() =>
-                  Linking.openURL(exturl + '/donate')
-                }>
+                onPress={() => Linking.openURL(EXT_URL + '/donate')}>
                 DONATE
               </Text>
             </Text>
@@ -89,7 +83,9 @@ const CustModal = () => {
           </View>
         </View>
       </Modal>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
+      <TouchableOpacity
+        style={styles.btnAbout}
+        onPress={() => setModalVisible(true)}>
         <Text style={styles.textStyle}>About</Text>
       </TouchableOpacity>
     </View>
@@ -105,7 +101,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     backgroundColor: 'white',
     padding: 35,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -119,6 +115,13 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+  },
+  imgStyle: {
+    width: 30,
+    height: 30,
+    position: 'absolute',
+    top: 0,
+    left: 260,
   },
   buttonOpen: {
     backgroundColor: '#F194FF',
@@ -135,6 +138,13 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     textAlign: 'center',
   },
+  btnAbout:{
+    paddingLeft: 20,
+    paddingTop: 10,
+    paddingBottom: 12,
+    borderBottomColor: '#ccc',
+    borderBottomWidth: 1,
+  }
 });
 
-export default CustModal;
+export default About;
