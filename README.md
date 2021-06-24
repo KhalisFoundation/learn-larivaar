@@ -1,4 +1,4 @@
-# Learn Llarivaar
+# Learn Larivaar
 
 Setup Instructions
 
