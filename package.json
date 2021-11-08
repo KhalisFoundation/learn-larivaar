@@ -1,47 +1,45 @@
 {
-  "name": "com.cyfersystems.learnlarivaar",
-  "version": "1.0.11",
-  "displayName": "Learn Larivaar",
+  "name": "learn_larivaar",
+  "version": "0.0.1",
   "scripts": {
-    "watch-css": "nodemon --watch www -e scss -x \"node-sass --output-style nested --source-map true --include-path www/src/scss www/src/scss/index.scss www/css/index.css\""
-  },
-  "cordova": {
-    "platforms": [
-      "browser",
-      "ios",
-      "android"
-    ],
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-insomnia": {},
-      "cordova-plugin-browsertab": {},
-      "cordova-plugin-inappbrowser": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-screen-orientation": {},
-      "cordova-plugin-network-information": {}
-    }
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "web": "react-native start --web"
   },
   "dependencies": {
-    "cordova-android": "^8.1.0",
-    "cordova-browser": "^5.0.4",
-    "cordova-ios": "^5.1.1",
-    "cordova-plugin-browsertab": "^0.2.0",
-    "cordova-plugin-compat": "^1.2.0",
-    "cordova-plugin-device": "^1.1.7",
-    "cordova-plugin-inappbrowser": "^1.7.2",
-    "cordova-plugin-insomnia": "^4.3.0",
-    "cordova-plugin-network-information": "^2.0.2",
-    "cordova-plugin-screen-orientation": "^2.0.2",
-    "cordova-plugin-splashscreen": "^4.1.0",
-    "cordova-plugin-statusbar": "^2.4.3",
-    "cordova-plugin-whitelist": "1",
-    "es6-promise-plugin": "^4.2.2",
-    "fsevents": "^2.1.2"
-  },
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-community/datetimepicker": "^3.5.2",
+    "@react-navigation/drawer": "^6.1.8",
+    "@react-navigation/native": "^6.0.6",
+    "@react-navigation/stack": "^5.14.4",
+    "expo": "~43.0.0",
+    "expo-status-bar": "~1.1.0",
+    "expo-keep-awake": "~10.0.0",
+    "moment": "^2.29.1",
+    "react": "17.0.1",
+    "react-native": "0.64.2",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-modal": "^13.0.0",
+    "react-native-paper": "~4.10.0",
+    "react-native-reanimated": "^2.2.3",
+    "react-native-safe-area-context": "^3.3.2",
+    "react-native-screens": "~3.8.0",
+    "react-native-web": "0.17.1",
+    "expo-splash-screen": "~0.13.3",
+    "expo-updates": "~0.10.5",
+    "react-dom": "17.0.1"
+   },
   "devDependencies": {
-    "node-sass": "^4.14.1",
-    "nodemon": "^1.14.3"
-  }
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.15.4",
+    "@react-native-community/eslint-config": "^3.0.1",
+    "@types/react": "~17.0.21",
+    "@types/react-native": "^0.64.18",
+    "babel-jest": "^27.3.1",
+    "eslint": "^8.1.0",
+    "jest": "^27.3.1",
+    "typescript": "~4.3.5"
+  },
+  "private": true
 }
