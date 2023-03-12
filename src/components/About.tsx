@@ -29,13 +29,13 @@ const About = () => {
               onPress={() => setModalVisible(!modalVisible)}>
               <Image
                 style={styles.imgStyle}
-                source={require(BTN_CLOSE)}
+                source={require("../img/close.png")}
               />
             </Pressable>
 
             <Text>
               Created By: {'\n'}
-              <Image source={require(MAIN_LOGO)} />
+              <Image source={require("../img/khalislogo150.png")} />
             </Text>
             <Text>We welcome your comments, suggestions and corrections!</Text>
             <Text>For information, suggestions, or help visit us at </Text>
@@ -61,7 +61,7 @@ const About = () => {
               </Text>
               <Image
                 style={{width: 150, height: 35}}
-                source={require(DB_LOGO)}
+                source={require("../img/banidblogo150.png")}
               />
             </Text>
             <Text>Bhul Chuk Maaf!</Text>

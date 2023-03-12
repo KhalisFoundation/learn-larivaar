@@ -90,9 +90,11 @@ export function CustomDrawerContent(props, navigation) {
               fontSize: 21,
               paddingLeft: 20,
             }}
-            onPress={() => null}>
+            onPress={() => {
+              ctx.larivaar ? ctx.setLarivaar(false) : ctx.setLarivaar(true)
+            }}>
             Larivaar{' '}
-            {'isLarivaar' && (
+            {ctx.larivaar && (
               <View style={{paddingLeft: 152}}>
                 <Image
                   source={require('../img/tick.png')}

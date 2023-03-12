@@ -1,5 +1,5 @@
 import React, {createContext, useState, useContext, useEffect} from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ResData, appService} from '../services';
 import {FONT_SIZE} from '../constants';
 
@@ -16,6 +16,8 @@ type ResContextData = {
   samapteeDate: Date;
   daysTarget: Number;
   daysProgress: Number;
+  larivaar: boolean;
+  larivaarAssist: boolean;
   getData(): Promise<void>;
   setNightMode(arg: boolean): void;
   setAngNo(arg: string): void;
@@ -26,6 +28,8 @@ type ResContextData = {
   openDailyAngModal(arg: string): void;
   setDatepickerOpen(arg: boolean): void;
   setSelSamapteeDate(arg: Date): void;
+  setLarivaar(arg: boolean): void;
+  setLarivaarAssist(arg: boolean): void;
 };
 
 const AppContext = createContext<ResContextData>({} as ResContextData);
@@ -43,6 +47,8 @@ const AppProvider: React.FC = ({children}) => {
   const [samapteeDate, setSamapteeDate] = useState();
   const [daysProgress, setdaysProgress] = useState(0);
   const [daysTarget, setdaysTarget] = useState();
+  const [larivaar, setlarivaar] = useState(true);
+  const [larivaarAssist, setlarivaarassist] = useState(true);
 
   useEffect(() => {
     loadStorageData();
@@ -120,6 +126,26 @@ const AppProvider: React.FC = ({children}) => {
     }
   }
 
+  async function setLarivaar(bool: boolean) {
+    if (bool) {
+      setlarivaar(true);
+      await AsyncStorage.setItem('@Larivaar', 'true');
+    } else {
+      setlarivaar(false);
+      await AsyncStorage.setItem('@Larivaar', 'false');
+    }
+  }
+
+  async function setLarivaarAssist(bool: boolean) {
+    if (bool) {
+      setlarivaarassist(true);
+      await AsyncStorage.setItem('@LarivaarAssist', 'true');
+    } else {
+      setlarivaarassist(false);
+      await AsyncStorage.setItem('@LarivaarAssist', 'false');
+    }
+  }
+
   const openDailyAngModal = str => {
     if (str == 'Daily') {
       setpopupType('Daily');
@@ -137,11 +163,15 @@ const AppProvider: React.FC = ({children}) => {
       //await AsyncStorage.setItem('@AngNumber', '1');
       const AngNumber = await AsyncStorage.getItem('@AngNumber');
       const NightMode = await AsyncStorage.getItem('@NightMode');
+      const Larivaar = await AsyncStorage.getItem('@Larivaar');
+      const LarivaarAssist = await AsyncStorage.getItem('@LarivaarAssist');
       const FontSize = await AsyncStorage.getItem('@FontSize');
       const DailyAng = await AsyncStorage.getItem('@DailyAng');
 
-      setdailyAngValue(JSON.parse(DailyAng))
+      setdailyAngValue(JSON.parse(DailyAng));
       setnightMode(JSON.parse(NightMode));
+      setlarivaar(JSON.parse(Larivaar));
+      setlarivaarassist(JSON.parse(LarivaarAssist));
       setFontSize(Number(FontSize));
       if (AngNumber) {
         setangNumber(Number(AngNumber));
@@ -182,6 +212,8 @@ const AppProvider: React.FC = ({children}) => {
         samapteeDate,
         daysProgress,
         daysTarget,
+        larivaar,
+        larivaarAssist,
         openDailyAngModal,
         setNightMode,
         getData,
@@ -191,7 +223,9 @@ const AppProvider: React.FC = ({children}) => {
         setCustomAngNo,
         setPopup,
         setDatepickerOpen,
-        setSelSamapteeDate
+        setSelSamapteeDate,
+        setLarivaar,
+        setLarivaarAssist,
       }}>
       {children}
     </AppContext.Provider>

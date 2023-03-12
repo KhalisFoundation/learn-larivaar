@@ -20,7 +20,7 @@ const ctx = useApp();
           <View style={styles.modalView}>
           <TextInput
               onChangeText={value => ctx.popupType == 'Nav' ? ctx.setCustomAngNo(value): ctx.setDailyAngNo(value)}
-              value={ctx.angNumber}
+              value={ctx.angNumber.toString()}
               style={{
                 width: 80,
                 marginHorizontal: 15,
