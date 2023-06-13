@@ -14,6 +14,7 @@ import {NavigationContainer} from '@react-navigation/native';
 
 import Ang from './components/Ang';
 import {layoutStyles} from './styles/layout';
+import {elementStyles} from './styles/elements';
 
 const App = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -42,6 +43,7 @@ const App = (): JSX.Element => {
               placeholder="Enter Ang Number"
               onChangeText={getUserInput}
               value={userInput}
+              style={elementStyles.input}
             />
             <Button
               title="Go"
