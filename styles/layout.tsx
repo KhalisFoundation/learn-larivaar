@@ -10,6 +10,7 @@ export const layoutStyles = StyleSheet.create({
   header: {
     display: 'flex',
     justifyContent: 'center',
+    flexDirection: 'row',
     margin: 20,
   },
   wordContainer: {

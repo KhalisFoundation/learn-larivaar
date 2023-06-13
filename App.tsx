@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Button,
   SafeAreaView,
@@ -18,14 +18,10 @@ import {elementStyles} from './styles/elements';
 
 const App = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
+  const textInputRef = useRef<TextInput>(null);
 
   const [inputAng, setInputAng] = useState(1);
-  const [userInput, setUserInput] = useState('1');
   const [larivaarAssist, setLarivaarAssist] = useState(false);
-
-  const getUserInput = (enteredText: string) => {
-    setUserInput(enteredText);
-  };
 
   return (
     <SafeAreaView>
@@ -39,16 +35,31 @@ const App = (): JSX.Element => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>
           <View style={layoutStyles.header}>
+            <Button
+              title="Previous"
+              onPress={() => {
+                setInputAng(inputAng - 1);
+                textInputRef.current?.setNativeProps({
+                  text: (inputAng - 1).toString(),
+                });
+              }}
+            />
             <TextInput
               placeholder="Enter Ang Number"
-              onChangeText={getUserInput}
-              value={userInput}
+              ref={textInputRef}
               style={elementStyles.input}
+              defaultValue={inputAng.toString()}
+              onSubmitEditing={event => {
+                setInputAng(parseInt(event.nativeEvent.text, 10));
+              }}
             />
             <Button
-              title="Go"
+              title="Next"
               onPress={() => {
-                setInputAng(parseInt(userInput, 10));
+                setInputAng(inputAng + 1);
+                textInputRef.current?.setNativeProps({
+                  text: (inputAng + 1).toString(),
+                });
               }}
             />
           </View>
