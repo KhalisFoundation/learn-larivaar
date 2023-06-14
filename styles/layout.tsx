@@ -17,4 +17,11 @@ export const layoutStyles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
+  sidebar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 20,
+    padding: 20,
+  },
 });
