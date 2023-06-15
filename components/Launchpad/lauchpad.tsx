@@ -18,7 +18,6 @@ const Launchpad = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
 
   const [inputAng, setInputAng] = useState(1);
-  const [larivaarAssist, setLarivaarAssist] = useState(false);
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -54,7 +53,7 @@ const Launchpad = (): JSX.Element => {
             />
           </View>
 
-          <Ang page={inputAng} larivaarAssist={larivaarAssist} />
+          <Ang page={inputAng} />
         </View>
       </ScrollView>
     </SafeAreaView>
