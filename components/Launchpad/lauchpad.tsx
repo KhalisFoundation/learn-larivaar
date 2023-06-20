@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import 'react-native-gesture-handler';
 import {
   Button,
@@ -10,6 +10,8 @@ import {
   View,
 } from 'react-native';
 
+import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+
 import {Ang} from '../../components';
 import {layoutStyles, elementStyles} from '../../styles';
 
@@ -18,6 +20,25 @@ const Launchpad = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
 
   const [inputAng, setInputAng] = useState(1);
+  const {getItem, setItem} = useAsyncStorage('@currentAng');
+
+  const readItemFromStorage = async () => {
+    const item = await getItem();
+    if (item) {
+      setInputAng(parseInt(item, 10));
+    }
+  };
+
+  const saveCurrentAng = async (newValue: number) => {
+    await setItem(newValue.toString());
+    setInputAng(newValue);
+  };
+
+  useEffect(() => {
+    readItemFromStorage();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <SafeAreaView>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
@@ -27,7 +48,7 @@ const Launchpad = (): JSX.Element => {
             <Button
               title="Previous"
               onPress={() => {
-                setInputAng(inputAng - 1);
+                saveCurrentAng(inputAng - 1);
                 textInputRef.current?.setNativeProps({
                   text: (inputAng - 1).toString(),
                 });
@@ -39,13 +60,13 @@ const Launchpad = (): JSX.Element => {
               style={elementStyles.input}
               defaultValue={inputAng.toString()}
               onSubmitEditing={event => {
-                setInputAng(parseInt(event.nativeEvent.text, 10));
+                saveCurrentAng(parseInt(event.nativeEvent.text, 10));
               }}
             />
             <Button
               title="Next"
               onPress={() => {
-                setInputAng(inputAng + 1);
+                saveCurrentAng(inputAng + 1);
                 textInputRef.current?.setNativeProps({
                   text: (inputAng + 1).toString(),
                 });

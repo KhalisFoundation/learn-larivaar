@@ -2,22 +2,18 @@ import React, {useContext} from 'react';
 import {View, Text, Switch, Button} from 'react-native';
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
-
-interface navigationProps {
-  navigation: {
-    closeDrawer: () => void;
-  };
-}
+import {navigationProps} from './interfaces/props';
 
 const Settings = ({navigation}: navigationProps): JSX.Element => {
-  const {larivaarAssist, setLarivaarAssist} = useContext(LarivaarContext);
+  const {larivaarAssist, saveLarivaarAssist} = useContext(LarivaarContext);
+
   return (
     <>
       <View style={layoutStyles.sidebar}>
         <Text>Larivaar Assist</Text>
         <Switch
           value={larivaarAssist}
-          onChange={() => setLarivaarAssist(!larivaarAssist)}
+          onChange={() => saveLarivaarAssist(!larivaarAssist)}
         />
       </View>
       <Button title="Go Back" onPress={() => navigation.closeDrawer()} />
