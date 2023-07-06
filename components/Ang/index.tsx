@@ -7,7 +7,7 @@ import {LarivaarContext} from '../../context';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
-  const {larivaarAssist} = useContext(LarivaarContext);
+  const {larivaarAssist, larivaar} = useContext(LarivaarContext);
 
   useEffect(() => {
     fetch(`https://api.banidb.com/v2/angs/${props.page}`)
@@ -19,7 +19,7 @@ const Ang = (props: AngProps): JSX.Element => {
     <View style={layoutStyles.wordContainer}>
       {currentAngData.page &&
         currentAngData.page.map(page =>
-          bake(page.verse.unicode, larivaarAssist),
+          bake(page.verse.unicode, larivaar, larivaarAssist),
         )}
     </View>
   );
