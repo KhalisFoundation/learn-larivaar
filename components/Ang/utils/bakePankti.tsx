@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {getStyle} from './getStyle';
 
-export const bake = (
+export const bakePankti = (
   verse: string,
   larivaar: Boolean,
   larivaarAssist: Boolean,

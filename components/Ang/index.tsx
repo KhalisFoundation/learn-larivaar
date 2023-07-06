@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {AngProps, AngData} from './interfaces';
 import {layoutStyles} from '../../styles/layout';
-import {bake} from './utils/bakePankti';
+import {bakePankti} from './utils/bakePankti';
 import {LarivaarContext} from '../../context';
 
 const Ang = (props: AngProps): JSX.Element => {
@@ -19,7 +19,7 @@ const Ang = (props: AngProps): JSX.Element => {
     <View style={layoutStyles.wordContainer}>
       {currentAngData.page &&
         currentAngData.page.map(page =>
-          bake(page.verse.unicode, larivaar, larivaarAssist),
+          bakePankti(page.verse.unicode, larivaar, larivaarAssist),
         )}
     </View>
   );
