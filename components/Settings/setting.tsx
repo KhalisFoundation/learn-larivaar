@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, Switch, Button} from 'react-native';
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
@@ -8,19 +8,31 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
   const {larivaarAssist, saveLarivaarAssist, larivaar, saveLarivaar} =
     useContext(LarivaarContext);
 
+  const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
+  const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
+
   return (
     <>
       <View style={layoutStyles.settingContainer}>
         <View style={{flex: 1}}>
           <View style={layoutStyles.sidebarItem}>
             <Text>Larivaar</Text>
-            <Switch value={larivaar} onChange={() => saveLarivaar(!larivaar)} />
+            <Switch
+              value={larivaarSwitch}
+              onChange={() => {
+                setLarivaarSwitch(!larivaar);
+                saveLarivaar(!larivaar);
+              }}
+            />
           </View>
           <View style={layoutStyles.sidebarItem}>
             <Text>Larivaar Assist</Text>
             <Switch
-              value={larivaarAssist}
-              onChange={() => saveLarivaarAssist(!larivaarAssist)}
+              value={assistSwitch}
+              onChange={() => {
+                setAssistSwitch(!larivaarAssist);
+                saveLarivaarAssist(!larivaarAssist);
+              }}
             />
           </View>
         </View>
