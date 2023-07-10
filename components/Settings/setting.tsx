@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, Text, Switch, Button} from 'react-native';
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
@@ -10,6 +10,11 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
 
   const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
   const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
+
+  useEffect(() => {
+    setAssistSwitch(larivaarAssist);
+    setLarivaarSwitch(larivaar);
+  }, [larivaarAssist, larivaar]);
 
   return (
     <>
