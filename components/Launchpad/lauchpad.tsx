@@ -45,9 +45,9 @@ const Launchpad = (): JSX.Element => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>
           <View style={layoutStyles.header}>
-            <FontAwesome5.Button
+            <FontAwesome5
               name="arrow-left"
-              style={elementStyles.button}
+              style={elementStyles.iconButton}
               onPress={() => {
                 saveCurrentAng(inputAng - 1);
                 textInputRef.current?.setNativeProps({
@@ -65,8 +65,9 @@ const Launchpad = (): JSX.Element => {
                 saveCurrentAng(parseInt(event.nativeEvent.text, 10));
               }}
             />
-            <FontAwesome5.Button
+            <FontAwesome5
               name="arrow-right"
+              style={elementStyles.iconButton}
               onPress={() => {
                 saveCurrentAng(inputAng + 1);
                 textInputRef.current?.setNativeProps({
