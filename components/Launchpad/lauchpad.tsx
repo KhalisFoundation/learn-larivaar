@@ -1,7 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'react-native-gesture-handler';
 import {
-  Button,
   SafeAreaView,
   ScrollView,
   StatusBar,
@@ -10,6 +9,7 @@ import {
   View,
 } from 'react-native';
 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 
 import {Ang} from '../../components';
@@ -45,8 +45,9 @@ const Launchpad = (): JSX.Element => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>
           <View style={layoutStyles.header}>
-            <Button
-              title="Previous"
+            <FontAwesome5.Button
+              name="arrow-left"
+              style={elementStyles.button}
               onPress={() => {
                 saveCurrentAng(inputAng - 1);
                 textInputRef.current?.setNativeProps({
@@ -56,6 +57,7 @@ const Launchpad = (): JSX.Element => {
             />
             <TextInput
               placeholder="Enter Ang Number"
+              keyboardType="numeric"
               ref={textInputRef}
               style={elementStyles.input}
               defaultValue={inputAng.toString()}
@@ -63,8 +65,8 @@ const Launchpad = (): JSX.Element => {
                 saveCurrentAng(parseInt(event.nativeEvent.text, 10));
               }}
             />
-            <Button
-              title="Next"
+            <FontAwesome5.Button
+              name="arrow-right"
               onPress={() => {
                 saveCurrentAng(inputAng + 1);
                 textInputRef.current?.setNativeProps({
