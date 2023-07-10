@@ -57,7 +57,7 @@ const Launchpad = (): JSX.Element => {
             />
             <TextInput
               placeholder="Enter Ang Number"
-              keyboardType="numeric"
+              inputMode="numeric"
               ref={textInputRef}
               style={elementStyles.input}
               defaultValue={inputAng.toString()}
