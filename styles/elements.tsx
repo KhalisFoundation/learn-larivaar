@@ -13,8 +13,10 @@ export const elementStyles = StyleSheet.create({
     width: 70,
     textAlign: 'center',
   },
-  button: {
-    backgroundColor: 'transparent',
+  iconButton: {
     color: 'black',
+    fontSize: 30,
+    verticalAlign: 'middle',
+    padding: 10,
   },
 });

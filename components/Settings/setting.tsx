@@ -11,19 +11,23 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
   return (
     <>
       <View style={layoutStyles.settingContainer}>
-        <View style={layoutStyles.sidebar}>
-          <Text>Larivaar</Text>
-          <Switch value={larivaar} onChange={() => saveLarivaar(!larivaar)} />
+        <View style={{flex: 1}}>
+          <View style={layoutStyles.sidebarItem}>
+            <Text>Larivaar</Text>
+            <Switch value={larivaar} onChange={() => saveLarivaar(!larivaar)} />
+          </View>
+          <View style={layoutStyles.sidebarItem}>
+            <Text>Larivaar Assist</Text>
+            <Switch
+              value={larivaarAssist}
+              onChange={() => saveLarivaarAssist(!larivaarAssist)}
+            />
+          </View>
         </View>
-        <View style={layoutStyles.sidebar}>
-          <Text>Larivaar Assist</Text>
-          <Switch
-            value={larivaarAssist}
-            onChange={() => saveLarivaarAssist(!larivaarAssist)}
-          />
+        <View>
+          <Button title="Go Back" onPress={() => navigation.closeDrawer()} />
         </View>
       </View>
-      <Button title="Go Back" onPress={() => navigation.closeDrawer()} />
     </>
   );
 };
