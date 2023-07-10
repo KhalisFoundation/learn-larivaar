@@ -4,10 +4,12 @@ import {AngProps, AngData} from './interfaces';
 import {layoutStyles} from '../../styles/layout';
 import {bakePankti} from './utils/bakePankti';
 import {LarivaarContext} from '../../context';
+import {DoubleTap} from '../common/double-tap';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
-  const {larivaarAssist, larivaar} = useContext(LarivaarContext);
+  const {larivaarAssist, larivaar, saveLarivaarAssist} =
+    useContext(LarivaarContext);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,12 +27,17 @@ const Ang = (props: AngProps): JSX.Element => {
   }
 
   return (
-    <View style={layoutStyles.wordContainer}>
-      {currentAngData.page &&
-        currentAngData.page.map(page =>
-          bakePankti(page.verse.unicode, larivaar, larivaarAssist),
-        )}
-    </View>
+    <DoubleTap
+      customTap={() => {
+        larivaar && saveLarivaarAssist(!larivaarAssist);
+      }}>
+      <View style={layoutStyles.wordContainer}>
+        {currentAngData.page &&
+          currentAngData.page.map(page =>
+            bakePankti(page.verse.unicode, larivaar, larivaarAssist),
+          )}
+      </View>
+    </DoubleTap>
   );
 };
 
