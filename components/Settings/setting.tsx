@@ -19,7 +19,7 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
   return (
     <>
       <View style={layoutStyles.settingContainer}>
-        <View style={{flex: 1}}>
+        <View style={layoutStyles.sidebarWrapper}>
           <View style={layoutStyles.sidebarItem}>
             <Text>Larivaar</Text>
             <Switch

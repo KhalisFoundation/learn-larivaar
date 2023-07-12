@@ -23,6 +23,9 @@ export const layoutStyles = StyleSheet.create({
     flex: 1,
     alignContent: 'space-between',
   },
+  sidebarWrapper: {
+    flex: 1,
+  },
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',

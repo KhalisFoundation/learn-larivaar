@@ -5,6 +5,7 @@ import {layoutStyles} from '../../styles/layout';
 import {bakePankti} from './utils/bakePankti';
 import {LarivaarContext} from '../../context';
 import {DoubleTap} from '../common/double-tap';
+import {sendRequest} from './utils/sendRequest';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
@@ -13,13 +14,7 @@ const Ang = (props: AngProps): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetch(`https://api.banidb.com/v2/angs/${props.page}`)
-      .then(res => res.json())
-      .then(data => {
-        setIsLoading(false);
-        setCurrentAngData(data);
-      });
+    sendRequest(props.page, setCurrentAngData, setIsLoading);
   }, [props.page]);
 
   if (isLoading) {
