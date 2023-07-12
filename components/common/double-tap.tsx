@@ -6,7 +6,6 @@ export const DoubleTap = ({children, customTap}: any) => {
 
   const onDoubleTapEvent = (event: any) => {
     if (event.nativeEvent.state === State.ACTIVE) {
-      console.log(customTap);
       customTap();
     }
   };
