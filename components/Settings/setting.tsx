@@ -1,15 +1,22 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, Switch, Button} from 'react-native';
+import {View, Text, Switch, Button, Pressable, BackHandler} from 'react-native';
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
-import {navigationProps} from './interfaces/props';
+import {DrawerContentComponentProps} from '@react-navigation/drawer';
 
-const Settings = ({navigation}: navigationProps): JSX.Element => {
-  const {larivaarAssist, saveLarivaarAssist, larivaar, saveLarivaar} =
-    useContext(LarivaarContext);
+const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
+  const {
+    larivaarAssist,
+    saveLarivaarAssist,
+    larivaar,
+    saveLarivaar,
+    keepAwake,
+    saveKeepAwake,
+  } = useContext(LarivaarContext);
 
   const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
   const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
+  const [awakeSwitch, setAwakeSwitch] = useState(keepAwake);
 
   useEffect(() => {
     setAssistSwitch(larivaarAssist);
@@ -20,6 +27,11 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
     <>
       <View style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
+          <Pressable
+            style={layoutStyles.sidebarItem}
+            onPress={() => navigation.navigate('Learn Larivaar')}>
+            <Text>Home</Text>
+          </Pressable>
           <View style={layoutStyles.sidebarItem}>
             <Text>Larivaar</Text>
             <Switch
@@ -40,9 +52,24 @@ const Settings = ({navigation}: navigationProps): JSX.Element => {
               }}
             />
           </View>
+          <View style={layoutStyles.sidebarItem}>
+            <Text>Keep Screen Awake</Text>
+            <Switch
+              value={awakeSwitch}
+              onChange={() => {
+                setAwakeSwitch(!keepAwake);
+                saveKeepAwake(!keepAwake);
+              }}
+            />
+          </View>
+          <Pressable
+            style={layoutStyles.sidebarItem}
+            onPress={() => navigation.navigate('About')}>
+            <Text>About</Text>
+          </Pressable>
         </View>
         <View>
-          <Button title="Go Back" onPress={() => navigation.closeDrawer()} />
+          <Button title="Exit" onPress={() => BackHandler.exitApp()} />
         </View>
       </View>
     </>
