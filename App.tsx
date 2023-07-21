@@ -94,7 +94,11 @@ const App = (): JSX.Element => {
     <LarivaarContext.Provider value={value}>
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
         {keepAwake && <KeepAwake />}
-        <Drawer.Navigator drawerContent={props => getSettings(props)}>
+        <Drawer.Navigator
+          screenOptions={{
+            headerTintColor: theme === 'dark' ? '#FFFFFF' : '#333333',
+          }}
+          drawerContent={props => getSettings(props)}>
           <Drawer.Screen name="Learn Larivaar" component={Launchpad} />
           <Drawer.Screen name="About" component={About} />
         </Drawer.Navigator>
