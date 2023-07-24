@@ -17,4 +17,14 @@ export const elementStyles = StyleSheet.create({
     verticalAlign: 'middle',
     padding: 10,
   },
+  logo: {
+    backgroundColor: 'white',
+    margin: 10,
+  },
+  aboutText: {
+    margin: 10,
+  },
+  heading: {
+    fontSize: 24,
+  },
 });

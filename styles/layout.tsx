@@ -23,6 +23,12 @@ export const layoutStyles = StyleSheet.create({
     flex: 1,
     alignContent: 'space-between',
   },
+  sidebarScreens: {
+    marginBottom: 10,
+  },
+  sidebarSettings: {
+    marginTop: 10,
+  },
   sidebarWrapper: {
     flex: 1,
   },
@@ -31,5 +37,9 @@ export const layoutStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 16,
+  },
+  aboutContainer: {
+    margin: 10,
+    padding: 10,
   },
 });

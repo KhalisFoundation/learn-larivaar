@@ -3,6 +3,7 @@ import {View, Text, Switch, Button, Pressable, BackHandler} from 'react-native';
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
+import {elementStyles} from '../../styles';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const {
@@ -27,46 +28,52 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     <>
       <View style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
-          <Pressable
-            style={layoutStyles.sidebarItem}
-            onPress={() => navigation.navigate('Learn Larivaar')}>
-            <Text>Home</Text>
-          </Pressable>
-          <View style={layoutStyles.sidebarItem}>
-            <Text>Larivaar</Text>
-            <Switch
-              value={larivaarSwitch}
-              onChange={() => {
-                setLarivaarSwitch(!larivaar);
-                saveLarivaar(!larivaar);
-              }}
-            />
+          <View style={layoutStyles.sidebarScreens}>
+            <Pressable
+              style={layoutStyles.sidebarItem}
+              onPress={() => navigation.navigate('Learn Larivaar')}>
+              <Text>Home</Text>
+            </Pressable>
+            <Pressable
+              style={layoutStyles.sidebarItem}
+              onPress={() => navigation.navigate('About')}>
+              <Text>About</Text>
+            </Pressable>
           </View>
-          <View style={layoutStyles.sidebarItem}>
-            <Text>Larivaar Assist</Text>
-            <Switch
-              value={assistSwitch}
-              onChange={() => {
-                setAssistSwitch(!larivaarAssist);
-                saveLarivaarAssist(!larivaarAssist);
-              }}
-            />
+
+          <View style={layoutStyles.sidebarSettings}>
+            <Text style={elementStyles.heading}>Settings</Text>
+            <View style={layoutStyles.sidebarItem}>
+              <Text>Larivaar</Text>
+              <Switch
+                value={larivaarSwitch}
+                onChange={() => {
+                  setLarivaarSwitch(!larivaar);
+                  saveLarivaar(!larivaar);
+                }}
+              />
+            </View>
+            <View style={layoutStyles.sidebarItem}>
+              <Text>Larivaar Assist</Text>
+              <Switch
+                value={assistSwitch}
+                onChange={() => {
+                  setAssistSwitch(!larivaarAssist);
+                  saveLarivaarAssist(!larivaarAssist);
+                }}
+              />
+            </View>
+            <View style={layoutStyles.sidebarItem}>
+              <Text>Keep Screen Awake</Text>
+              <Switch
+                value={awakeSwitch}
+                onChange={() => {
+                  setAwakeSwitch(!keepAwake);
+                  saveKeepAwake(!keepAwake);
+                }}
+              />
+            </View>
           </View>
-          <View style={layoutStyles.sidebarItem}>
-            <Text>Keep Screen Awake</Text>
-            <Switch
-              value={awakeSwitch}
-              onChange={() => {
-                setAwakeSwitch(!keepAwake);
-                saveKeepAwake(!keepAwake);
-              }}
-            />
-          </View>
-          <Pressable
-            style={layoutStyles.sidebarItem}
-            onPress={() => navigation.navigate('About')}>
-            <Text>About</Text>
-          </Pressable>
         </View>
         <View>
           <Button title="Exit" onPress={() => BackHandler.exitApp()} />
