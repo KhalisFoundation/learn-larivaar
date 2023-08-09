@@ -1,6 +1,5 @@
 export interface AngProps {
   page: number;
-  larivaarAssist: boolean;
 }
 
 export interface AngData {

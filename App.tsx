@@ -1,73 +1,27 @@
-import React, {useRef, useState} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  Switch,
-  TextInput,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, {useState} from 'react';
+import 'react-native-gesture-handler';
 
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {NavigationContainer} from '@react-navigation/native';
 
-import Ang from './components/Ang';
-import {layoutStyles} from './styles/layout';
-import {elementStyles} from './styles/elements';
+import {Launchpad, Settings} from './components';
+import {LarivaarContext} from './context';
+
+const Drawer = createDrawerNavigator();
 
 const App = (): JSX.Element => {
-  const isDarkMode = useColorScheme() === 'dark';
-  const textInputRef = useRef<TextInput>(null);
-
-  const [inputAng, setInputAng] = useState(1);
   const [larivaarAssist, setLarivaarAssist] = useState(false);
-
+  const value = {larivaarAssist, setLarivaarAssist};
   return (
-    <SafeAreaView>
+    <LarivaarContext.Provider value={value}>
       <NavigationContainer>
-        <Switch
-          value={larivaarAssist}
-          onValueChange={() => setLarivaarAssist(!larivaarAssist)}
-        />
+        <Drawer.Navigator
+          // eslint-disable-next-line react/no-unstable-nested-components
+          drawerContent={props => <Settings {...props} />}>
+          <Drawer.Screen name="Learn Larivaar" component={Launchpad} />
+        </Drawer.Navigator>
       </NavigationContainer>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View style={layoutStyles.mainContainer}>
-          <View style={layoutStyles.header}>
-            <Button
-              title="Previous"
-              onPress={() => {
-                setInputAng(inputAng - 1);
-                textInputRef.current?.setNativeProps({
-                  text: (inputAng - 1).toString(),
-                });
-              }}
-            />
-            <TextInput
-              placeholder="Enter Ang Number"
-              ref={textInputRef}
-              style={elementStyles.input}
-              defaultValue={inputAng.toString()}
-              onSubmitEditing={event => {
-                setInputAng(parseInt(event.nativeEvent.text, 10));
-              }}
-            />
-            <Button
-              title="Next"
-              onPress={() => {
-                setInputAng(inputAng + 1);
-                textInputRef.current?.setNativeProps({
-                  text: (inputAng + 1).toString(),
-                });
-              }}
-            />
-          </View>
-
-          <Ang page={inputAng} larivaarAssist={larivaarAssist} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    </LarivaarContext.Provider>
   );
 };
 

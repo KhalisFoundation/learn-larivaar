@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {AngProps, AngData} from './interfaces';
 import {layoutStyles} from '../../styles/layout';
 import {bake} from './utils/bakePankti';
+import {LarivaarContext} from '../../context';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
+  const {larivaarAssist} = useContext(LarivaarContext);
 
   useEffect(() => {
     fetch(`https://api.banidb.com/v2/angs/${props.page}`)
@@ -17,7 +19,7 @@ const Ang = (props: AngProps): JSX.Element => {
     <View style={layoutStyles.wordContainer}>
       {currentAngData.page &&
         currentAngData.page.map(page =>
-          bake(page.verse.unicode, props.larivaarAssist),
+          bake(page.verse.unicode, larivaarAssist),
         )}
     </View>
   );
