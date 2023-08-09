@@ -19,7 +19,7 @@ const Ang = (props: AngProps): JSX.Element => {
     <View style={layoutStyles.wordContainer}>
       {currentAngData.page &&
         currentAngData.page.map(page =>
-          bakePankti(page.verse.unicode, larivaar, larivaarAssist),
+          bakePankti({verse: page.verse.unicode, larivaar, larivaarAssist}),
         )}
     </View>
   );
