@@ -1,7 +1,11 @@
 import {elementStyles} from '../../../styles/elements';
 
-export const getStyle = (index: number, larivaarAssist: Boolean) => {
-  if (larivaarAssist) {
+export const getStyle = (
+  index: number,
+  larivaar: Boolean,
+  larivaarAssist: Boolean,
+) => {
+  if (larivaar && larivaarAssist) {
     if (index % 2 === 0) {
       return {
         color: 'black',
