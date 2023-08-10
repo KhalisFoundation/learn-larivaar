@@ -1,6 +1,8 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Cache} from 'react-native-cache';
 
+const apiURL = 'https://api.banidb.com/v2/angs';
+
 const cache = new Cache({
   namespace: 'learn-larivaar-gurbani',
   policy: {
@@ -31,7 +33,7 @@ export const sendRequest = (
 };
 
 const getFromAPI = async (page: number) => {
-  const dataRequest = await fetch(`https://api.banidb.com/v2/angs/${page}`);
+  const dataRequest = await fetch(`${apiURL}/${page}`);
   const data = await dataRequest.json();
   cache.set(`ang-${page}`, data);
   return data;
