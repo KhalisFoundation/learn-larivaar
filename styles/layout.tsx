@@ -20,8 +20,13 @@ export const layoutStyles = StyleSheet.create({
   settingContainer: {
     marginTop: 30,
     padding: 16,
+    flex: 1,
+    alignContent: 'space-between',
   },
-  sidebar: {
+  sidebarWrapper: {
+    flex: 1,
+  },
+  sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

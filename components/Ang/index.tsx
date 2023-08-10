@@ -1,27 +1,38 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import {AngProps, AngData} from './interfaces';
 import {layoutStyles} from '../../styles/layout';
 import {bakePankti} from './utils/bakePankti';
 import {LarivaarContext} from '../../context';
+import {DoubleTap} from '../common/double-tap';
+import {sendRequest} from './utils/sendRequest';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
-  const {larivaarAssist, larivaar} = useContext(LarivaarContext);
+  const {larivaarAssist, larivaar, saveLarivaarAssist} =
+    useContext(LarivaarContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`https://api.banidb.com/v2/angs/${props.page}`)
-      .then(res => res.json())
-      .then(data => setCurrentAngData(data));
+    sendRequest(props.page, setCurrentAngData, setIsLoading);
   }, [props.page]);
 
+  if (isLoading) {
+    return <Text>Loading</Text>;
+  }
+
   return (
-    <View style={layoutStyles.wordContainer}>
-      {currentAngData.page &&
-        currentAngData.page.map(page =>
-          bakePankti({verse: page.verse.unicode, larivaar, larivaarAssist}),
-        )}
-    </View>
+    <DoubleTap
+      customTap={() => {
+        larivaar && saveLarivaarAssist(!larivaarAssist);
+      }}>
+      <View style={layoutStyles.wordContainer}>
+        {currentAngData.page &&
+          currentAngData.page.map(page =>
+            bakePankti({verse: page.verse.unicode, larivaar, larivaarAssist}),
+          )}
+      </View>
+    </DoubleTap>
   );
 };
 
