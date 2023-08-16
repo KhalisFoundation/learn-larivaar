@@ -8,7 +8,6 @@ export const getStyle = (
   if (larivaar && larivaarAssist) {
     if (index % 2 === 0) {
       return {
-        color: 'black',
         ...elementStyles.gurbani,
       };
     } else {
