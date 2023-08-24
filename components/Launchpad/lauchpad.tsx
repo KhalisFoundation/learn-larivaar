@@ -30,6 +30,12 @@ const Launchpad = (): JSX.Element => {
   };
 
   const saveCurrentAng = async (newValue: number) => {
+    if (newValue < 1) {
+      newValue = 1;
+    }
+    if (newValue > 1430) {
+      newValue = 1430;
+    }
     await setItem(newValue.toString());
     setInputAng(newValue);
   };
@@ -45,16 +51,18 @@ const Launchpad = (): JSX.Element => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>
           <View style={layoutStyles.header}>
-            <FontAwesome5
-              name="arrow-left"
-              style={elementStyles.iconButton}
-              onPress={() => {
-                saveCurrentAng(inputAng - 1);
-                textInputRef.current?.setNativeProps({
-                  text: (inputAng - 1).toString(),
-                });
-              }}
-            />
+            {inputAng > 1 && (
+              <FontAwesome5
+                name="arrow-left"
+                style={elementStyles.iconButton}
+                onPress={() => {
+                  saveCurrentAng(inputAng - 1);
+                  textInputRef.current?.setNativeProps({
+                    text: (inputAng - 1).toString(),
+                  });
+                }}
+              />
+            )}
             <TextInput
               placeholder="Enter Ang Number"
               inputMode="numeric"
@@ -65,16 +73,18 @@ const Launchpad = (): JSX.Element => {
                 saveCurrentAng(parseInt(event.nativeEvent.text, 10));
               }}
             />
-            <FontAwesome5
-              name="arrow-right"
-              style={elementStyles.iconButton}
-              onPress={() => {
-                saveCurrentAng(inputAng + 1);
-                textInputRef.current?.setNativeProps({
-                  text: (inputAng + 1).toString(),
-                });
-              }}
-            />
+            {inputAng < 1430 && (
+              <FontAwesome5
+                name="arrow-right"
+                style={elementStyles.iconButton}
+                onPress={() => {
+                  saveCurrentAng(inputAng + 1);
+                  textInputRef.current?.setNativeProps({
+                    text: (inputAng + 1).toString(),
+                  });
+                }}
+              />
+            )}
           </View>
 
           <Ang page={inputAng} />
