@@ -14,22 +14,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-learn_larivaar-learn_larivaarTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-learn_larivaar-learn_larivaarTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		BAD8A3F92A5C278A007F940D /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3E92A5C278A007F940D /* Fontisto.ttf */; };
-		BAD8A3FA2A5C278A007F940D /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3EA2A5C278A007F940D /* Octicons.ttf */; };
-		BAD8A3FB2A5C278A007F940D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3EB2A5C278A007F940D /* Feather.ttf */; };
-		BAD8A3FC2A5C278A007F940D /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3EC2A5C278A007F940D /* Entypo.ttf */; };
-		BAD8A3FD2A5C278A007F940D /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3ED2A5C278A007F940D /* FontAwesome5_Brands.ttf */; };
-		BAD8A3FE2A5C278A007F940D /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3EE2A5C278A007F940D /* MaterialCommunityIcons.ttf */; };
-		BAD8A3FF2A5C278A007F940D /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3EF2A5C278A007F940D /* AntDesign.ttf */; };
-		BAD8A4002A5C278A007F940D /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F02A5C278A007F940D /* Foundation.ttf */; };
-		BAD8A4012A5C278A007F940D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F12A5C278A007F940D /* Ionicons.ttf */; };
-		BAD8A4022A5C278A007F940D /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F22A5C278A007F940D /* FontAwesome5_Solid.ttf */; };
-		BAD8A4032A5C278A007F940D /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F32A5C278A007F940D /* FontAwesome5_Regular.ttf */; };
-		BAD8A4042A5C278A007F940D /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F42A5C278A007F940D /* FontAwesome.ttf */; };
-		BAD8A4052A5C278A007F940D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F52A5C278A007F940D /* Zocial.ttf */; };
-		BAD8A4062A5C278A007F940D /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F62A5C278A007F940D /* EvilIcons.ttf */; };
-		BAD8A4072A5C278A007F940D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F72A5C278A007F940D /* SimpleLineIcons.ttf */; };
-		BAD8A4082A5C278A007F940D /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BAD8A3F82A5C278A007F940D /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,23 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD8A3F92A5C278A007F940D /* Fontisto.ttf in Resources */,
-				BAD8A4042A5C278A007F940D /* FontAwesome.ttf in Resources */,
-				BAD8A4002A5C278A007F940D /* Foundation.ttf in Resources */,
-				BAD8A4032A5C278A007F940D /* FontAwesome5_Regular.ttf in Resources */,
-				BAD8A4012A5C278A007F940D /* Ionicons.ttf in Resources */,
-				BAD8A4062A5C278A007F940D /* EvilIcons.ttf in Resources */,
-				BAD8A3FC2A5C278A007F940D /* Entypo.ttf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				BAD8A4052A5C278A007F940D /* Zocial.ttf in Resources */,
-				BAD8A4072A5C278A007F940D /* SimpleLineIcons.ttf in Resources */,
-				BAD8A3FB2A5C278A007F940D /* Feather.ttf in Resources */,
-				BAD8A3FA2A5C278A007F940D /* Octicons.ttf in Resources */,
-				BAD8A3FD2A5C278A007F940D /* FontAwesome5_Brands.ttf in Resources */,
-				BAD8A3FF2A5C278A007F940D /* AntDesign.ttf in Resources */,
-				BAD8A4082A5C278A007F940D /* MaterialIcons.ttf in Resources */,
-				BAD8A4022A5C278A007F940D /* FontAwesome5_Solid.ttf in Resources */,
-				BAD8A3FE2A5C278A007F940D /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,9 +526,16 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B3W82WVBU9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = learn_larivaar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Learn Larivaar";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -572,7 +547,10 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.KhalisFoundation.learnlarivaar;
 				PRODUCT_NAME = learn_larivaar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gauravjeet_learn-larivaar_24-08-2023";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -585,8 +563,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = B3W82WVBU9;
 				INFOPLIST_FILE = learn_larivaar/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Learn Larivaar";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -598,7 +583,10 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = com.KhalisFoundation.learnlarivaar;
 				PRODUCT_NAME = learn_larivaar;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "Gauravjeet_learn-larivaar_24-08-2023";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
