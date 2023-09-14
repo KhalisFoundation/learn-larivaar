@@ -4,6 +4,7 @@ import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
+import {useTheme} from '@react-navigation/native';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const {
@@ -24,6 +25,8 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     setLarivaarSwitch(larivaar);
   }, [larivaarAssist, larivaar]);
 
+  const currentTheme = useTheme().colors;
+
   return (
     <>
       <View style={layoutStyles.settingContainer}>
@@ -32,19 +35,21 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
             <Pressable
               style={layoutStyles.sidebarItem}
               onPress={() => navigation.navigate('Learn Larivaar')}>
-              <Text>Home</Text>
+              <Text style={elementStyles(currentTheme).sidebarItem}>Home</Text>
             </Pressable>
             <Pressable
               style={layoutStyles.sidebarItem}
               onPress={() => navigation.navigate('About')}>
-              <Text>About</Text>
+              <Text style={elementStyles(currentTheme).sidebarItem}>About</Text>
             </Pressable>
           </View>
 
           <View style={layoutStyles.sidebarSettings}>
-            <Text style={elementStyles.heading}>Settings</Text>
+            <Text style={elementStyles(currentTheme).heading}>Settings</Text>
             <View style={layoutStyles.sidebarItem}>
-              <Text>Larivaar</Text>
+              <Text style={elementStyles(currentTheme).sidebarItem}>
+                Larivaar
+              </Text>
               <Switch
                 value={larivaarSwitch}
                 onChange={() => {
@@ -54,7 +59,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text>Larivaar Assist</Text>
+              <Text style={elementStyles(currentTheme).sidebarItem}>
+                Larivaar Assist
+              </Text>
               <Switch
                 value={assistSwitch}
                 onChange={() => {
@@ -64,7 +71,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text>Keep Screen Awake</Text>
+              <Text style={elementStyles(currentTheme).sidebarItem}>
+                Keep Screen Awake
+              </Text>
               <Switch
                 value={awakeSwitch}
                 onChange={() => {
