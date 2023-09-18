@@ -26,6 +26,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   }, [larivaarAssist, larivaar]);
 
   const currentTheme = useTheme().colors;
+  const themeStyles = elementStyles(currentTheme);
 
   return (
     <>
@@ -35,21 +36,19 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
             <Pressable
               style={layoutStyles.sidebarItem}
               onPress={() => navigation.navigate('Learn Larivaar')}>
-              <Text style={elementStyles(currentTheme).sidebarItem}>Home</Text>
+              <Text style={themeStyles.sidebarItem}>Home</Text>
             </Pressable>
             <Pressable
               style={layoutStyles.sidebarItem}
               onPress={() => navigation.navigate('About')}>
-              <Text style={elementStyles(currentTheme).sidebarItem}>About</Text>
+              <Text style={themeStyles.sidebarItem}>About</Text>
             </Pressable>
           </View>
 
           <View style={layoutStyles.sidebarSettings}>
-            <Text style={elementStyles(currentTheme).heading}>Settings</Text>
+            <Text style={themeStyles.heading}>Settings</Text>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={elementStyles(currentTheme).sidebarItem}>
-                Larivaar
-              </Text>
+              <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
                 value={larivaarSwitch}
                 onChange={() => {
@@ -59,9 +58,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={elementStyles(currentTheme).sidebarItem}>
-                Larivaar Assist
-              </Text>
+              <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
               <Switch
                 value={assistSwitch}
                 onChange={() => {
@@ -71,9 +68,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={elementStyles(currentTheme).sidebarItem}>
-                Keep Screen Awake
-              </Text>
+              <Text style={themeStyles.sidebarItem}>Keep Screen Awake</Text>
               <Switch
                 value={awakeSwitch}
                 onChange={() => {

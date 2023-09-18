@@ -20,6 +20,7 @@ const Launchpad = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
   const textInputRef = useRef<TextInput>(null);
   const currentTheme = useTheme().colors;
+  const themeStyles = elementStyles(currentTheme);
 
   const [inputAng, setInputAng] = useState(1);
   const {getItem, setItem} = useAsyncStorage('@currentAng');
@@ -56,7 +57,7 @@ const Launchpad = (): JSX.Element => {
             {inputAng > 1 && (
               <FontAwesome5
                 name="arrow-left"
-                style={elementStyles(currentTheme).iconButton}
+                style={themeStyles.iconButton}
                 onPress={() => {
                   saveCurrentAng(inputAng - 1);
                   textInputRef.current?.setNativeProps({
@@ -69,7 +70,7 @@ const Launchpad = (): JSX.Element => {
               placeholder="Enter Ang Number"
               inputMode="numeric"
               ref={textInputRef}
-              style={elementStyles(currentTheme).input}
+              style={themeStyles.input}
               defaultValue={inputAng.toString()}
               onSubmitEditing={event => {
                 saveCurrentAng(parseInt(event.nativeEvent.text, 10));
@@ -78,7 +79,7 @@ const Launchpad = (): JSX.Element => {
             {inputAng < 1430 && (
               <FontAwesome5
                 name="arrow-right"
-                style={elementStyles(currentTheme).iconButton}
+                style={themeStyles.iconButton}
                 onPress={() => {
                   saveCurrentAng(inputAng + 1);
                   textInputRef.current?.setNativeProps({
