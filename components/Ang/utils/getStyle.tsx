@@ -1,22 +1,24 @@
+import {Theme} from '@react-navigation/native';
 import {elementStyles} from '../../../styles/elements';
 
 export const getStyle = (
   index: number,
   larivaar: Boolean,
   larivaarAssist: Boolean,
+  theme: Theme['colors'],
 ) => {
   if (larivaar && larivaarAssist) {
     if (index % 2 === 0) {
       return {
-        ...elementStyles.gurbani,
+        ...elementStyles(theme).gurbani,
       };
     } else {
       return {
+        ...elementStyles(theme).gurbani,
         color: 'red',
-        ...elementStyles.gurbani,
       };
     }
   } else {
-    return elementStyles.gurbani;
+    return elementStyles(theme).gurbani;
   }
 };

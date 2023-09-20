@@ -6,12 +6,14 @@ import {bakePankti} from './utils/bakePankti';
 import {LarivaarContext} from '../../context';
 import {DoubleTap} from '../common/double-tap';
 import {sendRequest} from './utils/sendRequest';
+import {useTheme} from '@react-navigation/native';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
   const {larivaarAssist, larivaar, saveLarivaarAssist} =
     useContext(LarivaarContext);
   const [isLoading, setIsLoading] = useState(true);
+  const currentTheme = useTheme().colors;
 
   useEffect(() => {
     sendRequest(props.page, setCurrentAngData, setIsLoading);
@@ -29,7 +31,12 @@ const Ang = (props: AngProps): JSX.Element => {
       <View style={layoutStyles.wordContainer}>
         {currentAngData.page &&
           currentAngData.page.map(page =>
-            bakePankti({verse: page.verse.unicode, larivaar, larivaarAssist}),
+            bakePankti({
+              verse: page.verse.unicode,
+              larivaar,
+              larivaarAssist,
+              currentTheme,
+            }),
           )}
       </View>
     </DoubleTap>
