@@ -10,7 +10,7 @@ import {useTheme} from '@react-navigation/native';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
-  const {larivaarAssist, larivaar, saveLarivaarAssist} =
+  const {larivaarAssist, larivaar, fontSize, saveLarivaarAssist} =
     useContext(LarivaarContext);
   const [isLoading, setIsLoading] = useState(true);
   const currentTheme = useTheme().colors;
@@ -36,6 +36,7 @@ const Ang = (props: AngProps): JSX.Element => {
               larivaar,
               larivaarAssist,
               currentTheme,
+              fontSize,
             }),
           )}
       </View>

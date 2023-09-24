@@ -7,4 +7,6 @@ export const LarivaarContext = createContext({
   saveLarivaarAssist: (_larivaarAssist: boolean) => {},
   keepAwake: true,
   saveKeepAwake: (_keepAwake: boolean) => {},
+  fontSize: 18,
+  saveFontSize: (_fontSize: number) => {},
 });

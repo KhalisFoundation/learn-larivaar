@@ -1,10 +1,13 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, Switch, Button, Pressable, BackHandler} from 'react-native';
+import {View, Text, Switch, Pressable} from 'react-native';
+
 import {layoutStyles} from '../../styles/layout';
 import {LarivaarContext} from '../../context';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
+
 import {useTheme} from '@react-navigation/native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const {
@@ -14,11 +17,16 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     saveLarivaar,
     keepAwake,
     saveKeepAwake,
+    fontSize,
+    saveFontSize,
   } = useContext(LarivaarContext);
 
   const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
   const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
   const [awakeSwitch, setAwakeSwitch] = useState(keepAwake);
+
+  const minFontSize = 14;
+  const maxFontSize = 30;
 
   useEffect(() => {
     setAssistSwitch(larivaarAssist);
@@ -47,6 +55,29 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
 
           <View style={layoutStyles.sidebarSettings}>
             <Text style={themeStyles.heading}>Settings</Text>
+            <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Font size</Text>
+              <View style={layoutStyles.sidebarItem}>
+                <FontAwesome5
+                  name="plus-circle"
+                  style={{paddingLeft: 10, fontSize: 20}}
+                  onPress={() => {
+                    if (fontSize < maxFontSize) {
+                      saveFontSize(fontSize + 2);
+                    }
+                  }}
+                />
+                <FontAwesome5
+                  name="minus-circle"
+                  style={{paddingLeft: 10, fontSize: 20}}
+                  onPress={() => {
+                    if (fontSize > minFontSize) {
+                      saveFontSize(fontSize - 2);
+                    }
+                  }}
+                />
+              </View>
+            </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
@@ -78,9 +109,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
           </View>
-        </View>
-        <View>
-          <Button title="Exit" onPress={() => BackHandler.exitApp()} />
         </View>
       </View>
     </>

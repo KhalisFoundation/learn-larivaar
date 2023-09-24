@@ -24,6 +24,7 @@ const App = (): JSX.Element => {
   const [larivaarAssist, setLarivaarAssist] = useState(false);
   const [larivaar, setLarivaar] = useState(true);
   const [keepAwake, setKeepAwake] = useState(true);
+  const [fontSize, setFontSize] = useState(18);
 
   const {getItem, setItem} = useAsyncStorage('@larivaar');
 
@@ -35,9 +36,11 @@ const App = (): JSX.Element => {
     const item = await getItem();
     if (item) {
       const savedSettings = JSON.parse(item);
-      setLarivaar(savedSettings.enabled);
-      setLarivaarAssist(savedSettings.assist);
-      setKeepAwake(savedSettings.keepAwake);
+      const savedKeys = Object.keys(savedSettings);
+      savedKeys.includes('enabled') && setLarivaar(savedSettings.enabled);
+      savedKeys.includes('assist') && setLarivaarAssist(savedSettings.assist);
+      savedKeys.includes('keepAwake') && setKeepAwake(savedSettings.keepAwake);
+      savedKeys.includes('fontSize') && setFontSize(savedSettings.fontSize);
     }
   };
 
@@ -57,6 +60,7 @@ const App = (): JSX.Element => {
       JSON.stringify({
         enabled: newValue,
         assist: larivaarAssist,
+        fontSize,
         keepAwake,
       }),
     );
@@ -69,9 +73,22 @@ const App = (): JSX.Element => {
         enabled: larivaar,
         assist: larivaarAssist,
         keepAwake: newValue,
+        fontSize,
       }),
     );
     setKeepAwake(newValue);
+  };
+
+  const saveFontSize = async (newValue: number) => {
+    await setItem(
+      JSON.stringify({
+        enabled: larivaar,
+        assist: larivaarAssist,
+        keepAwake,
+        fontSize: newValue,
+      }),
+    );
+    setFontSize(newValue);
   };
 
   const value = {
@@ -81,6 +98,8 @@ const App = (): JSX.Element => {
     saveLarivaar,
     keepAwake,
     saveKeepAwake,
+    fontSize,
+    saveFontSize,
   };
 
   const theme = useColorScheme();
