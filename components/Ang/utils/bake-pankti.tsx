@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-import {getStyle} from './getStyle';
+import {getStyle} from './get-style';
 import {Theme} from '@react-navigation/native';
 
 export const bakePankti = ({

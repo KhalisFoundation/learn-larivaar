@@ -1,43 +1,30 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
 import {View, Text, Switch, Pressable} from 'react-native';
 
 import {layoutStyles} from '../../styles/layout';
-import {LarivaarContext} from '../../context';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
 
 import {useTheme} from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import {useStoreActions, useStoreState} from 'easy-peasy';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
-  const {
-    larivaarAssist,
-    saveLarivaarAssist,
-    larivaar,
-    saveLarivaar,
-    keepAwake,
-    saveKeepAwake,
-    fontSize,
-    saveFontSize,
-  } = useContext(LarivaarContext);
-
-  const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
-  const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
-  const [awakeSwitch, setAwakeSwitch] = useState(keepAwake);
+  const {larivaar, larivaarAssist, keepAwake, fontSize} = useStoreState(
+    (state: any) => state.settings,
+  );
+  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize} =
+    useStoreActions((actions: any) => actions.settings);
 
   const minFontSize = 14;
   const maxFontSize = 30;
-
-  useEffect(() => {
-    setAssistSwitch(larivaarAssist);
-    setLarivaarSwitch(larivaar);
-  }, [larivaarAssist, larivaar]);
 
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
 
   return (
     <>
+      {console.log('does this all render again?')}
       <View style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
           <View style={layoutStyles.sidebarScreens}>
@@ -62,8 +49,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                   name="plus-circle"
                   style={{paddingLeft: 10, fontSize: 20}}
                   onPress={() => {
+                    console.log('font size is', fontSize);
                     if (fontSize < maxFontSize) {
-                      saveFontSize(fontSize + 2);
+                      setFontSize(fontSize + 2);
                     }
                   }}
                 />
@@ -71,8 +59,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                   name="minus-circle"
                   style={{paddingLeft: 10, fontSize: 20}}
                   onPress={() => {
+                    console.log('font size is', fontSize);
                     if (fontSize > minFontSize) {
-                      saveFontSize(fontSize - 2);
+                      setFontSize(fontSize - 2);
                     }
                   }}
                 />
@@ -81,30 +70,28 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
-                value={larivaarSwitch}
+                value={larivaar}
                 onChange={() => {
-                  setLarivaarSwitch(!larivaar);
-                  saveLarivaar(!larivaar);
+                  console.log('larivaar in setting', larivaar);
+                  setLarivaar(!larivaar);
                 }}
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
               <Switch
-                value={assistSwitch}
+                value={larivaarAssist}
                 onChange={() => {
-                  setAssistSwitch(!larivaarAssist);
-                  saveLarivaarAssist(!larivaarAssist);
+                  setLarivaarAssist(!larivaarAssist);
                 }}
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Keep Screen Awake</Text>
               <Switch
-                value={awakeSwitch}
+                value={keepAwake}
                 onChange={() => {
-                  setAwakeSwitch(!keepAwake);
-                  saveKeepAwake(!keepAwake);
+                  setKeepScreenAwake(!keepAwake);
                 }}
               />
             </View>

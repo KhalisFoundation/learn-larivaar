@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {useColorScheme} from 'react-native';
-
 import 'react-native-gesture-handler';
+import React from 'react';
+import {useColorScheme} from 'react-native';
+import {StoreProvider} from 'easy-peasy';
+
 import {
   DrawerContentComponentProps,
   createDrawerNavigator,
 } from '@react-navigation/drawer';
+
 import {
   DarkTheme,
   DefaultTheme,
@@ -13,106 +15,20 @@ import {
 } from '@react-navigation/native';
 
 import {Launchpad, Settings, About} from './components';
-
-import {LarivaarContext} from './context';
-import {useAsyncStorage} from '@react-native-async-storage/async-storage';
-import KeepAwake from 'react-native-keep-awake';
+import {store} from './store';
 
 const Drawer = createDrawerNavigator();
 
 const App = (): JSX.Element => {
-  const [larivaarAssist, setLarivaarAssist] = useState(false);
-  const [larivaar, setLarivaar] = useState(true);
-  const [keepAwake, setKeepAwake] = useState(true);
-  const [fontSize, setFontSize] = useState(18);
-
-  const {getItem, setItem} = useAsyncStorage('@larivaar');
-
   const getSettings = (props: DrawerContentComponentProps) => {
     return <Settings {...props} />;
   };
 
-  const readItemFromStorage = async () => {
-    const item = await getItem();
-    if (item) {
-      const savedSettings = JSON.parse(item);
-      const savedKeys = Object.keys(savedSettings);
-      savedKeys.includes('enabled') && setLarivaar(savedSettings.enabled);
-      savedKeys.includes('assist') && setLarivaarAssist(savedSettings.assist);
-      savedKeys.includes('keepAwake') && setKeepAwake(savedSettings.keepAwake);
-      savedKeys.includes('fontSize') && setFontSize(savedSettings.fontSize);
-    }
-  };
-
-  const saveLarivaarAssist = async (newValue: boolean) => {
-    await setItem(
-      JSON.stringify({
-        enabled: larivaar,
-        assist: newValue,
-        keepAwake,
-      }),
-    );
-    setLarivaarAssist(newValue);
-  };
-
-  const saveLarivaar = async (newValue: boolean) => {
-    await setItem(
-      JSON.stringify({
-        enabled: newValue,
-        assist: larivaarAssist,
-        fontSize,
-        keepAwake,
-      }),
-    );
-    setLarivaar(newValue);
-  };
-
-  const saveKeepAwake = async (newValue: boolean) => {
-    await setItem(
-      JSON.stringify({
-        enabled: larivaar,
-        assist: larivaarAssist,
-        keepAwake: newValue,
-        fontSize,
-      }),
-    );
-    setKeepAwake(newValue);
-  };
-
-  const saveFontSize = async (newValue: number) => {
-    await setItem(
-      JSON.stringify({
-        enabled: larivaar,
-        assist: larivaarAssist,
-        keepAwake,
-        fontSize: newValue,
-      }),
-    );
-    setFontSize(newValue);
-  };
-
-  const value = {
-    larivaarAssist,
-    saveLarivaarAssist,
-    larivaar,
-    saveLarivaar,
-    keepAwake,
-    saveKeepAwake,
-    fontSize,
-    saveFontSize,
-  };
-
   const theme = useColorScheme();
 
-  useEffect(() => {
-    readItemFromStorage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
-    <LarivaarContext.Provider value={value}>
+    <StoreProvider store={store}>
       <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
-        {keepAwake && <KeepAwake />}
         <Drawer.Navigator
           screenOptions={{
             headerTintColor: theme === 'dark' ? '#FFFFFF' : '#333333',
@@ -122,7 +38,7 @@ const App = (): JSX.Element => {
           <Drawer.Screen name="About" component={About} />
         </Drawer.Navigator>
       </NavigationContainer>
-    </LarivaarContext.Provider>
+    </StoreProvider>
   );
 };
 
