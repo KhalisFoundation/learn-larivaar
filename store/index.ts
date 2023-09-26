@@ -1,27 +1,11 @@
-import {createStore, action} from 'easy-peasy';
+import {createStore, persist} from 'easy-peasy';
+import {StoreInterface} from './interface';
+import {storeModel} from './model';
+import {customStorage} from './storage';
 
-export const store = createStore({
-  settings: {
-    fontSize: 18,
-    keepScreenAwake: false,
-    larivaar: true,
-    larivaarAssist: false,
-
-    setFontSize: action((state, payload) => ({
-      ...state,
-      fontSize: payload,
-    })),
-    setLarivaar: action((state, payload) => ({
-      ...state,
-      larivaar: payload,
-    })),
-    setLarivaarAssist: action((state, payload) => ({
-      ...state,
-      larivaarAssist: payload,
-    })),
-    setKeepScreenAwake: action((state, payload) => ({
-      ...state,
-      keepAwake: payload,
-    })),
-  },
-});
+export const store = createStore<StoreInterface>(
+  persist(storeModel, {
+    storage: customStorage,
+    allow: ['larivaar', 'larivaarAssist', 'fontSize', 'keepScreenAwake'],
+  }),
+);

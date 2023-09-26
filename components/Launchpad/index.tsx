@@ -16,7 +16,7 @@ import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 
 import {Ang} from '..';
 import {layoutStyles, elementStyles} from '../../styles';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import {useStoreState} from '../../store/hooks';
 
 const Launchpad = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,34 +24,14 @@ const Launchpad = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {larivaar, larivaarAssist, keepAwake, fontSize} = useStoreState(
-    (state: any) => state.settings,
-  );
-  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize} =
-    useStoreActions((actions: any) => actions.settings);
-
+  const {keepScreenAwake} = useStoreState(state => state);
   const [inputAng, setInputAng] = useState(1);
-  const {getItem, setItem} = useAsyncStorage('@larivaar');
   const {getItem: getAng, setItem: setAng} = useAsyncStorage('@currentAng');
 
   const readAngFromStorage = async () => {
     const item = await getAng();
     if (item) {
       setInputAng(parseInt(item, 10));
-    }
-  };
-
-  const readItemFromStorage = async () => {
-    console.log('reading item from storage');
-    const item = await getItem();
-    if (item) {
-      const savedSettings = JSON.parse(item);
-      const savedKeys = Object.keys(savedSettings);
-      savedKeys.includes('enabled') && setLarivaar(savedSettings.enabled);
-      savedKeys.includes('fontSize') && setFontSize(savedSettings.fontSize);
-      savedKeys.includes('assist') && setLarivaarAssist(savedSettings.assist);
-      savedKeys.includes('keepAwake') &&
-        setKeepScreenAwake(savedSettings.keepAwake);
     }
   };
 
@@ -68,25 +48,12 @@ const Launchpad = (): JSX.Element => {
 
   useEffect(() => {
     readAngFromStorage();
-    readItemFromStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Save the app settings in AsyncStorage on change
-  useEffect(() => {
-    setItem(
-      JSON.stringify({
-        enabled: larivaar,
-        assist: larivaarAssist,
-        keepAwake,
-        fontSize,
-      }),
-    );
-  }, [larivaar, larivaarAssist, fontSize, keepAwake, setItem]);
-
   return (
     <SafeAreaView>
-      {keepAwake && <KeepAwake />}
+      {keepScreenAwake && <KeepAwake />}
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>

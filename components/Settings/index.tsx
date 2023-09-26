@@ -1,20 +1,23 @@
 import React from 'react';
+import {useStoreRehydrated} from 'easy-peasy';
+import {useTheme} from '@react-navigation/native';
 import {View, Text, Switch, Pressable} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {layoutStyles} from '../../styles/layout';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
 
-import {useTheme} from '@react-navigation/native';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import {useStoreActions, useStoreState} from '../../store/hooks';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
-  const {larivaar, larivaarAssist, keepAwake, fontSize} = useStoreState(
-    (state: any) => state.settings,
+  const {larivaar, larivaarAssist, keepScreenAwake, fontSize} = useStoreState(
+    state => state,
   );
   const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize} =
-    useStoreActions((actions: any) => actions.settings);
+    useStoreActions(actions => actions);
+
+  const isRehydrated = useStoreRehydrated();
 
   const minFontSize = 14;
   const maxFontSize = 30;
@@ -22,9 +25,8 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
 
-  return (
+  return isRehydrated ? (
     <>
-      {console.log('does this all render again?')}
       <View style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
           <View style={layoutStyles.sidebarScreens}>
@@ -49,7 +51,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                   name="plus-circle"
                   style={{paddingLeft: 10, fontSize: 20}}
                   onPress={() => {
-                    console.log('font size is', fontSize);
                     if (fontSize < maxFontSize) {
                       setFontSize(fontSize + 2);
                     }
@@ -59,7 +60,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                   name="minus-circle"
                   style={{paddingLeft: 10, fontSize: 20}}
                   onPress={() => {
-                    console.log('font size is', fontSize);
                     if (fontSize > minFontSize) {
                       setFontSize(fontSize - 2);
                     }
@@ -72,7 +72,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               <Switch
                 value={larivaar}
                 onChange={() => {
-                  console.log('larivaar in setting', larivaar);
                   setLarivaar(!larivaar);
                 }}
               />
@@ -89,9 +88,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Keep Screen Awake</Text>
               <Switch
-                value={keepAwake}
+                value={keepScreenAwake}
                 onChange={() => {
-                  setKeepScreenAwake(!keepAwake);
+                  setKeepScreenAwake(!keepScreenAwake);
                 }}
               />
             </View>
@@ -99,6 +98,8 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
         </View>
       </View>
     </>
+  ) : (
+    <Text>Loading..</Text>
   );
 };
 

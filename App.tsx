@@ -1,7 +1,7 @@
-import 'react-native-gesture-handler';
 import React from 'react';
-import {useColorScheme} from 'react-native';
+import 'react-native-gesture-handler';
 import {StoreProvider} from 'easy-peasy';
+import {useColorScheme} from 'react-native';
 
 import {
   DrawerContentComponentProps,
@@ -14,8 +14,8 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 
-import {Launchpad, Settings, About} from './components';
 import {store} from './store';
+import {Launchpad, Settings, About} from './components';
 
 const Drawer = createDrawerNavigator();
 

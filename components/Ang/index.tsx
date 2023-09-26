@@ -7,18 +7,14 @@ import {bakePankti} from './utils/bake-pankti';
 import {layoutStyles} from '../../styles/layout';
 import {sendRequest} from './utils/send-request';
 import {AngProps, AngData} from './interfaces/api-response';
-import {useStoreActions, useStoreState} from 'easy-peasy';
+import {useStoreActions, useStoreState} from '../../store/hooks';
 
 const Ang = (props: AngProps): JSX.Element => {
   const [currentAngData, setCurrentAngData] = useState({} as AngData);
   const [isLoading, setIsLoading] = useState(true);
 
-  const {larivaar, larivaarAssist, fontSize} = useStoreState(
-    (state: any) => state.settings,
-  );
-  const {setLarivaarAssist} = useStoreActions(
-    (actions: any) => actions.settings,
-  );
+  const {larivaar, larivaarAssist, fontSize} = useStoreState(state => state);
+  const {setLarivaarAssist} = useStoreActions(actions => actions);
 
   const currentTheme = useTheme().colors;
 
@@ -26,15 +22,9 @@ const Ang = (props: AngProps): JSX.Element => {
     sendRequest(props.page, setCurrentAngData, setIsLoading);
   }, [props.page]);
 
-  useEffect(() => {
-    console.log('larivaar is changed');
-  }, [larivaar]);
-
   if (isLoading) {
     return <Text>Loading</Text>;
   }
-  console.log('larivaar in ang', larivaar);
-  console.log('font in ang', fontSize);
   return (
     <DoubleTap
       customTap={() => {
