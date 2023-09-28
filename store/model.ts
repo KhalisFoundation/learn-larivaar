@@ -21,6 +21,6 @@ export const storeModel: StoreInterface = {
   })),
   setKeepScreenAwake: action((state, payload) => ({
     ...state,
-    keepAwake: payload,
+    keepScreenAwake: payload,
   })),
 };
