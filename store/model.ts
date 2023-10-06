@@ -38,4 +38,8 @@ export const storeModel: StoreInterface = {
     ...state,
     swipeNavigation: payload,
   })),
-};
+  setDarkTheme: action((state, payload) => ({
+    ...state,
+    darkTheme: payload,
+  }))
+}
