@@ -5,6 +5,7 @@ export interface StoreProperties {
   keepScreenAwake: boolean;
   larivaar: boolean;
   larivaarAssist: boolean;
+  darkTheme: boolean;
 }
 
 export interface StoreInterface extends StoreProperties {
@@ -12,4 +13,5 @@ export interface StoreInterface extends StoreProperties {
   setLarivaar: Action<StoreInterface, boolean>;
   setLarivaarAssist: Action<StoreInterface, boolean>;
   setKeepScreenAwake: Action<StoreInterface, boolean>;
+  setDarkTheme: Action<StoreInterface, boolean>;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useStoreRehydrated} from 'easy-peasy';
-import {useTheme} from '@react-navigation/native';
+import {DarkTheme, useTheme} from '@react-navigation/native';
 import {View, Text, Switch, Pressable} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
@@ -11,10 +11,10 @@ import {elementStyles} from '../../styles';
 import {useStoreActions, useStoreState} from '../../store/hooks';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
-  const {larivaar, larivaarAssist, keepScreenAwake, fontSize} = useStoreState(
+  const {larivaar, larivaarAssist, keepScreenAwake, fontSize, darkTheme} = useStoreState(
     state => state,
   );
-  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize} =
+  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize, setDarkTheme} =
     useStoreActions(actions => actions);
 
   const isRehydrated = useStoreRehydrated();
@@ -91,6 +91,15 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                 value={keepScreenAwake}
                 onChange={() => {
                   setKeepScreenAwake(!keepScreenAwake);
+                }}
+              />
+            </View>
+            <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Dark Theme</Text>
+              <Switch
+                value={darkTheme}
+                onChange={() => {
+                  setDarkTheme(!darkTheme);
                 }}
               />
             </View>

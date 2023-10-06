@@ -6,6 +6,7 @@ export const storeModel: StoreInterface = {
   keepScreenAwake: false,
   larivaar: true,
   larivaarAssist: false,
+  darkTheme: false,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -23,4 +24,8 @@ export const storeModel: StoreInterface = {
     ...state,
     keepScreenAwake: payload,
   })),
-};
+  setDarkTheme: action((state, payload) => ({
+    ...state,
+    darkTheme: payload,
+  }))
+}

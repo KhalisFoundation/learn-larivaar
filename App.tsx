@@ -16,7 +16,7 @@ import {
 
 import {store} from './store';
 import {Launchpad, Settings, About} from './components';
-
+import AppWrapper from './components/AppWrapper';
 const Drawer = createDrawerNavigator();
 
 const App = (): JSX.Element => {
@@ -28,16 +28,7 @@ const App = (): JSX.Element => {
 
   return (
     <StoreProvider store={store}>
-      <NavigationContainer theme={theme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Drawer.Navigator
-          screenOptions={{
-            headerTintColor: theme === 'dark' ? '#FFFFFF' : '#333333',
-          }}
-          drawerContent={props => getSettings(props)}>
-          <Drawer.Screen name="Learn Larivaar" component={Launchpad} />
-          <Drawer.Screen name="About" component={About} />
-        </Drawer.Navigator>
-      </NavigationContainer>
+      <AppWrapper />
     </StoreProvider>
   );
 };
