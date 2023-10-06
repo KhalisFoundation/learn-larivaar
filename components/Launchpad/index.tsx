@@ -5,7 +5,6 @@ import {
   ScrollView,
   StatusBar,
   TextInput,
-  useColorScheme,
   View,
 } from 'react-native';
 
@@ -19,7 +18,9 @@ import {layoutStyles, elementStyles} from '../../styles';
 import {useStoreState} from '../../store/hooks';
 
 const Launchpad = (): JSX.Element => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const {darkTheme} = useStoreState(state => state);
+
+  const isDarkMode = darkTheme === true;
   const currentTheme = useTheme().colors;
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);

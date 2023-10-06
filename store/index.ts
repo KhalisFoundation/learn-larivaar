@@ -6,6 +6,12 @@ import {customStorage} from './storage';
 export const store = createStore<StoreInterface>(
   persist(storeModel, {
     storage: customStorage,
-    allow: ['larivaar', 'larivaarAssist', 'fontSize', 'keepScreenAwake'],
+    allow: [
+      'larivaar',
+      'larivaarAssist',
+      'fontSize',
+      'keepScreenAwake',
+      'darkTheme',
+    ],
   }),
 );
