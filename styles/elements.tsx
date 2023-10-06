@@ -5,7 +5,6 @@ export const elementStyles = (theme: Theme['colors']) =>
   StyleSheet.create({
     gurbani: {
       color: theme.text,
-      fontSize: 22,
       lineHeight: 35,
     },
     input: {
@@ -37,5 +36,6 @@ export const elementStyles = (theme: Theme['colors']) =>
     },
     sidebarItem: {
       color: theme.text,
+      fontSize: 18,
     },
   });

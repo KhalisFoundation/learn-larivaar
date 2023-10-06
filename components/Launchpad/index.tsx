@@ -9,24 +9,27 @@ import {
   View,
 } from 'react-native';
 
+import KeepAwake from 'react-native-keep-awake';
+import {useTheme} from '@react-navigation/native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import {useAsyncStorage} from '@react-native-async-storage/async-storage';
-import {useTheme} from '@react-navigation/native';
 
-import {Ang} from '../../components';
+import {Ang} from '..';
 import {layoutStyles, elementStyles} from '../../styles';
+import {useStoreState} from '../../store/hooks';
 
 const Launchpad = (): JSX.Element => {
   const isDarkMode = useColorScheme() === 'dark';
-  const textInputRef = useRef<TextInput>(null);
   const currentTheme = useTheme().colors;
+  const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
+  const {keepScreenAwake} = useStoreState(state => state);
   const [inputAng, setInputAng] = useState(1);
-  const {getItem, setItem} = useAsyncStorage('@currentAng');
+  const {getItem: getAng, setItem: setAng} = useAsyncStorage('@currentAng');
 
-  const readItemFromStorage = async () => {
-    const item = await getItem();
+  const readAngFromStorage = async () => {
+    const item = await getAng();
     if (item) {
       setInputAng(parseInt(item, 10));
     }
@@ -39,17 +42,18 @@ const Launchpad = (): JSX.Element => {
     if (newValue > 1430) {
       newValue = 1430;
     }
-    await setItem(newValue.toString());
+    await setAng(newValue.toString());
     setInputAng(newValue);
   };
 
   useEffect(() => {
-    readItemFromStorage();
+    readAngFromStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <SafeAreaView>
+      {keepScreenAwake && <KeepAwake />}
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>

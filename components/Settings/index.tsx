@@ -1,34 +1,31 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, Text, Switch, Button, Pressable, BackHandler} from 'react-native';
+import React from 'react';
+import {useStoreRehydrated} from 'easy-peasy';
+import {useTheme} from '@react-navigation/native';
+import {View, Text, Switch, Pressable} from 'react-native';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+
 import {layoutStyles} from '../../styles/layout';
-import {LarivaarContext} from '../../context';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
-import {useTheme} from '@react-navigation/native';
+
+import {useStoreActions, useStoreState} from '../../store/hooks';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
-  const {
-    larivaarAssist,
-    saveLarivaarAssist,
-    larivaar,
-    saveLarivaar,
-    keepAwake,
-    saveKeepAwake,
-  } = useContext(LarivaarContext);
+  const {larivaar, larivaarAssist, keepScreenAwake, fontSize} = useStoreState(
+    state => state,
+  );
+  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize} =
+    useStoreActions(actions => actions);
 
-  const [assistSwitch, setAssistSwitch] = useState(larivaarAssist);
-  const [larivaarSwitch, setLarivaarSwitch] = useState(larivaar);
-  const [awakeSwitch, setAwakeSwitch] = useState(keepAwake);
+  const isRehydrated = useStoreRehydrated();
 
-  useEffect(() => {
-    setAssistSwitch(larivaarAssist);
-    setLarivaarSwitch(larivaar);
-  }, [larivaarAssist, larivaar]);
+  const minFontSize = 14;
+  const maxFontSize = 30;
 
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
 
-  return (
+  return isRehydrated ? (
     <>
       <View style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
@@ -48,42 +45,61 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
           <View style={layoutStyles.sidebarSettings}>
             <Text style={themeStyles.heading}>Settings</Text>
             <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Font size</Text>
+              <View style={layoutStyles.sidebarItem}>
+                <FontAwesome5
+                  name="plus-circle"
+                  style={{paddingLeft: 10, fontSize: 20}}
+                  onPress={() => {
+                    if (fontSize < maxFontSize) {
+                      setFontSize(fontSize + 2);
+                    }
+                  }}
+                />
+                <FontAwesome5
+                  name="minus-circle"
+                  style={{paddingLeft: 10, fontSize: 20}}
+                  onPress={() => {
+                    if (fontSize > minFontSize) {
+                      setFontSize(fontSize - 2);
+                    }
+                  }}
+                />
+              </View>
+            </View>
+            <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
-                value={larivaarSwitch}
+                value={larivaar}
                 onChange={() => {
-                  setLarivaarSwitch(!larivaar);
-                  saveLarivaar(!larivaar);
+                  setLarivaar(!larivaar);
                 }}
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
               <Switch
-                value={assistSwitch}
+                value={larivaarAssist}
                 onChange={() => {
-                  setAssistSwitch(!larivaarAssist);
-                  saveLarivaarAssist(!larivaarAssist);
+                  setLarivaarAssist(!larivaarAssist);
                 }}
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Keep Screen Awake</Text>
               <Switch
-                value={awakeSwitch}
+                value={keepScreenAwake}
                 onChange={() => {
-                  setAwakeSwitch(!keepAwake);
-                  saveKeepAwake(!keepAwake);
+                  setKeepScreenAwake(!keepScreenAwake);
                 }}
               />
             </View>
           </View>
         </View>
-        <View>
-          <Button title="Exit" onPress={() => BackHandler.exitApp()} />
-        </View>
       </View>
     </>
+  ) : (
+    <Text>Loading..</Text>
   );
 };
 
