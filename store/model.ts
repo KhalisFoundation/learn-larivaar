@@ -27,5 +27,5 @@ export const storeModel: StoreInterface = {
   setDarkTheme: action((state, payload) => ({
     ...state,
     darkTheme: payload,
-  }))
-}
+  })),
+};
