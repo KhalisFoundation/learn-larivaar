@@ -48,7 +48,7 @@ const Launchpad = (): JSX.Element => {
     await setAng(newValue.toString());
     setInputAng(newValue);
   };
-  const onSwipe = (event) => {
+  const onSwipe = (event: any) => {
     const { translationX } = event.nativeEvent;
     if(swipeNavigation){
       if (translationX < 0) { // Swipe Right

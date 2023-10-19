@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useStoreRehydrated} from 'easy-peasy';
 import {useTheme} from '@react-navigation/native';
-import {View, Text, Switch, Pressable} from 'react-native';
+import {
+  View, 
+  Text, 
+  TextInput, 
+  Modal, 
+  Switch, 
+  Pressable, 
+  TouchableOpacity,
+} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Collapsible from 'react-native-collapsible';
 
 import {layoutStyles} from '../../styles/layout';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
 import {elementStyles} from '../../styles';
 
 import {useStoreActions, useStoreState} from '../../store/hooks';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import { TOTAL_ANGS } from '../constants';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const {
@@ -38,7 +50,65 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
 
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [desiredAngModal, setDesiredAngModal] = useState(false);
 
+  const [samaapteeDateModal, setSamaapteeDateModal] = useState(false);
+
+  const [samaapteeDate, setsamaapteeDate] = useState(new Date());
+  const [dailyAngs, setDailyAngs] = useState<number | null>(null);
+  const [angsCompletionDate, setAngsCompletionDate] = useState<Date | string>(new Date());
+  
+  const [showTotalAngs, setShowTotalAngs] = useState(false);
+  const [showSamaapteeDate, setShowSamaapteeDate] = useState(false);
+
+  const [todayAngs, setTodayAngs] = useState<number | null>(null);
+  
+  const twoDaysFromNow = new Date();
+  twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
+
+  const onChangeDate = (event, selectedDate: any) => {
+    const currentDate = selectedDate || samaapteeDate;
+    setsamaapteeDate(currentDate);
+    const today = new Date();
+    const timeDiff = currentDate.getTime() - today.getTime();
+    const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    const dailyAngs = Math.round(TOTAL_ANGS/(dayDiff + 1))
+    setDailyAngs(dailyAngs);
+    setTodayAngs(dailyAngs);
+    if(!showTotalAngs){
+      setShowTotalAngs(true);
+    }
+  };
+  function formatDate(date : string | number | Date): string {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+
+    if (month.length < 2) 
+      month = '0' + month;
+    if (day.length < 2) 
+      day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+  const onChangeAngs = (selectedAngs: string ) => {
+    const angs =  Number(selectedAngs);
+    const totalDays = TOTAL_ANGS/angs;
+    const today = new Date();
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + totalDays + 1);
+    const formattedDate = formatDate(endDate);
+    setAngsCompletionDate(formattedDate);
+    setTodayAngs(angs);
+    if(!showSamaapteeDate && selectedAngs.trim().length > 0){
+      setShowSamaapteeDate(true);
+    }
+    if(selectedAngs.trim().length === 0){
+      setShowSamaapteeDate(false);
+    }
+  }
   return isRehydrated ? (
     <>
       <View style={layoutStyles.settingContainer}>
@@ -109,7 +179,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Dark Theme</Text>
+              <Text style={themeStyles.sidebarItem}>Night Mode</Text>
               <Switch
                 value={darkTheme}
                 onChange={() => {
@@ -134,6 +204,97 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                   setSwipeNavigation(!swipeNavigation);
                 }}
               />
+            </View>
+            <Modal
+              visible={desiredAngModal}
+              onRequestClose={() => {
+                setDesiredAngModal(!desiredAngModal);
+              }}
+            >
+              <View style={layoutStyles.centeredView}>
+                <View style={layoutStyles.modalView}>
+                  <TouchableOpacity 
+                    style={layoutStyles.closeButton} 
+                    onPress={() => setDesiredAngModal(false)}
+                  >
+                    <FontAwesome5 name="times" size={24} color="#000" />
+                  </TouchableOpacity>
+                  <Text style={themeStyles.heading}>Daily Angs</Text>
+                  <Text>When you set a goal for daily reading, you will see approximate date of completion</Text>
+                  <View style={layoutStyles.modalInput}>
+                    <TextInput 
+                      style={themeStyles.input}
+                      keyboardType="numeric"
+                      inputMode="numeric"
+                      placeholder='Angs'
+                      onChangeText={onChangeAngs}
+                    />
+                  </View>
+                  {showSamaapteeDate && (
+                  <Text
+                    style={themeStyles.smallText}
+
+                  >Samaaptee: {angsCompletionDate.toString()} </Text> )}
+                </View>
+              </View>
+            </Modal>
+
+            <Modal
+              visible={samaapteeDateModal}
+              onRequestClose={() => {
+                setSamaapteeDateModal(!samaapteeDateModal);
+              }}
+            >
+              <View style={layoutStyles.centeredView}>
+                <View style={layoutStyles.modalView}>
+                  <TouchableOpacity 
+                    style={layoutStyles.closeButton} 
+                    onPress={() => setSamaapteeDateModal(false)}
+                  >
+                    <FontAwesome5 name="times" size={24} color="#000" />
+                  </TouchableOpacity>
+                  <Text style={themeStyles.heading}>Samaaptee Date</Text>
+                  <Text>When you set your desired finish date, you will be suggested a number of Angs 
+                    to read per day to finish on time
+                  </Text>
+                  <View style={layoutStyles.modalInput}>
+                    <DateTimePicker
+                      testID="dateTimePicker"
+                      value={samaapteeDate}
+                      mode="date"
+                      is24Hour={true}
+                      display="default"
+                      onChange={onChangeDate}
+                      minimumDate={twoDaysFromNow}
+                    />
+                  </View>
+                  {showTotalAngs && (
+                  <Text style={themeStyles.smallText}>Daily Angs to Complete: {dailyAngs} </Text>
+                  )}
+                </View>
+              </View>
+            </Modal>
+            <View>
+              <TouchableOpacity onPress={() => setIsCollapsed(!isCollapsed)}>
+                <View style={layoutStyles.sidebarItem}>
+                  <Text style={themeStyles.sidebarItem}>Sehaj Paatth</Text>
+                    {todayAngs === null || todayAngs === 0 ? 
+                      <FontAwesome5 name="angle-down" size={24} color="#000" /> : 
+                      <Text>0/{todayAngs}</Text>}
+                </View> 
+              </TouchableOpacity>
+              <Collapsible collapsed={isCollapsed}>
+                <View>
+                  <TouchableOpacity onPress={() => setDesiredAngModal(true)} 
+                      style={layoutStyles.nestedSidebarSettings}>
+                    <Text style={themeStyles.sidebarItem}>Set Desired Daily Ang</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => setSamaapteeDateModal(true)} 
+                      style={layoutStyles.nestedSidebarSettings}>
+                    <Text style={themeStyles.sidebarItem}>Edit Samaaptee Date</Text>
+                  </TouchableOpacity>
+                </View>
+              </Collapsible>
             </View>
           </View>
         </View>

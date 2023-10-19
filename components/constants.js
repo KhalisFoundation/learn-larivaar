@@ -1,0 +1,1 @@
+export const TOTAL_ANGS = 1430;

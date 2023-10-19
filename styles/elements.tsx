@@ -38,4 +38,7 @@ export const elementStyles = (theme: Theme['colors']) =>
       color: theme.text,
       fontSize: 18,
     },
+    smallText: {
+      fontSize: 12,
+    }
   });
