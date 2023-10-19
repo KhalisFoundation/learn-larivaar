@@ -7,6 +7,7 @@ export const storeModel: StoreInterface = {
   larivaar: true,
   larivaarAssist: false,
   darkTheme: false,
+  leftHandedMode: false,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -27,5 +28,9 @@ export const storeModel: StoreInterface = {
   setDarkTheme: action((state, payload) => ({
     ...state,
     darkTheme: payload,
+  })),
+  setLeftHandedMode: action((state, payload) => ({
+    ...state,
+    leftHandedMode: payload,
   })),
 };
