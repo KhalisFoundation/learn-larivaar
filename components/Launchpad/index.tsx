@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import 'react-native-gesture-handler';
+
 import {
   SafeAreaView,
   ScrollView,
@@ -16,6 +17,7 @@ import {useAsyncStorage} from '@react-native-async-storage/async-storage';
 import {Ang} from '..';
 import {layoutStyles, elementStyles} from '../../styles';
 import {useStoreState} from '../../store/hooks';
+import { PanGestureHandler,  PanGestureHandlerGestureEvent, HandlerStateChangeEvent, State } from 'react-native-gesture-handler';
 
 const Launchpad = (): JSX.Element => {
   const {darkTheme} = useStoreState(state => state);
@@ -25,7 +27,7 @@ const Launchpad = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {keepScreenAwake} = useStoreState(state => state);
+  const {keepScreenAwake, swipeNavigation} = useStoreState(state => state);
   const [inputAng, setInputAng] = useState(1);
   const {getItem: getAng, setItem: setAng} = useAsyncStorage('@currentAng');
 
@@ -46,7 +48,23 @@ const Launchpad = (): JSX.Element => {
     await setAng(newValue.toString());
     setInputAng(newValue);
   };
-
+  const onSwipe = (event) => {
+    const { translationX } = event.nativeEvent;
+    if(swipeNavigation){
+      if (translationX < 0) { // Swipe Right
+        saveCurrentAng(inputAng + 1);
+        textInputRef.current?.setNativeProps({
+          text: (inputAng + 1).toString(),
+        });
+      } else if (translationX > 0) { // Swipe Left
+        saveCurrentAng(inputAng - 1);
+        textInputRef.current?.setNativeProps({
+          text: (inputAng - 1).toString(),
+        });
+      }
+    }
+    
+  }
   useEffect(() => {
     readAngFromStorage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -56,6 +74,8 @@ const Launchpad = (): JSX.Element => {
     <SafeAreaView>
       {keepScreenAwake && <KeepAwake />}
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <PanGestureHandler onEnded={onSwipe}>
+      
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View style={layoutStyles.mainContainer}>
           <View style={layoutStyles.header}>
@@ -98,6 +118,7 @@ const Launchpad = (): JSX.Element => {
           <Ang page={inputAng} />
         </View>
       </ScrollView>
+      </PanGestureHandler>
     </SafeAreaView>
   );
 };

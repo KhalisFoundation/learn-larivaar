@@ -8,6 +8,7 @@ export const storeModel: StoreInterface = {
   larivaarAssist: false,
   darkTheme: false,
   leftHandedMode: false,
+  swipeNavigation: false,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -32,5 +33,9 @@ export const storeModel: StoreInterface = {
   setLeftHandedMode: action((state, payload) => ({
     ...state,
     leftHandedMode: payload,
+  })),
+  setSwipeNavigation: action((state, payload) => ({
+    ...state,
+    swipeNavigation: payload,
   })),
 };

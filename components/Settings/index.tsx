@@ -18,7 +18,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     fontSize,
     darkTheme,
     leftHandedMode,
+    swipeNavigation,
   } = useStoreState(state => state);
+
   const {
     setLarivaar,
     setLarivaarAssist,
@@ -26,6 +28,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     setFontSize,
     setDarkTheme,
     setLeftHandedMode,
+    setSwipeNavigation,
   } = useStoreActions(actions => actions);
 
   const isRehydrated = useStoreRehydrated();
@@ -120,6 +123,15 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                 value={leftHandedMode}
                 onChange={() => {
                   setLeftHandedMode(!leftHandedMode);
+                }}
+              />
+            </View>
+            <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Swipe Navigation</Text>
+              <Switch
+                value={swipeNavigation}
+                onChange={() => {
+                  setSwipeNavigation(!swipeNavigation);
                 }}
               />
             </View>

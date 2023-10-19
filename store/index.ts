@@ -13,6 +13,7 @@ export const store = createStore<StoreInterface>(
       'keepScreenAwake',
       'darkTheme',
       'leftHandedMode',
+      'swipeNavigation',
     ],
   }),
 );
