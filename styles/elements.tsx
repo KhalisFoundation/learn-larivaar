@@ -19,7 +19,6 @@ export const elementStyles = (theme: Theme['colors']) =>
     iconButton: {
       color: theme.text,
       fontSize: 30,
-      verticalAlign: 'middle',
       padding: 10,
     },
     logo: {
@@ -29,6 +28,9 @@ export const elementStyles = (theme: Theme['colors']) =>
     aboutText: {
       color: theme.text,
       margin: 10,
+    },
+    linkText: {
+      color: '#f37b20',
     },
     heading: {
       color: theme.text,
