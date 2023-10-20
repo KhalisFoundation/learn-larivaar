@@ -14,6 +14,7 @@ export const store = createStore<StoreInterface>(
       'darkTheme',
       'leftHandedMode',
       'swipeNavigation',
+      'currentAng',
     ],
   }),
 );

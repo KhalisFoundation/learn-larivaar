@@ -40,5 +40,13 @@ export const elementStyles = (theme: Theme['colors']) =>
     },
     smallText: {
       fontSize: 12,
-    }
+    },
+    navigationHeader: {
+      backgroundColor: theme.card,
+      display: 'flex',
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+      alignSelf: 'stretch',
+      padding: 8,
+    },
   });

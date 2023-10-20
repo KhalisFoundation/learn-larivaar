@@ -9,6 +9,7 @@ export const storeModel: StoreInterface = {
   darkTheme: false,
   leftHandedMode: false,
   swipeNavigation: false,
+  currentAng: 1,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -37,5 +38,9 @@ export const storeModel: StoreInterface = {
   setSwipeNavigation: action((state, payload) => ({
     ...state,
     swipeNavigation: payload,
+  })),
+  setCurrentAng: action((state, payload) => ({
+    ...state,
+    currentAng: payload,
   })),
 };

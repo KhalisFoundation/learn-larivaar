@@ -8,6 +8,7 @@ export interface StoreProperties {
   darkTheme: boolean;
   leftHandedMode: boolean;
   swipeNavigation: boolean;
+  currentAng: number;
 }
 
 export interface StoreInterface extends StoreProperties {
@@ -18,4 +19,5 @@ export interface StoreInterface extends StoreProperties {
   setDarkTheme: Action<StoreInterface, boolean>;
   setLeftHandedMode: Action<StoreInterface, boolean>;
   setSwipeNavigation: Action<StoreInterface, boolean>;
+  setCurrentAng: Action<StoreInterface, number>;
 }

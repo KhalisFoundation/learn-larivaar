@@ -12,11 +12,13 @@ import {
   NavigationContainer,
 } from '@react-navigation/native';
 
-import {TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {Launchpad, Settings, About} from '.';
 import {useStoreState} from '../store/hooks';
+import {AngInput} from './Ang/AngInput';
+import {elementStyles} from '../styles';
 
 const Drawer = createDrawerNavigator();
 
@@ -25,6 +27,7 @@ const AppWrapper = (): JSX.Element => {
     return <Settings {...props} />;
   };
   const {darkTheme, leftHandedMode} = useStoreState(state => state);
+  const currentTheme = darkTheme === true ? DarkTheme : DefaultTheme;
 
   const menuIcon = (navigation: any) => (
     <TouchableOpacity
@@ -38,14 +41,21 @@ const AppWrapper = (): JSX.Element => {
     </TouchableOpacity>
   );
 
+  const bakeHeader = (navigation: any) => {
+    return (
+      <View style={elementStyles(currentTheme.colors).navigationHeader}>
+        {leftHandedMode ? <AngInput /> : menuIcon(navigation)}
+        {leftHandedMode ? menuIcon(navigation) : <AngInput />}
+      </View>
+    );
+  };
+
   return (
-    <NavigationContainer theme={darkTheme === true ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={currentTheme}>
       <Drawer.Navigator
         screenOptions={({navigation}) => ({
-          headerTintColor: darkTheme === true ? '#FFFFFF' : '#333333',
           drawerPosition: leftHandedMode === true ? 'right' : 'left',
-          headerLeft: leftHandedMode ? () => null : () => menuIcon(navigation),
-          headerRight: leftHandedMode ? () => menuIcon(navigation) : () => null,
+          header: () => bakeHeader(navigation),
         })}
         drawerContent={props => getSettings(props)}>
         <Drawer.Screen name="Learn Larivaar" component={Launchpad} />

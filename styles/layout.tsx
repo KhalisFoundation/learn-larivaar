@@ -11,7 +11,7 @@ export const layoutStyles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'row',
-    margin: 20,
+    flexGrow: 1,
   },
   wordContainer: {
     flexDirection: 'row',
@@ -48,24 +48,24 @@ export const layoutStyles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 22,
-    backgroundColor: 'rgba(52, 52, 52, 0.5)'
+    backgroundColor: 'rgba(52, 52, 52, 0.5)',
   },
   modalView: {
     margin: 15,
-    backgroundColor: "white",
+    backgroundColor: 'white',
     borderRadius: 2,
     padding: 20,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2
+      height: 2,
     },
     shadowOpacity: 0.25,
     shadowRadius: 4,
-    elevation: 5
+    elevation: 5,
   },
   closeButton: {
     position: 'absolute',
@@ -73,9 +73,9 @@ export const layoutStyles = StyleSheet.create({
     right: 10,
   },
   modalInput: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 15,
     marginBottom: 15,
-  }
+  },
 });
