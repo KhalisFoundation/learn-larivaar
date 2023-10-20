@@ -1,9 +1,16 @@
 import React from 'react';
-import {View, Text, Image, Linking, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  Linking,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
 import {elementStyles, layoutStyles} from '../../styles';
 import {useTheme} from '@react-navigation/native';
 
-const About = (): JSX.Element => {
+const About = ({navigation}: any): JSX.Element => {
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
   const handlePressKhalis = () => {
@@ -14,7 +21,6 @@ const About = (): JSX.Element => {
   };
   return (
     <View style={layoutStyles.aboutContainer}>
-      <Text style={themeStyles.heading}>Learn Larivaar</Text>
       <Text style={themeStyles.aboutText}>Created by</Text>
       <Image
         style={themeStyles.logo}
@@ -22,20 +28,31 @@ const About = (): JSX.Element => {
       />
       <Text style={themeStyles.aboutText}>
         We welcome your comments, suggestions and corrections! For more
-        information, visit us at 
+        information, visit us at
         <TouchableOpacity onPress={handlePressKhalis}>
-        <Text style={themeStyles.linkText}>Khalisfoundation.org</Text>
-      </TouchableOpacity>
+          <Text style={themeStyles.linkText}>Khalisfoundation.org</Text>
+        </TouchableOpacity>
       </Text>
       <Text style={themeStyles.aboutText}>
         Please respectfully cover your head and remove your shoes when using
         this app.
       </Text>
       <Text style={themeStyles.aboutText}>
-        Learn Larivaar utilizes <Text onPress={handlePressBaniDB} style={themeStyles.linkText}>BaniDB</Text> 
-          - the open source Gurbani Database and
-        API used in many gurbani applications
+        Learn Larivaar utilizes{' '}
+        <Text onPress={handlePressBaniDB} style={themeStyles.linkText}>
+          BaniDB
+        </Text>
+        - the open source Gurbani Database and API used in many gurbani
+        applications
       </Text>
+      <View style={elementStyles(currentTheme).button}>
+        <Button
+          title="Go back"
+          onPress={() => {
+            navigation.goBack();
+          }}
+        />
+      </View>
     </View>
   );
 };

@@ -16,6 +16,11 @@ export const elementStyles = (theme: Theme['colors']) =>
       width: 70,
       textAlign: 'center',
     },
+    button: {
+      width: 100,
+      marginLeft: 10,
+      marginTop: 20,
+    },
     iconButton: {
       color: theme.text,
       fontSize: 30,
