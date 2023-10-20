@@ -52,13 +52,15 @@ const AppWrapper = (): JSX.Element => {
 
   return (
     <NavigationContainer theme={currentTheme}>
-      <Drawer.Navigator
-        screenOptions={({navigation}) => ({
-          drawerPosition: leftHandedMode === true ? 'right' : 'left',
-          header: () => bakeHeader(navigation),
-        })}
-        drawerContent={props => getSettings(props)}>
-        <Drawer.Screen name="Learn Larivaar" component={Launchpad} />
+      <Drawer.Navigator drawerContent={props => getSettings(props)}>
+        <Drawer.Screen
+          name="Learn Larivaar"
+          component={Launchpad}
+          options={({navigation}) => ({
+            drawerPosition: leftHandedMode === true ? 'right' : 'left',
+            header: () => bakeHeader(navigation),
+          })}
+        />
         <Drawer.Screen name="About" component={About} />
       </Drawer.Navigator>
     </NavigationContainer>
