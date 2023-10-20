@@ -110,53 +110,32 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               <Text style={themeStyles.sidebarItem}>About</Text>
             </Pressable>
           </View>
-          <View style={layoutStyles.sidebarItem}>
-            <Text style={themeStyles.sidebarItem}>Font size</Text>
-            <View style={layoutStyles.sidebarItem}>
-              {darkTheme ? 
-              <FontAwesome5
-                name="plus-circle"
-                style={{paddingLeft: 10, paddingRight:10, fontSize: 20, color: '#fafafa'}}
-                onPress={() => {
-                  if (fontSize < MAX_FONT_SIZE) {
-                    setFontSize(fontSize + 2);
-                  }
-                }}
-              /> : 
-              <FontAwesome5
-                name="plus-circle"
-                style={{paddingLeft: 10, paddingRight: 10, fontSize: 20 }}
-                onPress={() => {
-                  if (fontSize < MAX_FONT_SIZE) {
-                    setFontSize(fontSize + 2);
-                  }
-                }}
-              />}
-              <Text style={themeStyles.sidebarItem}>{fontSize}</Text>
-              {darkTheme ? 
-              <FontAwesome5
-                name="minus-circle"
-                style={{paddingLeft: 10, fontSize: 20, color: '#fafafa'}}
-                onPress={() => {
-                  if (fontSize > MIN_FONT_SIZE) {
-                    setFontSize(fontSize - 2);
-                  }
-                }}
-              /> : 
-              <FontAwesome5
-                name="minus-circle"
-                style={{paddingLeft: 10, fontSize: 20}}
-                onPress={() => {
-                  if (fontSize > MIN_FONT_SIZE) {
-                    setFontSize(fontSize - 2);
-                  }
-                }}
-              />}
-              
-            </View>
-          </View>
           <View style={layoutStyles.sidebarSettings}>
             <Text style={themeStyles.heading}>Settings</Text>
+            <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Font size</Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <FontAwesome5
+                  name="minus-circle"
+                  style={elementStyles(currentTheme).iconSetting}
+                  onPress={() => {
+                    if (fontSize > MIN_FONT_SIZE) {
+                      setFontSize(fontSize - 2);
+                    }
+                  }}
+                />
+                <Text style={themeStyles.sidebarItem}>{fontSize}</Text>
+                <FontAwesome5
+                  name="plus-circle"
+                  style={elementStyles(currentTheme).iconSetting}
+                  onPress={() => {
+                    if (fontSize < MAX_FONT_SIZE) {
+                      setFontSize(fontSize + 2);
+                    }
+                  }}
+                />
+              </View>
+            </View>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Night Mode</Text>
               <Switch
@@ -184,7 +163,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                 }}
               />
             </View>
-            
+
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
@@ -195,16 +174,17 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               />
             </View>
 
-            {larivaar ? 
-            <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
-              <Switch
-                value={larivaarAssist}
-                onChange={() => {
-                  setLarivaarAssist(!larivaarAssist);
-                }}
-              />
-            </View> : ''}
+            {larivaar && (
+              <View style={layoutStyles.sidebarItem}>
+                <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
+                <Switch
+                  value={larivaarAssist}
+                  onChange={() => {
+                    setLarivaarAssist(!larivaarAssist);
+                  }}
+                />
+              </View>
+            )}
 
             <Modal
               visible={desiredAngModal}
@@ -282,11 +262,11 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                 <View style={layoutStyles.sidebarItem}>
                   <Text style={themeStyles.sidebarItem}>Sehaj Paatth</Text>
                   {todayAngs === null || todayAngs === 0 ? (
-                    darkTheme ? (
-                      <FontAwesome5 name="angle-down" size={24} color="#fafafa" /> 
-                    ): (
-                      <FontAwesome5 name="angle-down" size={24} color="#000" /> 
-                    )
+                    <FontAwesome5
+                      name="angle-down"
+                      size={24}
+                      color={currentTheme.text}
+                    />
                   ) : (
                     <Text>0/{todayAngs}</Text>
                   )}

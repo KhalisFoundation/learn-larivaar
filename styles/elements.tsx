@@ -21,6 +21,12 @@ export const elementStyles = (theme: Theme['colors']) =>
       fontSize: 30,
       padding: 10,
     },
+    iconSetting: {
+      fontSize: 20,
+      color: theme.text,
+      paddingLeft: 10,
+      paddingRight: 10,
+    },
     logo: {
       backgroundColor: 'white',
       margin: 10,
