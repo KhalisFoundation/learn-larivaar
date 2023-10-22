@@ -10,6 +10,8 @@ export const storeModel: StoreInterface = {
   leftHandedMode: false,
   swipeNavigation: false,
   currentAng: 1,
+  completionDate: new Date(),
+  angsPerDay: 0,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -42,5 +44,13 @@ export const storeModel: StoreInterface = {
   setCurrentAng: action((state, payload) => ({
     ...state,
     currentAng: payload,
+  })),
+  setCompletitionDate: action((state, payload) => ({
+    ...state,
+    completionDate: payload,
+  })),
+  setAngsPerDay: action((state, payload) => ({
+    ...state,
+    angsPerDay: payload,
   })),
 };

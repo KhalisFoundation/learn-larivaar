@@ -9,6 +9,8 @@ export interface StoreProperties {
   leftHandedMode: boolean;
   swipeNavigation: boolean;
   currentAng: number;
+  angsPerDay: number;
+  completionDate: Date;
 }
 
 export interface StoreInterface extends StoreProperties {
@@ -20,4 +22,6 @@ export interface StoreInterface extends StoreProperties {
   setLeftHandedMode: Action<StoreInterface, boolean>;
   setSwipeNavigation: Action<StoreInterface, boolean>;
   setCurrentAng: Action<StoreInterface, number>;
+  setAngsPerDay: Action<StoreInterface, number>;
+  setCompletitionDate: Action<StoreInterface, Date | null>;
 }

@@ -14,6 +14,7 @@ export const elementStyles = (theme: Theme['colors']) =>
       color: theme.text,
       padding: 10,
       width: 70,
+      fontSize: 20,
       textAlign: 'center',
     },
     button: {

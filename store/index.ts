@@ -15,6 +15,8 @@ export const store = createStore<StoreInterface>(
       'leftHandedMode',
       'swipeNavigation',
       'currentAng',
+      'angsPerDay',
+      'completionDate',
     ],
   }),
 );
