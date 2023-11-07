@@ -14,8 +14,8 @@ export const AngInput = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {currentAng, leftHandedMode} = useStoreState(state => state);
-  const {setCurrentAng} = useStoreActions(actions => actions);
+  const {currentAng, leftHandedMode, currentAngForToday} = useStoreState(state => state);
+  const {setCurrentAng, setCurrentAngForToday} = useStoreActions(actions => actions);
 
   const saveCurrentAng = async (newValue: number) => {
     if (newValue < 1) {
@@ -29,23 +29,22 @@ export const AngInput = (): JSX.Element => {
     }
   };
 
-  const menuAdjustmentStyle = leftHandedMode
-    ? {marginLeft: 50}
-    : {marginRight: 50};
   const disabledLeftStyle = currentAng > 1 ? {} : {opacity: 0.2};
   const disabledRightStyle = currentAng < 1430 ? {} : {opacity: 0.2};
 
   return (
-    <View style={{...menuAdjustmentStyle, ...layoutStyles.header}}>
+    <View style={{...layoutStyles.header}}>
       <FontAwesome5
         name="arrow-left"
-        style={{...disabledLeftStyle, ...themeStyles.iconButton}}
+        style={{...disabledLeftStyle, margin:16}}
+        size={22}
         onPress={() => {
           if (currentAng > 1) {
             saveCurrentAng(currentAng - 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng - 1).toString(),
             });
+            setCurrentAngForToday(currentAngForToday - 1)
           }
         }}
       />
@@ -61,13 +60,15 @@ export const AngInput = (): JSX.Element => {
       />
       <FontAwesome5
         name="arrow-right"
-        style={{...disabledRightStyle, ...themeStyles.iconButton}}
+        style={{...disabledRightStyle, margin: 16}}
+        size={22}
         onPress={() => {
           if (currentAng < 1430) {
             saveCurrentAng(currentAng + 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng + 1).toString(),
             });
+            setCurrentAngForToday(currentAngForToday + 1)
           }
         }}
       />

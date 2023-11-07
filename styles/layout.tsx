@@ -78,4 +78,17 @@ export const layoutStyles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 15,
   },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10
+  },
+  larivaarAssistInHeader: {
+    marginTop: 10,
+    borderRadius: 6,
+    flexDirection: 'row',
+    borderWidth: 1,
+    padding: 5
+  }
 });

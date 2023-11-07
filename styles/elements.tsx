@@ -42,7 +42,7 @@ export const elementStyles = (theme: Theme['colors']) =>
       margin: 10,
     },
     linkText: {
-      color: '#f37b20',
+      color: theme.primary,
     },
     heading: {
       color: theme.text,

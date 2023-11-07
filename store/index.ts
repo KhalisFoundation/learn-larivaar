@@ -16,6 +16,7 @@ export const store = createStore<StoreInterface>(
       'swipeNavigation',
       'currentAng',
       'angsPerDay',
+      'currentAngForToday',
       'completionDate',
     ],
   }),

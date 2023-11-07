@@ -10,6 +10,7 @@ export interface StoreProperties {
   swipeNavigation: boolean;
   currentAng: number;
   angsPerDay: number;
+  currentAngForToday: number;
   completionDate: Date;
 }
 
@@ -23,5 +24,6 @@ export interface StoreInterface extends StoreProperties {
   setSwipeNavigation: Action<StoreInterface, boolean>;
   setCurrentAng: Action<StoreInterface, number>;
   setAngsPerDay: Action<StoreInterface, number>;
+  setCurrentAngForToday: Action<StoreInterface, number>;
   setCompletitionDate: Action<StoreInterface, Date | null>;
 }

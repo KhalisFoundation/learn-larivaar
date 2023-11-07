@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 
 import {useTheme} from '@react-navigation/native';
-import {Modal, Text, TouchableOpacity, View} from 'react-native';
+import {Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import DateTimePicker, {
   DateTimePickerEvent,
@@ -10,6 +10,9 @@ import DateTimePicker, {
 import {elementStyles, layoutStyles} from '../../../styles';
 import {useStoreActions, useStoreState} from '../../../store/hooks';
 import {calculateDailyAngs, formatDate} from '../utils';
+
+const twoDaysFromNow = new Date();
+twoDaysFromNow.setDate(twoDaysFromNow.getDate() + 2);
 
 interface Props {
   visible: boolean;
@@ -33,6 +36,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
 
   return (
     <Modal transparent={true} visible={visible} onRequestClose={closeModal}>
+      <TouchableWithoutFeedback onPress={closeModal}>
       <View style={layoutStyles.centeredView}>
         <View style={layoutStyles.modalView}>
           <TouchableOpacity
@@ -60,6 +64,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
                 mode="date"
                 is24Hour={true}
                 value={completionDate}
+                minimumDate={twoDaysFromNow}
                 onChange={(
                   event: DateTimePickerEvent,
                   selectedDate: Date | undefined,
@@ -80,6 +85,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
           </Text>
         </View>
       </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };

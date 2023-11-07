@@ -2,7 +2,7 @@ import React from 'react';
 
 import {useTheme} from '@react-navigation/native';
 import {TextInput} from 'react-native-gesture-handler';
-import {Modal, Text, TouchableOpacity, View} from 'react-native';
+import {Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {elementStyles, layoutStyles} from '../../../styles';
@@ -29,7 +29,8 @@ const AngModal: React.FC<Props> = ({visible, onClose}) => {
 
   return (
     <Modal transparent={true} visible={visible} onRequestClose={closeModal}>
-      <View style={layoutStyles.centeredView}>
+      <TouchableWithoutFeedback onPress={closeModal}>
+        <View style={layoutStyles.centeredView}>
         <View style={layoutStyles.modalView}>
           <TouchableOpacity
             style={layoutStyles.closeButton}
@@ -61,6 +62,7 @@ const AngModal: React.FC<Props> = ({visible, onClose}) => {
           </Text>
         </View>
       </View>
+      </TouchableWithoutFeedback>
     </Modal>
   );
 };
