@@ -14,8 +14,10 @@ export const AngInput = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {currentAng, leftHandedMode, currentAngForToday} = useStoreState(state => state);
-  const {setCurrentAng, setCurrentAngForToday} = useStoreActions(actions => actions);
+  const {currentAng, currentAngForToday} = useStoreState(state => state);
+  const {setCurrentAng, setCurrentAngForToday} = useStoreActions(
+    actions => actions,
+  );
 
   const saveCurrentAng = async (newValue: number) => {
     if (newValue < 1) {
@@ -33,18 +35,19 @@ export const AngInput = (): JSX.Element => {
   const disabledRightStyle = currentAng < 1430 ? {} : {opacity: 0.2};
 
   return (
-    <View style={{...layoutStyles.header}}>
+    <View style={{...layoutStyles.angInputContainer}}>
       <FontAwesome5
         name="arrow-left"
-        style={{...disabledLeftStyle, margin:16}}
+        style={{...disabledLeftStyle}}
         size={22}
+        color={currentTheme.text}
         onPress={() => {
           if (currentAng > 1) {
             saveCurrentAng(currentAng - 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng - 1).toString(),
             });
-            setCurrentAngForToday(currentAngForToday - 1)
+            setCurrentAngForToday(currentAngForToday - 1);
           }
         }}
       />
@@ -52,7 +55,7 @@ export const AngInput = (): JSX.Element => {
         placeholder="Enter Ang Number"
         inputMode="numeric"
         ref={textInputRef}
-        style={themeStyles.input}
+        style={{...themeStyles.input}}
         defaultValue={currentAng.toString()}
         onSubmitEditing={event => {
           saveCurrentAng(parseInt(event.nativeEvent.text, 10));
@@ -60,15 +63,16 @@ export const AngInput = (): JSX.Element => {
       />
       <FontAwesome5
         name="arrow-right"
-        style={{...disabledRightStyle, margin: 16}}
+        style={{...disabledRightStyle}}
         size={22}
+        color={currentTheme.text}
         onPress={() => {
           if (currentAng < 1430) {
             saveCurrentAng(currentAng + 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng + 1).toString(),
             });
-            setCurrentAngForToday(currentAngForToday + 1)
+            setCurrentAngForToday(currentAngForToday + 1);
           }
         }}
       />

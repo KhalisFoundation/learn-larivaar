@@ -25,7 +25,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     leftHandedMode,
     swipeNavigation,
     angsPerDay,
-    currentAngForToday
+    currentAngForToday,
   } = useStoreState(state => state);
 
   const {
@@ -36,7 +36,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     setDarkTheme,
     setLeftHandedMode,
     setSwipeNavigation,
-
   } = useStoreActions(actions => actions);
 
   const isRehydrated = useStoreRehydrated();
@@ -144,20 +143,22 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               <TouchableOpacity onPress={() => setIsCollapsed(!isCollapsed)}>
                 <View style={layoutStyles.sidebarItem}>
                   <Text style={themeStyles.sidebarItem}>Sehaj Paatth</Text>
-                  <Text>{currentAngForToday}/{angsPerDay}</Text>
-                  {isCollapsed ? 
+                  <Text style={{color: currentTheme.text}}>
+                    {currentAngForToday}/{angsPerDay}
+                  </Text>
+                  {isCollapsed ? (
                     <FontAwesome5
                       name="angle-down"
                       size={24}
                       color={currentTheme.text}
                     />
-                  :
+                  ) : (
                     <FontAwesome5
                       name="angle-up"
                       size={24}
                       color={currentTheme.text}
                     />
-                  }
+                  )}
                 </View>
               </TouchableOpacity>
               <Collapsible collapsed={isCollapsed}>

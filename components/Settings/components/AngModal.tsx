@@ -2,7 +2,13 @@ import React from 'react';
 
 import {useTheme} from '@react-navigation/native';
 import {TextInput} from 'react-native-gesture-handler';
-import {Modal, Text, TouchableOpacity, View, TouchableWithoutFeedback} from 'react-native';
+import {
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import {elementStyles, layoutStyles} from '../../../styles';
@@ -28,40 +34,43 @@ const AngModal: React.FC<Props> = ({visible, onClose}) => {
   };
 
   return (
-    <Modal transparent={true} visible={visible} onRequestClose={closeModal}>
+    <Modal
+      transparent={true}
+      visible={visible}
+      onRequestClose={closeModal}
+      style={themeStyles.popup}>
       <TouchableWithoutFeedback onPress={closeModal}>
         <View style={layoutStyles.centeredView}>
-        <View style={layoutStyles.modalView}>
-          <TouchableOpacity
-            style={layoutStyles.closeButton}
-            onPress={closeModal}>
-            <FontAwesome5 name="times" size={24} color="#000" />
-          </TouchableOpacity>
-          <Text style={themeStyles.heading}>Daily Angs</Text>
-          <Text>
-            When you set a goal for daily reading, you will see approximate date
-            of completion
-          </Text>
-          <View style={layoutStyles.modalInput}>
-            <TextInput
-              style={{...themeStyles.input, textAlign: 'left'}}
-              keyboardType="numeric"
-              inputMode="numeric"
-              placeholder="Angs"
-              onChangeText={angInput => {
-                setAngsPerDay(Number(angInput));
-                const completionDate = calculateCompletionDate(
-                  Number(angInput),
-                );
-                setCompletitionDate(completionDate);
-              }}
-            />
+          <View style={themeStyles.modalView}>
+            <TouchableOpacity
+              style={layoutStyles.closeButton}
+              onPress={closeModal}>
+              <FontAwesome5 name="times" size={24} color={currentTheme.text} />
+            </TouchableOpacity>
+            <Text style={themeStyles.heading}>Daily Angs</Text>
+            <Text style={{color: currentTheme.text}}>
+              When you set a goal for daily reading, you will see approximate
+              date of completion
+            </Text>
+            <View style={layoutStyles.modalInput}>
+              <TextInput
+                style={{...themeStyles.input, textAlign: 'left'}}
+                keyboardType="numeric"
+                inputMode="numeric"
+                placeholder="Angs"
+                placeholderTextColor={currentTheme.text}
+                onChangeText={angInput => {
+                  setAngsPerDay(Number(angInput));
+                  const completion = calculateCompletionDate(Number(angInput));
+                  setCompletitionDate(completion);
+                }}
+              />
+            </View>
+            <Text style={themeStyles.smallText}>
+              {`Estimated Samaaptee date: ${formatDate(completionDate)}`}
+            </Text>
           </View>
-          <Text style={themeStyles.smallText}>
-            {`Estimated Samaaptee date: ${formatDate(completionDate)}`}
-          </Text>
         </View>
-      </View>
       </TouchableWithoutFeedback>
     </Modal>
   );

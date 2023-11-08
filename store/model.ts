@@ -57,5 +57,5 @@ export const storeModel: StoreInterface = {
   setCurrentAngForToday: action((state, payload) => ({
     ...state,
     currentAngForToday: payload,
-  }))
+  })),
 };

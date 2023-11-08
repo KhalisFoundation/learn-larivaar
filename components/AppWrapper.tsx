@@ -22,7 +22,7 @@ const AppLightTheme = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#f37b20',        
+    primary: '#f37b20',
   },
 };
 
@@ -30,9 +30,9 @@ const AppDarkTheme = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: '#f37b20'
-  }
-}
+    primary: '#f37b20',
+  },
+};
 const AppWrapper = (): JSX.Element => {
   const getSettings = (props: DrawerContentComponentProps) => {
     return <Settings {...props} />;
