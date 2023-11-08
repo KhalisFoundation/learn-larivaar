@@ -7,11 +7,14 @@ export const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
   },
-  header: {
+  angInputContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
-    flexGrow: 1,
+    alignItems: 'center',
+    width: 140,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   wordContainer: {
     flexDirection: 'row',
@@ -51,21 +54,6 @@ export const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 22,
-    backgroundColor: 'rgba(52, 52, 52, 0.5)',
-  },
-  modalView: {
-    margin: 15,
-    backgroundColor: 'white',
-    borderRadius: 2,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
   },
   closeButton: {
     position: 'absolute',
@@ -77,5 +65,11 @@ export const layoutStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 15,
     marginBottom: 15,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });

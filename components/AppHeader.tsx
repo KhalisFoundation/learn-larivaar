@@ -1,41 +1,55 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
-import {DarkTheme, DefaultTheme} from '@react-navigation/native';
+import {useTheme} from '@react-navigation/native';
 
-import {useStoreState} from '../store/hooks';
+import {useStoreState, useStoreActions} from '../store/hooks';
 
 import {AngInput} from './Ang/AngInput';
 import {elementStyles} from '../styles';
 
 export const Header = ({navigation}: {navigation: any}) => {
-  const {darkTheme, leftHandedMode} = useStoreState(state => state);
-  const currentTheme = darkTheme === true ? DarkTheme : DefaultTheme;
-
+  const {leftHandedMode, larivaarAssist} = useStoreState(state => state);
+  const currentTheme = useTheme().colors;
+  const {setLarivaarAssist} = useStoreActions(actions => actions);
   const insets = useSafeAreaInsets();
 
-  const menuIcon = (navigation: any) => (
-    <TouchableOpacity
-      style={{margin: 16}}
-      onPress={() => navigation.toggleDrawer()}>
-      <FontAwesome5
-        name="bars"
-        size={22}
-        color={darkTheme ? '#FFFFFF' : '#333333'}
-      />
+  const menuIcon = (menuNavigation: any) => (
+    <TouchableOpacity onPress={() => menuNavigation.toggleDrawer()}>
+      <FontAwesome5 name="bars" size={22} color={currentTheme.text} />
     </TouchableOpacity>
   );
-
+  const larivaarAssistIcon = () => (
+    <TouchableOpacity
+      onPress={() => {
+        setLarivaarAssist(!larivaarAssist);
+      }}>
+      <View style={elementStyles(currentTheme).larivaarAssistInHeader}>
+        {larivaarAssist ? (
+          <>
+            <Text style={{color: currentTheme.text}}>ਸੋ</Text>
+            <Text style={{color: currentTheme.primary}}>ਦਰੁ</Text>
+          </>
+        ) : (
+          <>
+            <Text style={{color: currentTheme.text}}>ਸੋ</Text>
+            <Text style={{color: currentTheme.text}}>ਦਰੁ</Text>
+          </>
+        )}
+      </View>
+    </TouchableOpacity>
+  );
   return (
     <View
       style={{
-        ...elementStyles(currentTheme.colors).navigationHeader,
+        ...elementStyles(currentTheme).navigationHeader,
         paddingTop: insets.top,
       }}>
-      {leftHandedMode ? <AngInput /> : menuIcon(navigation)}
-      {leftHandedMode ? menuIcon(navigation) : <AngInput />}
+      {leftHandedMode ? larivaarAssistIcon() : menuIcon(navigation)}
+      <AngInput />
+      {leftHandedMode ? menuIcon(navigation) : larivaarAssistIcon()}
     </View>
   );
 };

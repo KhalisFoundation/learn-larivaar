@@ -12,6 +12,7 @@ export const storeModel: StoreInterface = {
   currentAng: 1,
   completionDate: new Date(),
   angsPerDay: 0,
+  currentAngForToday: 0,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -52,5 +53,9 @@ export const storeModel: StoreInterface = {
   setAngsPerDay: action((state, payload) => ({
     ...state,
     angsPerDay: payload,
+  })),
+  setCurrentAngForToday: action((state, payload) => ({
+    ...state,
+    currentAngForToday: payload,
   })),
 };

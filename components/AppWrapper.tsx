@@ -18,6 +18,21 @@ import {Header} from './AppHeader';
 
 const Drawer = createDrawerNavigator();
 
+const AppLightTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#f37b20',
+  },
+};
+
+const AppDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#f37b20',
+  },
+};
 const AppWrapper = (): JSX.Element => {
   const getSettings = (props: DrawerContentComponentProps) => {
     return <Settings {...props} />;
@@ -26,7 +41,7 @@ const AppWrapper = (): JSX.Element => {
     return <Header navigation={navigation} />;
   };
   const {darkTheme, leftHandedMode} = useStoreState(state => state);
-  const currentTheme = darkTheme === true ? DarkTheme : DefaultTheme;
+  const currentTheme = darkTheme === true ? AppDarkTheme : AppLightTheme;
 
   return (
     <NavigationContainer theme={currentTheme}>

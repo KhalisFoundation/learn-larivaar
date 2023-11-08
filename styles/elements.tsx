@@ -42,7 +42,7 @@ export const elementStyles = (theme: Theme['colors']) =>
       margin: 10,
     },
     linkText: {
-      color: '#f37b20',
+      color: theme.primary,
     },
     heading: {
       color: theme.text,
@@ -54,13 +54,42 @@ export const elementStyles = (theme: Theme['colors']) =>
     },
     smallText: {
       fontSize: 12,
+      color: theme.text,
     },
     navigationHeader: {
       backgroundColor: theme.card,
       display: 'flex',
       justifyContent: 'space-between',
       flexDirection: 'row',
-      alignSelf: 'stretch',
-      padding: 8,
+      alignItems: 'center',
+      paddingLeft: 16,
+      paddingRight: 16,
+    },
+    larivaarAssistInHeader: {
+      borderRadius: 6,
+      borderColor: theme.text,
+      flexDirection: 'row',
+      borderWidth: 1,
+      padding: 5,
+    },
+    popup: {
+      backgroundColor: theme.background,
+      padding: 10,
+      borderRadius: 5,
+    },
+    modalView: {
+      margin: 15,
+      backgroundColor: theme.background,
+      color: theme.text,
+      borderRadius: 2,
+      padding: 20,
+      shadowColor: theme.background,
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 4,
+      elevation: 5,
     },
   });
