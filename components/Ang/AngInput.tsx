@@ -54,13 +54,16 @@ export const AngInput = (): JSX.Element => {
       <TextInput
         placeholder="Enter Ang Number"
         inputMode="numeric"
+        keyboardType="numeric"
         ref={textInputRef}
         style={{...themeStyles.input}}
         defaultValue={currentAng.toString()}
+        returnKeyType="done"
         onSubmitEditing={event => {
           saveCurrentAng(parseInt(event.nativeEvent.text, 10));
         }}
       />
+
       <FontAwesome5
         name="arrow-right"
         style={{...disabledRightStyle}}

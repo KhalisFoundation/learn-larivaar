@@ -35,7 +35,9 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
     actions => actions,
   );
 
-  const [dateDialog, setDateDialog] = useState(false);
+  const currentPlatform = Platform.OS;
+
+  const [dateDialog, setDateDialog] = useState(currentPlatform === 'ios');
 
   const closeModal = () => {
     onClose();
@@ -58,7 +60,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
             </Text>
             <View style={layoutStyles.modalInput}>
               <TouchableOpacity onPress={() => setDateDialog(true)}>
-                {Platform.OS === 'android' && (
+                {!dateDialog && (
                   <View style={{flexDirection: 'row'}}>
                     <Text
                       style={{
@@ -84,7 +86,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
                     event: DateTimePickerEvent,
                     selectedDate: Date | undefined,
                   ) => {
-                    setDateDialog(false);
+                    currentPlatform !== 'ios' && setDateDialog(false);
                     const currentDate = selectedDate;
                     if (currentDate && completionDate !== currentDate) {
                       const dailyAngs = calculateDailyAngs(currentDate);
