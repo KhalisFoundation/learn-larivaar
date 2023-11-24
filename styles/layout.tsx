@@ -7,11 +7,14 @@ export const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     padding: 24,
   },
-  header: {
+  angInputContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     flexDirection: 'row',
-    margin: 20,
+    alignItems: 'center',
+    width: 140,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   wordContainer: {
     flexDirection: 'row',
@@ -41,5 +44,32 @@ export const layoutStyles = StyleSheet.create({
   aboutContainer: {
     margin: 10,
     padding: 10,
+  },
+  nestedSidebarSettings: {
+    marginLeft: 16,
+    marginTop: 16,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  closeButton: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  modalInput: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 15,
+    marginBottom: 15,
+  },
+  loader: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
   },
 });

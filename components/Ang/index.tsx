@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 import {useTheme} from '@react-navigation/native';
 
 import {DoubleTap} from '../common';
@@ -23,7 +23,11 @@ const Ang = (props: AngProps): JSX.Element => {
   }, [props.page]);
 
   if (isLoading) {
-    return <Text>Loading</Text>;
+    return (
+      <View style={layoutStyles.loader}>
+        <ActivityIndicator size="large" color={currentTheme.text} />
+      </View>
+    );
   }
   return (
     <DoubleTap

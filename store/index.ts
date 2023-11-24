@@ -12,6 +12,12 @@ export const store = createStore<StoreInterface>(
       'fontSize',
       'keepScreenAwake',
       'darkTheme',
+      'leftHandedMode',
+      'swipeNavigation',
+      'currentAng',
+      'angsPerDay',
+      'currentAngForToday',
+      'completionDate',
     ],
   }),
 );

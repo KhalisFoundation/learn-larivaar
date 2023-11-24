@@ -15,7 +15,7 @@ export const getStyle = (
     } else {
       return {
         ...elementStyles(theme).gurbani,
-        color: 'red',
+        color: theme.primary,
       };
     }
   } else {

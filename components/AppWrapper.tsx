@@ -14,27 +14,49 @@ import {
 
 import {Launchpad, Settings, About} from '.';
 import {useStoreState} from '../store/hooks';
+import {Header} from './AppHeader';
 
 const Drawer = createDrawerNavigator();
 
+const AppLightTheme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#f37b20',
+  },
+};
+
+const AppDarkTheme = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#f37b20',
+  },
+};
 const AppWrapper = (): JSX.Element => {
   const getSettings = (props: DrawerContentComponentProps) => {
     return <Settings {...props} />;
   };
-  const {darkTheme} = useStoreState(state => state);
-
+  const getHeader = ({navigation}: any) => {
+    return <Header navigation={navigation} />;
+  };
+  const {darkTheme, leftHandedMode} = useStoreState(state => state);
+  const currentTheme = darkTheme === true ? AppDarkTheme : AppLightTheme;
 
   return (
-      <NavigationContainer theme={darkTheme === true ? DarkTheme : DefaultTheme}>
-        <Drawer.Navigator
-          screenOptions={{
-            headerTintColor: darkTheme === true ? '#FFFFFF' : '#333333',
-          }}
-          drawerContent={props => getSettings(props)}>
-          <Drawer.Screen name="Learn Larivaar" component={Launchpad} />
-          <Drawer.Screen name="About" component={About} />
-        </Drawer.Navigator>
-      </NavigationContainer>
+    <NavigationContainer theme={currentTheme}>
+      <Drawer.Navigator drawerContent={props => getSettings(props)}>
+        <Drawer.Screen
+          name="Learn Larivaar"
+          component={Launchpad}
+          options={({navigation}) => ({
+            drawerPosition: leftHandedMode === true ? 'right' : 'left',
+            header: () => getHeader({navigation}),
+          })}
+        />
+        <Drawer.Screen name="About" component={About} />
+      </Drawer.Navigator>
+    </NavigationContainer>
   );
 };
 

@@ -1,29 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useStoreRehydrated} from 'easy-peasy';
-import {DarkTheme, useTheme} from '@react-navigation/native';
-import {View, Text, Switch, Pressable} from 'react-native';
+import {useTheme} from '@react-navigation/native';
+
+import {View, Text, Switch, Pressable, TouchableOpacity} from 'react-native';
+
+import Collapsible from 'react-native-collapsible';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-
-import {layoutStyles} from '../../styles/layout';
 import {DrawerContentComponentProps} from '@react-navigation/drawer';
-import {elementStyles} from '../../styles';
 
+import {elementStyles, layoutStyles} from '../../styles';
+import {MIN_FONT_SIZE, MAX_FONT_SIZE} from '../constants';
 import {useStoreActions, useStoreState} from '../../store/hooks';
 
+import AngModal from './components/AngModal';
+import DateModal from './components/DateModal';
+
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
-  const {larivaar, larivaarAssist, keepScreenAwake, fontSize, darkTheme} = useStoreState(
-    state => state,
-  );
-  const {setLarivaar, setLarivaarAssist, setKeepScreenAwake, setFontSize, setDarkTheme} =
-    useStoreActions(actions => actions);
+  const {
+    larivaar,
+    larivaarAssist,
+    keepScreenAwake,
+    fontSize,
+    darkTheme,
+    leftHandedMode,
+    swipeNavigation,
+    angsPerDay,
+    currentAngForToday,
+  } = useStoreState(state => state);
+
+  const {
+    setLarivaar,
+    setLarivaarAssist,
+    setKeepScreenAwake,
+    setFontSize,
+    setDarkTheme,
+    setLeftHandedMode,
+    setSwipeNavigation,
+  } = useStoreActions(actions => actions);
 
   const isRehydrated = useStoreRehydrated();
 
-  const minFontSize = 14;
-  const maxFontSize = 30;
-
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
+
+  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [angModal, setAngModal] = useState(false);
+  const [dateModal, setDateModal] = useState(false);
 
   return isRehydrated ? (
     <>
@@ -41,50 +63,50 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               <Text style={themeStyles.sidebarItem}>About</Text>
             </Pressable>
           </View>
-
           <View style={layoutStyles.sidebarSettings}>
-            <Text style={themeStyles.heading}>Settings</Text>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Font size</Text>
-              <View style={layoutStyles.sidebarItem}>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
                 <FontAwesome5
-                  name="plus-circle"
-                  style={{paddingLeft: 10, fontSize: 20}}
+                  name="minus-circle"
+                  style={elementStyles(currentTheme).iconSetting}
                   onPress={() => {
-                    if (fontSize < maxFontSize) {
-                      setFontSize(fontSize + 2);
+                    if (fontSize > MIN_FONT_SIZE) {
+                      setFontSize(fontSize - 2);
                     }
                   }}
                 />
+                <Text style={themeStyles.sidebarItem}>{fontSize}</Text>
                 <FontAwesome5
-                  name="minus-circle"
-                  style={{paddingLeft: 10, fontSize: 20}}
+                  name="plus-circle"
+                  style={elementStyles(currentTheme).iconSetting}
                   onPress={() => {
-                    if (fontSize > minFontSize) {
-                      setFontSize(fontSize - 2);
+                    if (fontSize < MAX_FONT_SIZE) {
+                      setFontSize(fontSize + 2);
                     }
                   }}
                 />
               </View>
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Larivaar</Text>
+              <Text style={themeStyles.sidebarItem}>Night Mode</Text>
               <Switch
-                value={larivaar}
+                value={darkTheme}
                 onChange={() => {
-                  setLarivaar(!larivaar);
+                  setDarkTheme(!darkTheme);
                 }}
               />
             </View>
             <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
+              <Text style={themeStyles.sidebarItem}>Swipe Navigation</Text>
               <Switch
-                value={larivaarAssist}
+                value={swipeNavigation}
                 onChange={() => {
-                  setLarivaarAssist(!larivaarAssist);
+                  setSwipeNavigation(!swipeNavigation);
                 }}
               />
             </View>
+
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Keep Screen Awake</Text>
               <Switch
@@ -94,12 +116,82 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
                 }}
               />
             </View>
+
             <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Dark Theme</Text>
+              <Text style={themeStyles.sidebarItem}>Larivaar</Text>
               <Switch
-                value={darkTheme}
+                value={larivaar}
                 onChange={() => {
-                  setDarkTheme(!darkTheme);
+                  setLarivaar(!larivaar);
+                }}
+              />
+            </View>
+
+            {larivaar && (
+              <View style={layoutStyles.sidebarItem}>
+                <Text style={themeStyles.sidebarItem}>Larivaar Assist</Text>
+                <Switch
+                  value={larivaarAssist}
+                  onChange={() => {
+                    setLarivaarAssist(!larivaarAssist);
+                  }}
+                />
+              </View>
+            )}
+
+            <View>
+              <TouchableOpacity onPress={() => setIsCollapsed(!isCollapsed)}>
+                <View style={layoutStyles.sidebarItem}>
+                  <Text style={themeStyles.sidebarItem}>Sehaj Paatth</Text>
+                  <Text style={{color: currentTheme.text}}>
+                    {currentAngForToday}/{angsPerDay}
+                  </Text>
+                  {isCollapsed ? (
+                    <FontAwesome5
+                      name="angle-down"
+                      size={24}
+                      color={currentTheme.text}
+                    />
+                  ) : (
+                    <FontAwesome5
+                      name="angle-up"
+                      size={24}
+                      color={currentTheme.text}
+                    />
+                  )}
+                </View>
+              </TouchableOpacity>
+              <Collapsible collapsed={isCollapsed}>
+                <View>
+                  <TouchableOpacity
+                    onPress={() => setAngModal(true)}
+                    style={layoutStyles.nestedSidebarSettings}>
+                    <Text style={themeStyles.sidebarItem}>
+                      Set Desired Daily Ang
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => setDateModal(true)}
+                    style={layoutStyles.nestedSidebarSettings}>
+                    <Text style={themeStyles.sidebarItem}>
+                      Edit Samaaptee Date
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </Collapsible>
+            </View>
+            <AngModal visible={angModal} onClose={() => setAngModal(false)} />
+            <DateModal
+              visible={dateModal}
+              onClose={() => setDateModal(false)}
+            />
+
+            <View style={layoutStyles.sidebarItem}>
+              <Text style={themeStyles.sidebarItem}>Left-Handed Mode</Text>
+              <Switch
+                value={leftHandedMode}
+                onChange={() => {
+                  setLeftHandedMode(!leftHandedMode);
                 }}
               />
             </View>

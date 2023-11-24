@@ -6,6 +6,12 @@ export interface StoreProperties {
   larivaar: boolean;
   larivaarAssist: boolean;
   darkTheme: boolean;
+  leftHandedMode: boolean;
+  swipeNavigation: boolean;
+  currentAng: number;
+  angsPerDay: number;
+  currentAngForToday: number;
+  completionDate: Date;
 }
 
 export interface StoreInterface extends StoreProperties {
@@ -14,4 +20,10 @@ export interface StoreInterface extends StoreProperties {
   setLarivaarAssist: Action<StoreInterface, boolean>;
   setKeepScreenAwake: Action<StoreInterface, boolean>;
   setDarkTheme: Action<StoreInterface, boolean>;
+  setLeftHandedMode: Action<StoreInterface, boolean>;
+  setSwipeNavigation: Action<StoreInterface, boolean>;
+  setCurrentAng: Action<StoreInterface, number>;
+  setAngsPerDay: Action<StoreInterface, number>;
+  setCurrentAngForToday: Action<StoreInterface, number>;
+  setCompletitionDate: Action<StoreInterface, Date | null>;
 }

@@ -7,6 +7,12 @@ export const storeModel: StoreInterface = {
   larivaar: true,
   larivaarAssist: false,
   darkTheme: false,
+  leftHandedMode: false,
+  swipeNavigation: false,
+  currentAng: 1,
+  completionDate: new Date(),
+  angsPerDay: 0,
+  currentAngForToday: 0,
 
   setFontSize: action((state, payload) => ({
     ...state,
@@ -27,5 +33,29 @@ export const storeModel: StoreInterface = {
   setDarkTheme: action((state, payload) => ({
     ...state,
     darkTheme: payload,
+  })),
+  setLeftHandedMode: action((state, payload) => ({
+    ...state,
+    leftHandedMode: payload,
+  })),
+  setSwipeNavigation: action((state, payload) => ({
+    ...state,
+    swipeNavigation: payload,
+  })),
+  setCurrentAng: action((state, payload) => ({
+    ...state,
+    currentAng: payload,
+  })),
+  setCompletitionDate: action((state, payload) => ({
+    ...state,
+    completionDate: payload,
+  })),
+  setAngsPerDay: action((state, payload) => ({
+    ...state,
+    angsPerDay: payload,
+  })),
+  setCurrentAngForToday: action((state, payload) => ({
+    ...state,
+    currentAngForToday: payload,
   })),
 };
