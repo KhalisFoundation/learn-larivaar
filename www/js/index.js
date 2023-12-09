@@ -190,6 +190,21 @@ function formatDate(date) {
   return "" + year + "-" + month + "-" + day;
 }
 
+function fixFontRendering(text) {
+  // use private-use characters for legibility, with the exception of ਈ
+  //  since these characters do not render correctly with it
+  result = text
+  .replace(/ੑੁ/g,'\uF040') // halant and unkar
+  .replace(/ੑੂ/g,'\uF041') // halant and dulainkar
+  .replace(/ੵੁ/g,'\uF043') // yakash and unkar
+  .replace(/ੵੂ/g,'\uF044') // yakash and dulainkar
+  .replace(/ਂੀ/g,'\u0A40\uF03D') // bindi before bihaari
+  .replace(/ੰੀ/g,'\u0A40\uF034') // tipi before bihaari
+  .replace(/\u0A72\u0A40\uF03D/g,'ੲਂੀ')
+  .replace(/\u0A72\u0A40\uF034/g,'ੲੰੀ');
+  return result;
+}
+
 function setAng(set_ang, store) {
   store = typeof store !== 'undefined' ? store : true;
   //Make sure it's an Ang within the proper range or set to 1
@@ -216,12 +231,12 @@ function setAng(set_ang, store) {
     if (isOnline) {
       var lines = [];
       $.each(data.page, function(index, line){
-        lines.push(line.verse.unicode);
+        lines.push(fixFontRendering(line.verse.unicode));
       });
       var allLines = lines.join(' ');
       shabads = allLines.split(' ');
     } else {
-      shabads = data
+      shabads = fixFontRendering(data)
       .replace(/\./g, '')
       .replace(/,/g, '')
       .replace(/;/g, '')
