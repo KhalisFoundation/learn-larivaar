@@ -47,7 +47,9 @@ export const AngInput = (): JSX.Element => {
             textInputRef.current?.setNativeProps({
               text: (currentAng - 1).toString(),
             });
-            setCurrentAngForToday(currentAngForToday - 1);
+            if (currentAngForToday > 0) {
+              setCurrentAngForToday(currentAngForToday - 1);
+            }
           }
         }}
       />
