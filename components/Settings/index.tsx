@@ -66,7 +66,7 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
           <View style={layoutStyles.sidebarSettings}>
             <View style={layoutStyles.sidebarItem}>
               <Text style={themeStyles.sidebarItem}>Font size</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <View style={layoutStyles.flexRowContainer}>
                 <FontAwesome5
                   name="minus-circle"
                   style={elementStyles(currentTheme).iconSetting}

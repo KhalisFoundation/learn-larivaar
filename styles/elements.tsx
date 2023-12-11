@@ -17,6 +17,9 @@ export const elementStyles = (theme: Theme['colors']) =>
       fontSize: 20,
       textAlign: 'center',
     },
+    leftAlign: {
+      textAlign: 'left',
+    },
     button: {
       width: 100,
       marginLeft: 10,
@@ -64,13 +67,15 @@ export const elementStyles = (theme: Theme['colors']) =>
       alignItems: 'center',
       paddingLeft: 16,
       paddingRight: 16,
+      height: 82,
     },
     larivaarAssistInHeader: {
       borderRadius: 6,
       borderColor: theme.text,
       flexDirection: 'row',
       borderWidth: 1,
-      padding: 5,
+      padding: 8,
+      fontSize: 20,
     },
     popup: {
       backgroundColor: theme.background,
@@ -91,5 +96,9 @@ export const elementStyles = (theme: Theme['colors']) =>
       shadowOpacity: 0.25,
       shadowRadius: 4,
       elevation: 5,
+    },
+    datePickerLabel: {
+      color: theme.text,
+      marginRight: 10,
     },
   });

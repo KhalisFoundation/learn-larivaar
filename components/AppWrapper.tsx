@@ -54,7 +54,14 @@ const AppWrapper = (): JSX.Element => {
             header: () => getHeader({navigation}),
           })}
         />
-        <Drawer.Screen name="About" component={About} />
+        <Drawer.Screen
+          name="About"
+          component={About}
+          options={({navigation}) => ({
+            drawerPosition: leftHandedMode === true ? 'right' : 'left',
+            header: () => getHeader({navigation}),
+          })}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
