@@ -41,10 +41,6 @@ export const layoutStyles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
   },
-  aboutContainer: {
-    margin: 10,
-    padding: 10,
-  },
   nestedSidebarSettings: {
     marginLeft: 16,
     marginTop: 16,
@@ -71,5 +67,9 @@ export const layoutStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 10,
+  },
+  flexRowContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

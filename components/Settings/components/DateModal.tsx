@@ -61,12 +61,10 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
             <View style={layoutStyles.modalInput}>
               <TouchableOpacity onPress={() => setDateDialog(true)}>
                 {!dateDialog && (
-                  <View style={{flexDirection: 'row'}}>
-                    <Text
-                      style={{
-                        color: currentTheme.text,
-                        marginRight: 10,
-                      }}>{`${formatDate(completionDate)}`}</Text>
+                  <View style={layoutStyles.flexRowContainer}>
+                    <Text style={themeStyles.datePickerLabel}>{`${formatDate(
+                      completionDate,
+                    )}`}</Text>
                     <FontAwesome5
                       name="calendar"
                       size={18}

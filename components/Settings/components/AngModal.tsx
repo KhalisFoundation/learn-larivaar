@@ -54,7 +54,7 @@ const AngModal: React.FC<Props> = ({visible, onClose}) => {
             </Text>
             <View style={layoutStyles.modalInput}>
               <TextInput
-                style={{...themeStyles.input, textAlign: 'left'}}
+                style={{...themeStyles.input, ...themeStyles.leftAlign}}
                 keyboardType="numeric"
                 inputMode="numeric"
                 placeholder="Angs"

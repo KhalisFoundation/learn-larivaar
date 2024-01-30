@@ -11,10 +11,13 @@ import {AngInput} from './Ang/AngInput';
 import {elementStyles} from '../styles';
 
 export const Header = ({navigation}: {navigation: any}) => {
-  const {leftHandedMode, larivaarAssist} = useStoreState(state => state);
+  const {leftHandedMode, larivaar, larivaarAssist} = useStoreState(
+    state => state,
+  );
   const currentTheme = useTheme().colors;
   const {setLarivaarAssist} = useStoreActions(actions => actions);
   const insets = useSafeAreaInsets();
+  const screenIndex = navigation.getState().index;
 
   const menuIcon = (menuNavigation: any) => (
     <TouchableOpacity onPress={() => menuNavigation.toggleDrawer()}>
@@ -22,34 +25,44 @@ export const Header = ({navigation}: {navigation: any}) => {
     </TouchableOpacity>
   );
   const larivaarAssistIcon = () => (
-    <TouchableOpacity
-      onPress={() => {
-        setLarivaarAssist(!larivaarAssist);
-      }}>
-      <View style={elementStyles(currentTheme).larivaarAssistInHeader}>
-        {larivaarAssist ? (
-          <>
-            <Text style={{color: currentTheme.text}}>ਸੋ</Text>
-            <Text style={{color: currentTheme.primary}}>ਦਰੁ</Text>
-          </>
-        ) : (
-          <>
-            <Text style={{color: currentTheme.text}}>ਸੋ</Text>
-            <Text style={{color: currentTheme.text}}>ਦਰੁ</Text>
-          </>
-        )}
+    <>
+      {larivaar && screenIndex === 0 ? (
+        <TouchableOpacity
+          onPress={() => {
+            setLarivaarAssist(!larivaarAssist);
+          }}>
+          <View style={elementStyles(currentTheme).larivaarAssistInHeader}>
+            <>
+              <Text style={{color: currentTheme.text}}>ਸੋ</Text>
+              <Text
+                style={
+                  larivaarAssist
+                    ? {color: currentTheme.primary}
+                    : {color: currentTheme.text}
+                }>
+                ਦਰੁ
+              </Text>
+            </>
+          </View>
+        </TouchableOpacity>
+      ) : (
+        <Text />
+      )}
+    </>
+  );
+  const screenHeader = () => {
+    return (
+      <View
+        style={{
+          ...elementStyles(currentTheme).navigationHeader,
+          paddingTop: insets.top,
+        }}>
+        {leftHandedMode ? larivaarAssistIcon() : menuIcon(navigation)}
+        {screenIndex === 0 && <AngInput />}
+        {leftHandedMode ? menuIcon(navigation) : larivaarAssistIcon()}
       </View>
-    </TouchableOpacity>
-  );
-  return (
-    <View
-      style={{
-        ...elementStyles(currentTheme).navigationHeader,
-        paddingTop: insets.top,
-      }}>
-      {leftHandedMode ? larivaarAssistIcon() : menuIcon(navigation)}
-      <AngInput />
-      {leftHandedMode ? menuIcon(navigation) : larivaarAssistIcon()}
-    </View>
-  );
+    );
+  };
+
+  return <>{screenHeader()}</>;
 };
