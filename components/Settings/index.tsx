@@ -1,5 +1,4 @@
-import React, {useState, JSX} from 'react';
-import {useStoreRehydrated} from 'easy-peasy';
+import React, {useState} from 'react';
 import {useTheme} from '@react-navigation/native';
 
 import {View, Text, Switch, Pressable, TouchableOpacity} from 'react-native';
@@ -14,6 +13,8 @@ import {useStoreActions, useStoreState} from '../../store/hooks';
 
 import AngModal from './components/AngModal';
 import DateModal from './components/DateModal';
+import {ScrollView} from 'react-native-gesture-handler';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const {
@@ -38,8 +39,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     setSwipeNavigation,
   } = useStoreActions(actions => actions);
 
-  const isRehydrated = useStoreRehydrated();
-
   const currentTheme = useTheme().colors;
   const themeStyles = elementStyles(currentTheme);
 
@@ -47,9 +46,9 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
   const [angModal, setAngModal] = useState(false);
   const [dateModal, setDateModal] = useState(false);
 
-  return isRehydrated ? (
-    <>
-      <View style={layoutStyles.settingContainer}>
+  return (
+    <ScrollView>
+      <SafeAreaView style={layoutStyles.settingContainer}>
         <View style={layoutStyles.sidebarWrapper}>
           <View style={layoutStyles.sidebarScreens}>
             <Pressable
@@ -197,10 +196,8 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
             </View>
           </View>
         </View>
-      </View>
-    </>
-  ) : (
-    <Text>Loading..</Text>
+      </SafeAreaView>
+    </ScrollView>
   );
 };
 

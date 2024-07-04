@@ -72,4 +72,7 @@ export const layoutStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  gurmukhiFont: {
+    fontFamily: 'GurbaniAkharTrue',
+  },
 });

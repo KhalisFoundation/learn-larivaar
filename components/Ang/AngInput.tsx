@@ -14,7 +14,8 @@ export const AngInput = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {currentAng, currentAngForToday} = useStoreState(state => state);
+  const {currentAng, currentAngForToday, larivaar, databaseDownloaded} =
+    useStoreState(state => state);
   const {setCurrentAng, setCurrentAngForToday} = useStoreActions(
     actions => actions,
   );
@@ -31,18 +32,23 @@ export const AngInput = (): JSX.Element => {
     }
   };
 
-  const disabledLeftStyle = currentAng > 1 ? {} : {opacity: 0.2};
-  const disabledRightStyle = currentAng < 1430 ? {} : {opacity: 0.2};
+  const disabledLeftStyle =
+    databaseDownloaded && currentAng > 1 ? {} : {opacity: 0.2};
+  const disabledRightStyle =
+    databaseDownloaded && currentAng < 1430 ? {} : {opacity: 0.2};
+  const containerStyle = !larivaar
+    ? {marginRight: 40, ...layoutStyles.angInputContainer}
+    : {...layoutStyles.angInputContainer};
 
   return (
-    <View style={{...layoutStyles.angInputContainer}}>
+    <View style={containerStyle}>
       <FontAwesome5
         name="arrow-left"
         style={{...disabledLeftStyle}}
         size={22}
         color={currentTheme.text}
         onPress={() => {
-          if (currentAng > 1) {
+          if (databaseDownloaded && currentAng > 1) {
             saveCurrentAng(currentAng - 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng - 1).toString(),
@@ -60,6 +66,7 @@ export const AngInput = (): JSX.Element => {
         ref={textInputRef}
         style={{...themeStyles.input}}
         defaultValue={currentAng.toString()}
+        editable={databaseDownloaded}
         returnKeyType="done"
         onSubmitEditing={event => {
           saveCurrentAng(parseInt(event.nativeEvent.text, 10));
@@ -72,7 +79,7 @@ export const AngInput = (): JSX.Element => {
         size={22}
         color={currentTheme.text}
         onPress={() => {
-          if (currentAng < 1430) {
+          if (databaseDownloaded && currentAng < 1430) {
             saveCurrentAng(currentAng + 1);
             textInputRef.current?.setNativeProps({
               text: (currentAng + 1).toString(),

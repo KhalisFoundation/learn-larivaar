@@ -18,6 +18,7 @@ export const store = createStore<StoreInterface>(
       'angsPerDay',
       'currentAngForToday',
       'completionDate',
+      'databaseDownloaded',
     ],
   }),
 );

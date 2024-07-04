@@ -5,7 +5,8 @@ export const elementStyles = (theme: Theme['colors']) =>
   StyleSheet.create({
     gurbani: {
       color: theme.text,
-      lineHeight: 35,
+      fontFamily: 'GurbaniAkharTrue',
+      paddingTop: 8,
     },
     input: {
       borderColor: theme.text,
@@ -68,7 +69,6 @@ export const elementStyles = (theme: Theme['colors']) =>
       alignItems: 'center',
       paddingLeft: 16,
       paddingRight: 16,
-      height: 82,
     },
     larivaarAssistInHeader: {
       borderRadius: 6,

@@ -2,20 +2,20 @@ export interface AngProps {
   page: number;
 }
 
-export interface AngData {
-  source: {
-    sourceId: string;
-    gurmukhi: string;
-    unicode: string;
-    english: string;
-    pageNo: number;
-  };
-  count: number;
-  navigation: {
-    previous: number;
-    next: number;
-  };
-  page: Array<Page>;
+export interface AngsData {
+  FirstLetterEng: string;
+  FirstLetterLen: number;
+  FirstLetterStr: string;
+  Gurmukhi: string;
+  ID: number;
+  LineNo: number;
+  MainLetters: string;
+  PageNo: number;
+  Raag: [Object];
+  Shabads: Array<Page>;
+  Source: [Object];
+  Translations: string;
+  Writer: [Object];
 }
 
 interface Page {
