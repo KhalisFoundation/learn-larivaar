@@ -23,7 +23,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     keepScreenAwake,
     fontSize,
     darkTheme,
-    leftHandedMode,
     swipeNavigation,
     angsPerDay,
     currentAngForToday,
@@ -35,7 +34,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
     setKeepScreenAwake,
     setFontSize,
     setDarkTheme,
-    setLeftHandedMode,
     setSwipeNavigation,
   } = useStoreActions(actions => actions);
 
@@ -184,16 +182,6 @@ const Settings = ({navigation}: DrawerContentComponentProps): JSX.Element => {
               visible={dateModal}
               onClose={() => setDateModal(false)}
             />
-
-            <View style={layoutStyles.sidebarItem}>
-              <Text style={themeStyles.sidebarItem}>Left-Handed Mode</Text>
-              <Switch
-                value={leftHandedMode}
-                onChange={() => {
-                  setLeftHandedMode(!leftHandedMode);
-                }}
-              />
-            </View>
           </View>
         </View>
       </SafeAreaView>

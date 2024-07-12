@@ -11,9 +11,7 @@ import {AngInput} from './Ang/AngInput';
 import {elementStyles} from '../styles';
 
 export const Header = ({navigation}: {navigation: any}) => {
-  const {leftHandedMode, larivaar, larivaarAssist} = useStoreState(
-    state => state,
-  );
+  const {larivaar, larivaarAssist} = useStoreState(state => state);
   const currentTheme = useTheme().colors;
   const {setLarivaarAssist} = useStoreActions(actions => actions);
   const insets = useSafeAreaInsets();
@@ -57,9 +55,9 @@ export const Header = ({navigation}: {navigation: any}) => {
           ...elementStyles(currentTheme).navigationHeader,
           paddingTop: insets.top,
         }}>
-        {leftHandedMode ? larivaarAssistIcon() : menuIcon(navigation)}
+        {menuIcon(navigation)}
         {screenIndex === 0 && <AngInput />}
-        {leftHandedMode ? menuIcon(navigation) : larivaarAssistIcon()}
+        {larivaarAssistIcon()}
       </View>
     );
   };

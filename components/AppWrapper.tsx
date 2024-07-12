@@ -45,17 +45,18 @@ const AppWrapper = (): JSX.Element => {
   const getHeader = ({navigation}: any) => {
     return <Header navigation={navigation} />;
   };
-  const {darkTheme, leftHandedMode} = useStoreState(state => state);
+  const {darkTheme} = useStoreState(state => state);
   const currentTheme = darkTheme === true ? AppDarkTheme : AppLightTheme;
 
   return isRehydrated ? (
     <NavigationContainer theme={currentTheme}>
-      <Drawer.Navigator drawerContent={props => getSettings(props)}>
+      <Drawer.Navigator
+        drawerContent={props => getSettings(props)}
+        screenOptions={{drawerPosition: 'left'}}>
         <Drawer.Screen
           name="Learn Larivaar"
           component={Launchpad}
           options={({navigation}) => ({
-            drawerPosition: leftHandedMode === true ? 'right' : 'left',
             header: () => getHeader({navigation}),
           })}
         />
@@ -63,7 +64,6 @@ const AppWrapper = (): JSX.Element => {
           name="About"
           component={About}
           options={({navigation}) => ({
-            drawerPosition: leftHandedMode === true ? 'right' : 'left',
             header: () => getHeader({navigation}),
           })}
         />
