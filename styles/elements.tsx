@@ -15,7 +15,6 @@ export const elementStyles = (theme: Theme['colors']) =>
       color: theme.text,
       padding: 10,
       width: 70,
-      height: 36,
       fontSize: 20,
       textAlign: 'center',
     },
@@ -39,7 +38,6 @@ export const elementStyles = (theme: Theme['colors']) =>
       paddingRight: 10,
     },
     logo: {
-      backgroundColor: 'white',
       margin: 10,
     },
     aboutText: {
@@ -69,6 +67,7 @@ export const elementStyles = (theme: Theme['colors']) =>
       alignItems: 'center',
       paddingLeft: 16,
       paddingRight: 16,
+      minHeight: 80,
     },
     larivaarAssistInHeader: {
       borderRadius: 6,

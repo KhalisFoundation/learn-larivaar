@@ -19,7 +19,7 @@ export const downloadDBFile = async (setDownloadProgress: Function) => {
       progress: res => {
         const progress = (res.bytesWritten / res.contentLength).toFixed(2);
         console.log(progress);
-        setDownloadProgress(progress);
+        setDownloadProgress(parseFloat(progress));
       },
     });
 

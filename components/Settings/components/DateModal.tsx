@@ -28,6 +28,7 @@ interface Props {
 
 const DateModal: React.FC<Props> = ({visible, onClose}) => {
   const currentTheme = useTheme().colors;
+  const isDark = useTheme().dark;
   const themeStyles = elementStyles(currentTheme);
 
   const {angsPerDay, completionDate} = useStoreState(state => state);
@@ -92,6 +93,7 @@ const DateModal: React.FC<Props> = ({visible, onClose}) => {
                       setCompletitionDate(currentDate);
                     }
                   }}
+                  themeVariant={isDark ? 'dark' : 'light'}
                 />
               )}
             </View>

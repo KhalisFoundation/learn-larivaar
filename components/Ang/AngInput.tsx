@@ -14,8 +14,13 @@ export const AngInput = (): JSX.Element => {
   const textInputRef = useRef<TextInput>(null);
   const themeStyles = elementStyles(currentTheme);
 
-  const {currentAng, currentAngForToday, larivaar, databaseDownloaded} =
-    useStoreState(state => state);
+  const {
+    angsPerDay,
+    currentAng,
+    currentAngForToday,
+    databaseDownloaded,
+    larivaar,
+  } = useStoreState(state => state);
   const {setCurrentAng, setCurrentAngForToday} = useStoreActions(
     actions => actions,
   );
@@ -53,7 +58,7 @@ export const AngInput = (): JSX.Element => {
             textInputRef.current?.setNativeProps({
               text: (currentAng - 1).toString(),
             });
-            if (currentAngForToday > 0) {
+            if (currentAngForToday > 0 && angsPerDay > 0) {
               setCurrentAngForToday(currentAngForToday - 1);
             }
           }
@@ -84,7 +89,9 @@ export const AngInput = (): JSX.Element => {
             textInputRef.current?.setNativeProps({
               text: (currentAng + 1).toString(),
             });
-            setCurrentAngForToday(currentAngForToday + 1);
+            if (angsPerDay > 0) {
+              setCurrentAngForToday(currentAngForToday + 1);
+            }
           }
         }}
       />
